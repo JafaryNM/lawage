@@ -6,7 +6,6 @@ const NAV = [
   { label: "Home", href: "#home" },
   { label: "Who We Are", href: "#about" },
   { label: "Practice Areas", href: "#practice" },
-  { label: "Attorneys", href: "#team" },
   { label: "Our Projects", href: "#projects" },
   { label: "Legal Insights", href: "#insights" },
 ];
