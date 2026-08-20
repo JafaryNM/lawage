@@ -13,7 +13,7 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -175,6 +175,53 @@ const FAQS = [
   },
 ];
 
+function AnimatedCounter({ value }: { value: string }) {
+  const [count, setCount] = useState(0);
+  const elementRef = useRef<HTMLSpanElement>(null);
+  
+  // Parse numeric part and suffix (e.g. "480+" -> 480 and "+")
+  const numericMatch = value.match(/^(\d+)(.*)$/);
+  const target = numericMatch ? parseInt(numericMatch[1], 10) : 0;
+  const suffix = numericMatch ? numericMatch[2] : "";
+
+  useEffect(() => {
+    let startTimestamp: number | null = null;
+    const duration = 2000; // 2 seconds animation
+    let animationFrameId: number;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          const step = (timestamp: number) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            setCount(Math.floor(progress * target));
+            if (progress < 1) {
+              animationFrameId = window.requestAnimationFrame(step);
+            }
+          };
+          animationFrameId = window.requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [target]);
+
+  return <span ref={elementRef}>{count}{suffix}</span>;
+}
+
 function SectionHeading({
   eyebrow,
   title,
@@ -321,7 +368,9 @@ function Index() {
               height={1104}
             />
             <div className="absolute bottom-0 left-0 bg-navy px-10 py-8 text-primary-foreground">
-              <p className="font-[var(--font-display)] text-5xl text-gold">14+</p>
+              <p className="font-[var(--font-display)] text-5xl text-gold">
+                <AnimatedCounter value="14+" />
+              </p>
               <p className="mt-1 text-xs uppercase tracking-[0.22em]">Years of practice</p>
             </div>
           </div>
@@ -471,7 +520,9 @@ function Index() {
             ["9", "Practice areas"],
           ].map(([value, label]) => (
             <div key={label} className="text-center">
-              <p className="font-[var(--font-display)] text-5xl text-gold">{value}</p>
+              <p className="font-[var(--font-display)] text-5xl text-gold">
+                <AnimatedCounter value={value} />
+              </p>
               <p className="mt-2 text-[0.72rem] uppercase tracking-[0.22em] text-primary-foreground/75">
                 {label}
               </p>
