@@ -1,14 +1,16 @@
-# Welcome to your Lovable project
+# Darton Attoneys
+
+i wnat to cretae a website for a legal company in the document please read it and also understand it clearly before you make the landing page. i want it to be exactly in design and layout on this  https://peacefulqode.co.in/themes/lawfic/html/index-4.html home 4 please check it use the same colors used in the website and use the logoi have given you please.
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4a022d74-46f0-4c5e-b913-90f50e4d9899).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +22,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
