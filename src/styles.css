@@ -74,8 +74,8 @@
   /* Lawfic-style palette, tuned to the Darton logo (navy + maroon) */
   --navy: oklch(0.244 0.049 265);
   --navy-deep: oklch(0.196 0.045 265);
-  --gold: oklch(0.4187 0.1388 23.47);
-  --gold-soft: oklch(0.60 0.10 23.47);
+  --gold: oklch(0.741 0.062 63);
+  --gold-soft: oklch(0.842 0.041 70);
   --maroon: oklch(0.358 0.121 15);
   --background: oklch(1 0 0);
   --foreground: oklch(0.244 0.049 265);
@@ -85,7 +85,7 @@
   --popover-foreground: oklch(0.244 0.049 265);
   --primary: oklch(0.244 0.049 265);
   --primary-foreground: oklch(0.99 0.005 90);
-  --secondary: oklch(0.4187 0.1388 23.47);
+  --secondary: oklch(0.741 0.062 63);
   --secondary-foreground: oklch(0.244 0.049 265);
   --muted: oklch(0.966 0.005 90);
   --muted-foreground: oklch(0.525 0.018 265);
@@ -95,7 +95,7 @@
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.912 0.006 90);
   --input: oklch(0.912 0.006 90);
-  --ring: oklch(0.4187 0.1388 23.47);
+  --ring: oklch(0.741 0.062 63);
   --chart-1: oklch(0.646 0.222 41.116);
 
   --chart-2: oklch(0.6 0.118 184.704);
@@ -188,7 +188,7 @@
   justify-content: center;
   gap: 0.6rem;
   background-color: var(--gold);
-  color: oklch(0.99 0.005 90);
+  color: var(--navy-deep);
   font-size: 0.82rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -197,8 +197,8 @@
     background-color 0.3s ease,
     color 0.3s ease;
   &:hover {
-    background-color: var(--navy-deep);
-    color: oklch(0.99 0.005 90);
+    background-color: var(--navy);
+    color: var(--gold);
   }
 }
 
@@ -218,7 +218,7 @@
     color 0.3s ease;
   &:hover {
     background-color: var(--gold);
-    color: oklch(0.99 0.005 90);
+    color: var(--navy-deep);
   }
 }
 

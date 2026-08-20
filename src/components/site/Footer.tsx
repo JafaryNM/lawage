@@ -1,23 +1,10 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import logo from "@/assets/darton-logo.png";
-import hero from "@/assets/hero.jpg";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-navy-deep text-primary-foreground">
-      {/* Background Image */}
-      <img
-        src={hero}
-        alt=""
-        className="absolute inset-0 size-full object-cover"
-        loading="lazy"
-      />
-      {/* Transparent Layer Overlay */}
-      <div className="absolute inset-0 bg-navy-deep/92" />
-
-      {/* Footer Content */}
-      <div className="relative z-10">
-        <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-20 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-navy-deep text-primary-foreground">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-20 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="inline-block bg-background px-4 py-3">
             <img
@@ -122,7 +109,6 @@ export function Footer() {
           <p>Advocates, Notaries Public & Commissioners for Oaths — Dar es Salaam, Tanzania</p>
         </div>
       </div>
-    </div>
     </footer>
   );
 }
