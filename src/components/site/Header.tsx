@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, Phone, Mail, Search, X, Facebook, Linkedin, Instagram, Twitter } from "lucide-react";
-import logo from "@/assets/darton-logo.png.asset.json";
+import logo from "@/assets/darton-logo.png";
 
 const NAV = [
   { label: "Home", href: "#home" },
@@ -67,7 +67,7 @@ export function Header() {
         <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-5">
           <a href="#home" className="shrink-0">
             <img
-              src={logo.url}
+              src={logo}
               alt="Darton Attorneys logo"
               className="h-11 w-auto md:h-14"
               width={520}

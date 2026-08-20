@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
-import logo from "@/assets/darton-logo.png.asset.json";
+import logo from "@/assets/darton-logo.png";
 
 export function Footer() {
   return (
@@ -8,7 +8,7 @@ export function Footer() {
         <div>
           <div className="inline-block bg-background px-4 py-3">
             <img
-              src={logo.url}
+              src={logo}
               alt="Darton Attorneys logo"
               className="h-12 w-auto"
               loading="lazy"

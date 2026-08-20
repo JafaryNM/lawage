@@ -17,20 +17,20 @@ import { useState } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import hero from "@/assets/hero.jpg.asset.json";
-import about from "@/assets/about.jpg.asset.json";
-import p1 from "@/assets/p1.jpg.asset.json";
-import p2 from "@/assets/p2.jpg.asset.json";
-import p3 from "@/assets/p3.jpg.asset.json";
-import p4 from "@/assets/p4.jpg.asset.json";
-import t1 from "@/assets/t1.jpg.asset.json";
-import t2 from "@/assets/t2.jpg.asset.json";
-import t3 from "@/assets/t3.jpg.asset.json";
-import b1 from "@/assets/b1.jpg.asset.json";
-import b2 from "@/assets/b2.jpg.asset.json";
-import b3 from "@/assets/b3.jpg.asset.json";
-import c1 from "@/assets/c1.jpg.asset.json";
-import c2 from "@/assets/c2.jpg.asset.json";
+import hero from "@/assets/hero.jpg";
+import about from "@/assets/about.jpg";
+import p1 from "@/assets/p1.jpg";
+import p2 from "@/assets/p2.jpg";
+import p3 from "@/assets/p3.jpg";
+import p4 from "@/assets/p4.jpg";
+import t1 from "@/assets/t1.jpg";
+import t2 from "@/assets/t2.jpg";
+import t3 from "@/assets/t3.jpg";
+import b1 from "@/assets/b1.jpg";
+import b2 from "@/assets/b2.jpg";
+import b3 from "@/assets/b3.jpg";
+import c1 from "@/assets/c1.jpg";
+import c2 from "@/assets/c2.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,8 +47,8 @@ export const Route = createFileRoute("/")({
         content:
           "Trusted Tanzanian advocates for corporate, litigation, land, family, employment and tax matters.",
       },
-      { property: "og:image", content: hero.url },
-      { name: "twitter:image", content: hero.url },
+      { property: "og:image", content: hero },
+      { name: "twitter:image", content: hero },
     ],
   }),
   component: Index,
@@ -210,7 +210,7 @@ function Index() {
       {/* HERO */}
       <section className="relative">
         <img
-          src={hero.url}
+          src={hero}
           alt="Darton Attorneys advocates reviewing a legal contract in their Dar es Salaam office"
           className="absolute inset-0 size-full object-cover"
           width={1920}
@@ -313,7 +313,7 @@ function Index() {
 
           <div className="relative">
             <img
-              src={about.url}
+              src={about}
               alt="Managing partner of Darton Attorneys in the firm's law library"
               className="w-full object-cover"
               loading="lazy"
@@ -340,7 +340,7 @@ function Index() {
             {SERVICES.map((s) => (
               <a key={s.title} href={s.href} className="group relative block overflow-hidden">
                 <img
-                  src={s.img.url}
+                  src={s.img}
                   alt={s.title}
                   className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -368,7 +368,7 @@ function Index() {
             {PROJECTS.map((p, i) => (
               <article key={i} className="group relative overflow-hidden">
                 <img
-                  src={p.img.url}
+                  src={p.img}
                   alt={p.title}
                   className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
                     p.tall ? "h-[30rem]" : "h-72"
@@ -420,7 +420,7 @@ function Index() {
               <article key={m.name} className="group bg-background">
                 <div className="overflow-hidden">
                   <img
-                    src={m.img.url}
+                    src={m.img}
                     alt={`${m.name}, ${m.role} at Darton Attorneys`}
                     className="h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
@@ -489,7 +489,7 @@ function Index() {
               <article key={post.title} className="group">
                 <div className="relative overflow-hidden">
                   <img
-                    src={post.img.url}
+                    src={post.img}
                     alt={post.title}
                     className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
