@@ -60,9 +60,8 @@ export function Header() {
 
       {/* Main nav */}
       <div
-        className={`w-full bg-background ${
-          stuck ? "fixed inset-x-0 top-0 shadow-[0_4px_24px_rgba(13,27,52,0.12)]" : ""
-        }`}
+        className={`w-full bg-background ${stuck ? "fixed inset-x-0 top-0 shadow-[0_4px_24px_rgba(13,27,52,0.12)]" : ""
+          }`}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-5">
           <a href="#home" className="shrink-0">
