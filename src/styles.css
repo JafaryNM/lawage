@@ -155,5 +155,84 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 }
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@utility section-pad {
+  padding-block: 6rem;
+}
+
+@utility btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background-color: var(--gold);
+  color: var(--navy-deep);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 1.05rem 2.4rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  &:hover {
+    background-color: var(--navy);
+    color: var(--gold);
+  }
+}
+
+@utility btn-outline-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 1.05rem 2.4rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  &:hover {
+    background-color: var(--gold);
+    color: var(--navy-deep);
+  }
+}
+
+@utility rule-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  &::before,
+  &::after {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background-color: var(--gold);
+  }
+}
+
