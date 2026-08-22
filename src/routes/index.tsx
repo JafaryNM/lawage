@@ -255,37 +255,8 @@ function Index() {
       <Header />
 
       {/* HERO */}
-      <section className="relative">
-        <img
-          src={hero}
-          alt="Darton Attorneys advocates reviewing a legal contract in their Dar es Salaam office"
-          className="absolute inset-0 size-full object-cover"
-          width={1920}
-          height={1088}
-        />
-        <div className="absolute inset-0 bg-navy-deep/75" />
-        <div className="relative mx-auto flex min-h-[640px] max-w-[1400px] flex-col justify-center px-6 py-28 lg:min-h-[780px]">
-          <span className="eyebrow flex items-center gap-4">
-            <span className="h-px w-10 bg-gold" />
-            Leave the law to us
-          </span>
-          <h1 className="mt-6 max-w-4xl text-5xl leading-[1.05] text-primary-foreground md:text-7xl lg:text-[5.2rem]">
-            Proven Result Partners In Legal Success
-          </h1>
-          <p className="mt-7 max-w-xl text-base leading-relaxed text-primary-foreground/80">
-            Darton Attorneys is a Dar es Salaam law firm delivering clear, decisive counsel to
-            businesses, institutions and private clients across Tanzania.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a href="#about" className="btn-gold">
-              Read More
-            </a>
-            <a href="#get-involved" className="btn-outline-gold">
-              Book A Consultation
-            </a>
-          </div>
-        </div>
-      </section>
+      <HeroSlideshow />
+
 
       {/* PRACTICE AREAS */}
       <section id="practice" className="section-pad">
