@@ -8,6 +8,7 @@ export interface TextAnimateProps {
   className?: string;
   duration?: number;
   stagger?: number;
+  trigger?: boolean;
 }
 
 export function TextAnimate({
@@ -18,11 +19,20 @@ export function TextAnimate({
   className = "",
   duration = 0.6,
   stagger = 0.04,
+  trigger,
 }: TextAnimateProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
+    if (trigger === true) {
+      setShouldAnimate(true);
+      return;
+    }
+    if (trigger === false) {
+      setShouldAnimate(false);
+      return;
+    }
     if (!ref.current) return;
 
     const observer = new IntersectionObserver(
@@ -36,12 +46,12 @@ export function TextAnimate({
           }
         });
       },
-      { threshold: 0.2 },
+      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" },
     );
 
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [once]);
+  }, [once, trigger]);
 
   const tokens = useMemo(
     () => (by === "word" ? children.split(" ") : children.split("")),
@@ -64,7 +74,7 @@ export function TextAnimate({
                 ? "blur-in-up"
                 : "blur-in-down"
               : "none",
-            opacity: shouldAnimate ? undefined : 0,
+            opacity: shouldAnimate ? 1 : 0,
           } as React.CSSProperties}
         >
           {token === " " ? "\u00A0" : token}
@@ -74,3 +84,4 @@ export function TextAnimate({
     </span>
   );
 }
+
