@@ -311,10 +311,23 @@ function HeroSlideshow() {
               {slide.eyebrow}
             </span>
             <h1 className="mt-6 text-6xl leading-[1.05] text-primary-foreground md:text-8xl lg:text-[7rem]">
-              {slide.title}
+              {i === active ? (
+                <TextAnimate
+                  animation="blurInDown"
+                  by="character"
+                  once={false}
+                  duration={0.7}
+                  stagger={0.05}
+                >
+                  {slide.title}
+                </TextAnimate>
+              ) : (
+                slide.title
+              )}
             </h1>
           </div>
         ))}
+
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <a href="#get-involved" className="btn-gold">
             Book A Consultation <ArrowRight className="size-4" strokeWidth={1.5} />
