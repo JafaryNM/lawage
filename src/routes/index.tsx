@@ -17,6 +17,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { TextAnimate } from "@/registry/magicui/text-animate";
+
 import hero from "@/assets/hero.jpg";
 import slide1Asset from "@/assets/business-meeting-cafe.jpg.asset.json";
 import slide2Asset from "@/assets/executive-correcting-report.jpg.asset.json";
@@ -309,10 +311,21 @@ function HeroSlideshow() {
               {slide.eyebrow}
             </span>
             <h1 className="mt-6 text-6xl leading-[1.05] text-primary-foreground md:text-8xl lg:text-[7rem]">
-              {slide.title}
+              <TextAnimate
+                animation="blurInDown"
+                by="character"
+                once={false}
+                duration={0.7}
+                stagger={0.05}
+                trigger={i === active}
+              >
+                {slide.title}
+              </TextAnimate>
             </h1>
+
           </div>
         ))}
+
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <a href="#get-involved" className="btn-gold">
             Book A Consultation <ArrowRight className="size-4" strokeWidth={1.5} />
