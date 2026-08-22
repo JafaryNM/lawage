@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { TextAnimate } from "@/registry/magicui/text-animate";
 
 import slide1 from "@/assets/slider-01-img-b2.png";
-import slide2 from "@/assets/business-meeting-cafe.png";
-import slide3 from "@/assets/executive-correcting-report.png";
-import slide4 from "@/assets/successful-diverse-business-people-discussing-contract.png";
+import slide2 from "@/assets/demo-lawyer-blog-03.png";
+import slide3 from "@/assets/successful-diverse-business-people-discussing-contract.png";
 
 const HERO_SLIDES = [
   {
@@ -20,7 +19,7 @@ const HERO_SLIDES = [
   },
   {
     src: slide2,
-    alt: "Attorney taking notes with a client during an informal consultation",
+    alt: "Professional attorney working in the office",
     eyebrow: "Trusted Counsel For",
     title: "Legal Clarity",
     desc: "We provide clear, precise guidance for Tanzanian commercial and tax matters.",
@@ -29,15 +28,6 @@ const HERO_SLIDES = [
   },
   {
     src: slide3,
-    alt: "Executive reviewing and correcting a legal report",
-    eyebrow: "Precise Advice On",
-    title: "Complex Matters",
-    desc: "Advocating with absolute diligence in every Tanzanian court and tribunal.",
-    position: "object-top",
-    theme: "dark",
-  },
-  {
-    src: slide4,
     alt: "Business professionals discussing a contract together",
     eyebrow: "Creative Solutions For",
     title: "Legal Problems",
@@ -74,29 +64,52 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
     return () => window.clearInterval(id);
   }, [onThemeChange]);
 
-  const activeTheme = HERO_SLIDES[active].theme;
-  const isLight = activeTheme === "light";
+  const activeSlide = HERO_SLIDES[active];
+  const isLight = activeSlide.theme === "light";
 
   return (
-    <section className="relative overflow-hidden w-full min-h-screen min-h-[100dvh] flex flex-col justify-center">
-      {HERO_SLIDES.map((slide, i) => (
-        <img
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          loading={i === 0 ? "eager" : "lazy"}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-[2000ms] ease-in-out ${
-            slide.position || "object-top"
-          } ${i === active ? "opacity-100" : "opacity-0"}`}
-        />
-      ))}
-      
-      {/* Dynamic Overlay Gradient */}
-      <div className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${
-        isLight
-          ? "bg-gradient-to-r from-white/95 via-white/50 to-transparent"
-          : "bg-gradient-to-b from-black/60 via-black/10 to-black/50"
-      }`} />
+    <section className="relative overflow-hidden w-full min-h-screen min-h-[100dvh] flex flex-col justify-center bg-white">
+      {/* Render Background slides */}
+      {HERO_SLIDES.map((slide, i) => {
+        const isSlideLight = slide.theme === "light";
+        return (
+          <div
+            key={slide.src}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${
+              i === active ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
+            }`}
+          >
+            {isSlideLight ? (
+              /* Light theme split column layout to match reference composition */
+              <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] w-full h-full bg-white">
+                <div className="relative w-full h-full flex items-end justify-center lg:justify-start lg:pl-12 xl:pl-20">
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    className="h-[60vh] lg:h-[80vh] w-auto max-h-[85vh] object-contain object-bottom select-none"
+                  />
+                </div>
+                <div className="hidden lg:block bg-white w-full h-full" />
+              </div>
+            ) : (
+              /* Dark theme full-screen layout */
+              <>
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className={`absolute inset-0 size-full object-cover ${slide.position || "object-top"}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-black/50" />
+              </>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Dynamic Overlay Gradient for overall layout blending */}
+      {isLight && (
+        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent pointer-events-none z-5" />
+      )}
 
       {/* Vertical Social Follow Us Bar (Bottom Left) */}
       <div className={`absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 transition-colors duration-1000 ${
@@ -113,25 +126,34 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
         </div>
       </div>
 
-      {/* Render active text slide */}
-      <div className={`relative mx-auto flex min-h-screen min-h-[100dvh] w-full max-w-[1400px] flex-col justify-center px-6 py-28 z-10 transition-all duration-[1000ms] ${
+      {/* Text Content Grid Wrapper */}
+      <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 ${
         isLight
-          ? "items-start text-left md:pl-[45%] lg:pl-[50%]"
-          : "items-center text-center"
+          ? "grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] min-h-screen min-h-[100dvh] items-center"
+          : "flex min-h-screen min-h-[100dvh] flex-col justify-center items-center text-center"
       }`}>
-        <div key={active} className="w-full animate-in fade-in duration-700">
-          <span className={`block text-[0.8rem] uppercase tracking-[0.4em] ${
+        {isLight ? (
+          /* Left column: Empty to balance the Lady Justice statue layout */
+          <div className="hidden lg:block w-full h-full" />
+        ) : null}
+
+        {/* Right column (or Centered wrapper for dark slides) */}
+        <div key={active} className={`w-full animate-in fade-in duration-700 ${
+          isLight ? "flex flex-col items-start text-left lg:pl-8 xl:pl-16" : "flex flex-col items-center"
+        }`}>
+          <span className={`block text-[0.8rem] uppercase tracking-[0.4em] font-sans ${
             isLight ? "text-muted-foreground" : "text-primary-foreground/90"
           }`}>
-            {HERO_SLIDES[active].eyebrow}
+            {activeSlide.eyebrow}
           </span>
           
-          <h1 className={`mt-5 text-4xl leading-[1.1] md:text-5xl lg:text-[4.5rem] font-display transition-colors duration-1000 ${
+          <h1 className={`mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display transition-colors duration-1000 tracking-tight font-medium ${
             isLight ? "text-navy" : "text-primary-foreground"
           }`}>
             {active === 0 ? (
               <>
-                A law firm with a <span className="text-gold border-b-2 border-gold/70 pb-1 italic font-medium">passion</span> for success
+                A law firm with a <br className="hidden lg:block" />
+                <span className="text-gold border-b-2 border-gold/70 pb-1 italic font-medium">passion</span> for success
               </>
             ) : (
               <TextAnimate
@@ -142,42 +164,42 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
                 stagger={0.04}
                 trigger={true}
               >
-                {HERO_SLIDES[active].title}
+                {activeSlide.title}
               </TextAnimate>
             )}
           </h1>
           
-          <p className={`mt-6 text-sm md:text-base leading-relaxed max-w-xl transition-colors duration-1000 ${
+          <p className={`mt-6 text-sm md:text-base leading-relaxed max-w-xl transition-colors duration-1000 font-sans ${
             isLight ? "text-muted-foreground" : "text-primary-foreground/75"
           } ${isLight ? "" : "mx-auto"}`}>
-            {HERO_SLIDES[active].desc}
+            {activeSlide.desc}
           </p>
-        </div>
 
-        <div className={`mt-10 flex flex-wrap gap-4 z-10 ${
-          isLight ? "justify-start" : "justify-center"
-        }`}>
-          {active === 0 ? (
-            <>
-              <a href="#projects" className="btn-gold font-sans">
-                Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
+          <div className={`mt-10 flex flex-wrap gap-4 z-10 ${
+            isLight ? "justify-start" : "justify-center"
+          }`}>
+            {active === 0 ? (
+              <>
+                <a href="#projects" className="btn-gold font-sans">
+                  Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
+                </a>
+                <a
+                  href="#get-involved"
+                  className="inline-flex items-center gap-2 border border-[#152833] text-[#152833] text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 hover:bg-[#152833] hover:text-white transition-colors duration-300 font-sans"
+                >
+                  Contact Us <ArrowRight className="size-4" strokeWidth={1.5} />
+                </a>
+              </>
+            ) : (
+              <a href="#get-involved" className="btn-gold font-sans">
+                Book A Consultation <ArrowRight className="size-4" strokeWidth={1.5} />
               </a>
-              <a
-                href="#get-involved"
-                className="inline-flex items-center gap-2 border border-[#152833] text-[#152833] text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 hover:bg-[#152833] hover:text-white transition-colors duration-300 font-sans"
-              >
-                Contact Us <ArrowRight className="size-4" strokeWidth={1.5} />
-              </a>
-            </>
-          ) : (
-            <a href="#get-involved" className="btn-gold font-sans">
-              Book A Consultation <ArrowRight className="size-4" strokeWidth={1.5} />
-            </a>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Horizontal DOT/Circle slide indicators (Right vertical panel) */}
+      {/* Slide Indicators dot panel (Right vertical center) */}
       <div className="absolute right-8 top-1/2 z-20 flex -translate-y-1/2 flex-col gap-4">
         {HERO_SLIDES.map((slide, i) => (
           <button
