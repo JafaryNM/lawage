@@ -65,6 +65,8 @@ export function TextAnimate({
           key={`${token}-${i}`}
           className="text-animate-char"
           data-animate={animation}
+          data-trigger={shouldAnimate ? "true" : "false"}
+
           style={{
             "--text-animate-index": i,
             "--text-animate-duration": `${duration}s`,
