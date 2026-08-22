@@ -311,20 +311,18 @@ function HeroSlideshow() {
               {slide.eyebrow}
             </span>
             <h1 className="mt-6 text-6xl leading-[1.05] text-primary-foreground md:text-8xl lg:text-[7rem]">
-              {i === active ? (
-                <TextAnimate
-                  animation="blurInDown"
-                  by="character"
-                  once={false}
-                  duration={0.7}
-                  stagger={0.05}
-                >
-                  {slide.title}
-                </TextAnimate>
-              ) : (
-                slide.title
-              )}
+              <TextAnimate
+                animation="blurInDown"
+                by="character"
+                once={false}
+                duration={0.7}
+                stagger={0.05}
+                trigger={i === active}
+              >
+                {slide.title}
+              </TextAnimate>
             </h1>
+
           </div>
         ))}
 
