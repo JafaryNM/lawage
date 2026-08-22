@@ -236,3 +236,44 @@
   }
 }
 
+@keyframes blur-in-down {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes blur-in-up {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.text-animate-char {
+  display: inline-block;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  will-change: opacity, filter, transform;
+}
+
+.text-animate-char.animate {
+  animation-name: blur-in-down;
+  animation-duration: var(--text-animate-duration, 0.6s);
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-delay: calc(var(--text-animate-index, 0) * var(--text-animate-stagger, 0.04s));
+}
+
+
