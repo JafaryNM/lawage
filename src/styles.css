@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -19,8 +20,8 @@
  */
 
 @theme inline {
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Marcellus", serif;
+  --font-sans: "Montserrat", sans-serif;
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-navy: var(--navy);
@@ -72,8 +73,8 @@
 :root {
   --radius: 0rem;
   /* Lawfic-style palette, tuned to the Darton logo (navy + maroon) */
-  --navy: oklch(0.244 0.049 265);
-  --navy-deep: oklch(0.196 0.045 265);
+  --navy: oklch(0.210 0.045 253.5);
+  --navy-deep: oklch(0.186 0.045 253.5);
   --gold: oklch(0.741 0.062 63);
   --gold-soft: oklch(0.842 0.041 70);
   --maroon: oklch(0.358 0.121 15);
@@ -275,5 +276,10 @@
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   animation-delay: calc(var(--text-animate-index, 0) * var(--text-animate-stagger, 0.04s));
 }
-
-
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

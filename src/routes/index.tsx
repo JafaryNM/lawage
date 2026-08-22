@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  ArrowLeft,
   ArrowRight,
   Building2,
+  Facebook,
   Gavel,
+  Globe,
   Handshake,
+  Heart,
   Home,
   Landmark,
   Minus,
@@ -11,6 +15,7 @@ import {
   Quote,
   Scale,
   ShieldCheck,
+  Twitter,
   Users,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -105,6 +110,15 @@ const PROJECTS = [
   { img: p2, title: "Regulatory Compliance", tag: "Advisory", tall: false },
 ];
 
+const TAG_ICONS: Record<string, any> = {
+  Corporate: Building2,
+  Finance: Landmark,
+  Litigation: Scale,
+  Property: Home,
+  Family: Users,
+  Advisory: ShieldCheck,
+};
+
 const MILESTONES = [
   { year: "2012", title: "Firm Founded", text: "Darton Attorneys opens its doors in Dar es Salaam." },
   { year: "2015", title: "Corporate Desk", text: "Dedicated corporate and commercial practice established." },
@@ -121,16 +135,19 @@ const TEAM = [
 
 const TESTIMONIALS = [
   {
+    img: t2,
     name: "Iliena Mwangosi",
     role: "Managing Director, Logistics",
     text: "Darton Attorneys restructured our shareholding and commercial contracts with real precision. Their advice was practical, timely and commercially aware at every stage.",
   },
   {
+    img: t1,
     name: "Joseph Thomas",
     role: "Finance Director",
-    text: "They represented us in a complex tax dispute and kept us informed throughout. The outcome exceeded what we thought was realistic.",
+    text: "They represented us in a tax dispute and kept us informed. The outcome exceeded what we thought was realistic.",
   },
   {
+    img: p3,
     name: "Grace Ndosi",
     role: "Private Client",
     text: "A difficult family matter handled with dignity and complete confidentiality. I always felt heard and properly advised.",
@@ -142,19 +159,25 @@ const POSTS = [
     img: b1,
     tag: "Corporate",
     title: "Understanding the Companies Act obligations for directors",
+    desc: "Key directors' duties under the Tanzanian Companies Act, including filing requirements and regulatory liabilities.",
     date: "12 August 2026",
+    likes: 65,
   },
   {
     img: b2,
     tag: "Property",
     title: "Land title verification in Dar es Salaam: what to check first",
+    desc: "A practical guide to checking land registry indexes, planning details and title certificates in Dar es Salaam.",
     date: "28 July 2026",
+    likes: 42,
   },
   {
     img: b3,
     tag: "Contracts",
     title: "Drafting enforceable commercial contracts under Tanzanian law",
+    desc: "Critical elements to ensure commercial agreements are binding and fully enforceable under local statutes.",
     date: "09 July 2026",
+    likes: 58,
   },
 ];
 
@@ -253,13 +276,68 @@ function SectionHeading({
 
 function Index() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const projectsScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollProjects = (direction: "left" | "right") => {
+    if (projectsScrollRef.current) {
+      const { scrollLeft, clientWidth } = projectsScrollRef.current;
+      const scrollAmount = clientWidth * 0.4;
+      const targetScroll = direction === "left"
+        ? scrollLeft - scrollAmount
+        : scrollLeft + scrollAmount;
+      projectsScrollRef.current.scrollTo({ left: targetScroll, behavior: "smooth" });
+    }
+  };
+
+  const handleProjectsScroll = () => {
+    if (projectsScrollRef.current) {
+      const { scrollLeft } = projectsScrollRef.current;
+      const cardWidth = window.innerWidth >= 768 ? 604 : 334;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveProjectIndex(Math.min(Math.max(index, 0), PROJECTS.length - 1));
+    }
+  };
+
+  useEffect(() => {
+    let intervalId: number;
+    const startAutoScroll = () => {
+      intervalId = window.setInterval(() => {
+        if (projectsScrollRef.current) {
+          const { scrollLeft, scrollWidth, clientWidth } = projectsScrollRef.current;
+          const cardWidth = window.innerWidth >= 768 ? 604 : 334;
+          
+          if (scrollLeft + clientWidth >= scrollWidth - 10) {
+            projectsScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+          } else {
+            projectsScrollRef.current.scrollTo({ left: scrollLeft + cardWidth, behavior: "smooth" });
+          }
+        }
+      }, 6000);
+    };
+    startAutoScroll();
+    return () => {
+      if (intervalId) {
+        window.clearInterval(intervalId);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header theme={heroTheme} />
 
       {/* HERO */}
-      <HeroSlideshow />
+      <HeroSlideshow onThemeChange={setHeroTheme} />
 
 
       {/* PRACTICE AREAS */}
@@ -272,28 +350,30 @@ function Index() {
             </a>
           </div>
 
-          <div className="mt-14 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid bg-background sm:grid-cols-2 lg:grid-cols-3">
             {PRACTICE.map(({ icon: Icon, title, text }) => (
               <article
                 key={title}
-                className="group bg-background p-10 transition-colors duration-300 hover:bg-navy"
+                className="group bg-background p-10"
               >
-                <Icon
-                  className="size-11 text-gold transition-transform duration-300 group-hover:-translate-y-1"
-                  strokeWidth={1.2}
-                />
-                <h3 className="mt-6 text-2xl text-foreground transition-colors group-hover:text-primary-foreground">
-                  {title}
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-primary-foreground/70">
-                  {text}
-                </p>
-                <a
-                  href="#get-involved"
-                  className="mt-6 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.22em] text-gold"
-                >
-                  Read More <ArrowRight className="size-4" strokeWidth={1.5} />
-                </a>
+                <div className="transition-transform duration-300 group-hover:-translate-y-2 flex flex-col h-full">
+                  <Icon
+                    className="size-11 text-gold"
+                    strokeWidth={1.2}
+                  />
+                  <h3 className="mt-6 text-2xl text-foreground">
+                    {title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground flex-grow">
+                    {text}
+                  </p>
+                  <a
+                    href="#get-involved"
+                    className="mt-6 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.22em] text-gold"
+                  >
+                    Read More <ArrowRight className="size-4" strokeWidth={1.5} />
+                  </a>
+                </div>
               </article>
             ))}
           </div>
@@ -385,31 +465,105 @@ function Index() {
       </section>
 
       {/* PROJECTS / CASE STUDIES */}
-      <section id="projects" className="section-pad bg-navy-deep">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <SectionHeading eyebrow="Our Projects" title="Selected Matters We Have Handled" light />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {PROJECTS.map((p, i) => (
-              <article key={i} className="group relative overflow-hidden">
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                    p.tall ? "h-[30rem]" : "h-72"
-                  }`}
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7">
-                  <span className="text-[0.7rem] uppercase tracking-[0.22em] text-gold">
-                    {p.tag}
-                  </span>
-                  <h3 className="mt-2 text-2xl text-primary-foreground">{p.title}</h3>
-                </div>
-              </article>
-            ))}
+      <section id="projects" className="section-pad bg-navy-deep overflow-hidden">
+        <div className="mx-auto max-w-[1400px] px-6 grid grid-cols-1 lg:grid-cols-[1fr_2.2fr] gap-12 items-center">
+          <div>
+            <span className="rule-gold eyebrow">Our Projects</span>
+            <h2 className="mt-4 text-4xl leading-[1.15] md:text-5xl text-primary-foreground font-display">
+              Selected Matters <br /> We Have <span className="italic font-medium">Handled.</span>
+            </h2>
+            
+            {/* Navigation Arrow Buttons & Page Indicator */}
+            <div className="mt-8 flex items-center gap-4">
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => scrollProjects("left")}
+                  className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
+                  aria-label="Previous project"
+                >
+                  <ArrowLeft className="size-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollProjects("right")}
+                  className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
+                  aria-label="Next project"
+                >
+                  <ArrowRight className="size-5" />
+                </button>
+              </div>
+              
+              {/* Circular Page Indicator */}
+              <div className="relative flex size-12 shrink-0 items-center justify-center rounded-full border border-white/20 text-xs font-semibold font-display text-white">
+                {activeProjectIndex + 1}/{PROJECTS.length}
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll container on the right */}
+          <div
+            ref={projectsScrollRef}
+            onScroll={handleProjectsScroll}
+            className="flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4"
+            style={{ scrollbarWidth: "none" }}
+          >
+            {PROJECTS.map((p, i) => {
+              const Icon = TAG_ICONS[p.tag] || ShieldCheck;
+              const isEven = i % 2 !== 0;
+              return (
+                <article
+                  key={i}
+                  className="group relative flex w-[310px] md:w-[580px] h-[350px] shrink-0 snap-start overflow-hidden border border-white/5 bg-background shadow-md animate-in fade-in duration-300"
+                >
+                  {/* Left half: Image */}
+                  <div className="w-2/5 md:w-1/2 h-full overflow-hidden">
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  
+                  {/* Right half: Text Content Box */}
+                  <div className={`w-3/5 md:w-1/2 h-full p-6 md:p-8 flex flex-col justify-between relative transition-colors duration-300 ${
+                    isEven
+                      ? "bg-navy-deep text-primary-foreground"
+                      : "bg-background text-foreground"
+                  }`}>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-display leading-snug tracking-tight">
+                        {p.title}
+                      </h3>
+                      <p className={`mt-3 text-xs leading-relaxed line-clamp-4 ${
+                        isEven ? "text-primary-foreground/75" : "text-muted-foreground"
+                      }`}>
+                        Diam magna consectetur nunc tristique consequat. Integer venenatis nec rutrum. We provide diligent legal advocacy to resolve complex dispute scenarios and ensure regulatory compliance.
+                      </p>
+                    </div>
+                    
+                    <div className="flex justify-between items-end mt-4">
+                      {/* Arrow Button */}
+                      <div className={`flex size-10 items-center justify-center transition-colors duration-300 ${
+                        isEven
+                          ? "border border-white/20 text-white hover:bg-white hover:text-navy-deep"
+                          : "bg-gold text-navy-deep hover:bg-navy hover:text-gold"
+                      }`}>
+                        <ArrowRight className="size-4" strokeWidth={2} />
+                      </div>
+                      
+                      {/* Gold background tag icon outline */}
+                      <div className={`opacity-15 shrink-0 ${
+                        isEven ? "text-white" : "text-[#C49B7A]"
+                      }`}>
+                        <Icon className="size-14" strokeWidth={1.2} />
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -433,28 +587,40 @@ function Index() {
       {/* TEAM */}
       <section id="team" className="section-pad bg-muted">
         <div className="mx-auto max-w-[1400px] px-6">
-          <div className="flex flex-wrap items-end justify-between gap-8">
-            <SectionHeading eyebrow="Our Team" title="Exceptional And Dedicated Attorneys" />
-            <a href="#get-involved" className="btn-gold">
-              Read More
-            </a>
+          <div className="text-center mb-14">
+            <span className="rule-gold eyebrow">Meet Our People</span>
+            <h2 className="mt-4 text-4xl leading-[1.15] md:text-5xl text-foreground font-display">
+              Leading experts
+            </h2>
           </div>
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-[1150px] mx-auto">
             {TEAM.map((m) => (
-              <article key={m.name} className="group bg-background">
-                <div className="overflow-hidden">
+              <article key={m.name} className="group flex flex-col items-center text-center">
+                <div className="relative overflow-hidden w-full aspect-[4/5] bg-background mb-6">
                   <img
                     src={m.img}
                     alt={`${m.name}, ${m.role} at Darton Attorneys`}
-                    className="h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                     width={700}
                     height={860}
                   />
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-[#C49B7A]/80 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a href="#" className="text-white hover:text-navy transition-colors">
+                      <Facebook className="size-5" />
+                    </a>
+                    <a href="#" className="text-white hover:text-navy transition-colors">
+                      <Globe className="size-5" />
+                    </a>
+                    <a href="#" className="text-white hover:text-navy transition-colors">
+                      <Twitter className="size-5" />
+                    </a>
+                  </div>
                 </div>
-                <div className="border-t-2 border-gold p-7 text-center">
-                  <h3 className="text-2xl text-foreground">{m.name}</h3>
-                  <p className="mt-1 text-[0.72rem] uppercase tracking-[0.22em] text-muted-foreground">
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground tracking-tight">{m.name}</h3>
+                  <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
                     {m.role}
                   </p>
                 </div>
@@ -465,22 +631,78 @@ function Index() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section id="testimonials" className="section-pad">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <SectionHeading eyebrow="Testimonials" title="What Our Clients Say" center />
-          <div className="mt-14 grid gap-8 lg:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <article key={t.name} className="border border-border p-10">
-                <Quote className="size-9 text-gold" strokeWidth={1.2} />
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{t.text}</p>
-                <div className="mt-8 border-t border-border pt-6">
-                  <h3 className="text-xl text-foreground">{t.name}</h3>
-                  <p className="mt-1 text-[0.72rem] uppercase tracking-[0.22em] text-gold">
-                    {t.role}
-                  </p>
+      <section id="testimonials" className="section-pad overflow-hidden">
+        <div className="mx-auto max-w-[1100px] px-6">
+          {/* Header with Circular Index progress */}
+          <div className="flex items-center justify-between gap-6 border-b border-border pb-6 mb-12">
+            <div>
+              <h2 className="text-3xl md:text-5xl text-foreground font-display tracking-tight leading-none">
+                What Our Clients Say
+              </h2>
+              <span className="mt-4 block h-[2px] w-12 bg-gold" />
+            </div>
+            
+            {/* Index circle indicator */}
+            <div className="relative flex size-14 shrink-0 items-center justify-center rounded-full border border-gold/40 text-sm font-semibold font-display text-gold">
+              {activeTestimonial + 1}/{TESTIMONIALS.length}
+            </div>
+          </div>
+          
+          {/* Content: round profile image left, quote text + stars right */}
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8 md:gap-14 items-center min-h-[220px]">
+            {/* Left profile Column */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="size-36 rounded-full overflow-hidden border border-border bg-muted mb-4 shadow-sm animate-in fade-in duration-300">
+                <img
+                  src={TESTIMONIALS[activeTestimonial].img}
+                  alt={TESTIMONIALS[activeTestimonial].name}
+                  className="size-full object-cover object-top"
+                  loading="lazy"
+                  width={200}
+                  height={200}
+                />
+              </div>
+              <h3 className="text-base font-semibold text-foreground uppercase tracking-wider font-sans">
+                {TESTIMONIALS[activeTestimonial].name}
+              </h3>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1 font-sans">
+                {TESTIMONIALS[activeTestimonial].role}
+              </p>
+            </div>
+            
+            {/* Right quote content Column */}
+            <div className="relative flex justify-between items-start gap-8">
+              <div className="flex-grow animate-in fade-in slide-in-from-right-3 duration-500">
+                {/* 5 Stars Rating */}
+                <div className="flex gap-1 text-gold mb-5 justify-center md:justify-start">
+                  {[...Array(5)].map((_, idx) => (
+                    <span key={idx} className="text-lg">★</span>
+                  ))}
                 </div>
-              </article>
-            ))}
+                
+                {/* Testimony paragraph quote */}
+                <p className="text-lg md:text-2xl font-medium leading-relaxed text-foreground/90 italic font-display">
+                  "{TESTIMONIALS[activeTestimonial].text}"
+                </p>
+                
+                {/* Bottom slideshow dot indicators */}
+                <div className="mt-8 flex gap-2.5 justify-center md:justify-start">
+                  {TESTIMONIALS.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveTestimonial(idx)}
+                      className={`h-2 transition-all duration-300 cursor-pointer rounded-none ${
+                        idx === activeTestimonial ? "w-6 bg-gold" : "w-2 bg-muted hover:bg-gold/40"
+                      }`}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              {/* Giant quote icon */}
+              <Quote className="size-20 text-muted-foreground/15 shrink-0 hidden sm:block rotate-180" strokeWidth={1} />
+            </div>
           </div>
         </div>
       </section>
@@ -510,28 +732,40 @@ function Index() {
       <section id="insights" className="section-pad">
         <div className="mx-auto max-w-[1400px] px-6">
           <SectionHeading eyebrow="Legal Insights" title="Our Latest Commentary" center />
-          <div className="mt-14 grid gap-8 lg:grid-cols-3">
+          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {POSTS.map((post) => (
-              <article key={post.title} className="group">
-                <div className="relative overflow-hidden">
+              <article
+                key={post.title}
+                className="group flex flex-col bg-background shadow-md border border-border/10 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="relative overflow-hidden aspect-[16/10]">
                   <img
                     src={post.img}
                     alt={post.title}
-                    className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                     width={800}
                     height={600}
                   />
-                  <span className="absolute left-0 top-0 bg-gold px-4 py-2 text-[0.68rem] uppercase tracking-[0.22em] text-navy-deep">
-                    {post.tag}
-                  </span>
                 </div>
-                <p className="mt-6 text-[0.72rem] uppercase tracking-[0.22em] text-muted-foreground">
-                  {post.date}
-                </p>
-                <h3 className="mt-3 text-2xl leading-snug text-foreground transition-colors group-hover:text-gold">
-                  {post.title}
-                </h3>
+                
+                <div className="p-7 flex flex-col flex-grow">
+                  <h3 className="text-xl font-semibold leading-snug text-foreground hover:text-gold transition-colors duration-200">
+                    {post.title}
+                  </h3>
+                  
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-grow">
+                    {post.desc}
+                  </p>
+                  
+                  <div className="mt-6 pt-5 border-t border-border/60 flex justify-between items-center text-xs text-muted-foreground">
+                    <span>{post.date}</span>
+                    <span className="flex items-center gap-1">
+                      <Heart className="size-4 text-[#EA580C] fill-[#EA580C]" />
+                      {post.likes}
+                    </span>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -566,59 +800,6 @@ function Index() {
         </div>
       </section>
 
-      {/* GET INVOLVED / CONTACT */}
-      <section id="get-involved" className="section-pad bg-navy-deep">
-        <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-2">
-          <div>
-            <SectionHeading eyebrow="Get Involved" title="Speak To An Attorney Today" light />
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-primary-foreground/70">
-              Tell us briefly about your matter and we will arrange a consultation with the
-              attorney best suited to it. All enquiries are treated in strict confidence.
-            </p>
-            <div className="mt-10 space-y-5 text-sm text-primary-foreground/80">
-              <p className="flex items-center gap-3">
-                <Home className="size-4 text-gold" strokeWidth={1.5} />
-                Masaki, Chole Road, Dar es Salaam, Tanzania
-              </p>
-              <p>Monday – Friday, 08:00 – 17:00 EAT</p>
-            </div>
-          </div>
-
-          <form
-            className="grid gap-4 bg-background p-8 sm:grid-cols-2"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              required
-              placeholder="Full name"
-              className="border border-border bg-background px-4 py-3 text-sm outline-none focus:border-gold"
-            />
-            <input
-              required
-              type="email"
-              placeholder="Email address"
-              className="border border-border bg-background px-4 py-3 text-sm outline-none focus:border-gold"
-            />
-            <input
-              placeholder="Phone number"
-              className="border border-border bg-background px-4 py-3 text-sm outline-none focus:border-gold"
-            />
-            <input
-              placeholder="Practice area"
-              className="border border-border bg-background px-4 py-3 text-sm outline-none focus:border-gold"
-            />
-            <textarea
-              required
-              rows={5}
-              placeholder="Briefly describe your matter"
-              className="border border-border bg-background px-4 py-3 text-sm outline-none focus:border-gold sm:col-span-2"
-            />
-            <button type="submit" className="btn-gold sm:col-span-2">
-              Send Enquiry
-            </button>
-          </form>
-        </div>
-      </section>
 
       <Footer />
     </div>
