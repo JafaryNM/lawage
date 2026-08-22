@@ -17,6 +17,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { TextAnimate } from "@/registry/magicui/text-animate";
+
 import hero from "@/assets/hero.jpg";
 import slide1Asset from "@/assets/business-meeting-cafe.jpg.asset.json";
 import slide2Asset from "@/assets/executive-correcting-report.jpg.asset.json";
