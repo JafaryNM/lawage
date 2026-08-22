@@ -18,6 +18,9 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import hero from "@/assets/hero.jpg";
+import slide1Asset from "@/assets/business-meeting-cafe.jpg.asset.json";
+import slide2Asset from "@/assets/executive-correcting-report.jpg.asset.json";
+import slide3Asset from "@/assets/successful-diverse-business-people-discussing-contract.jpg.asset.json";
 import about from "@/assets/about.jpg";
 import p1 from "@/assets/p1.jpg";
 import p2 from "@/assets/p2.jpg";
@@ -181,8 +184,8 @@ function AnimatedCounter({ value }: { value: string }) {
   
   // Parse numeric part and suffix (e.g. "480+" -> 480 and "+")
   const numericMatch = value.match(/^(\d+)(.*)$/);
-  const target = numericMatch ? parseInt(numericMatch[1], 10) : 0;
-  const suffix = numericMatch ? numericMatch[2] : "";
+  const target = numericMatch ? parseInt(numericMatch[1] ?? "0", 10) : 0;
+  const suffix = numericMatch ? (numericMatch[2] ?? "") : "";
 
   useEffect(() => {
     let startTimestamp: number | null = null;
@@ -247,6 +250,94 @@ function SectionHeading({
   );
 }
 
+const HERO_SLIDES = [
+  {
+    src: slide1Asset.url,
+    alt: "Attorney taking notes with a client during an informal consultation",
+    eyebrow: "Trusted Counsel For",
+    title: "Legal Clarity",
+  },
+  {
+    src: slide2Asset.url,
+    alt: "Executive reviewing and correcting a legal report",
+    eyebrow: "Precise Advice On",
+    title: "Complex Matters",
+  },
+  {
+    src: slide3Asset.url,
+    alt: "Business professionals discussing a contract together",
+    eyebrow: "Creative Solutions For",
+    title: "Legal Problems",
+  },
+];
+
+function HeroSlideshow() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setActive((i) => (i + 1) % HERO_SLIDES.length),
+      8000,
+    );
+    return () => window.clearInterval(id);
+  }, []);
+
+  return (
+    <section className="relative overflow-hidden">
+      {HERO_SLIDES.map((slide, i) => (
+        <img
+          key={slide.src}
+          src={slide.src}
+          alt={slide.alt}
+          loading={i === 0 ? "eager" : "lazy"}
+          className={`absolute inset-0 size-full object-cover transition-opacity duration-[2000ms] ease-in-out ${
+            i === active ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+      <div className="absolute inset-0 bg-navy-deep/35" />
+
+      <div className="relative mx-auto flex min-h-[640px] max-w-[1400px] flex-col items-center justify-center px-6 py-28 text-center lg:min-h-[820px]">
+        {HERO_SLIDES.map((slide, i) => (
+          <div
+            key={slide.title}
+            className={`transition-opacity duration-[1200ms] ${
+              i === active ? "opacity-100" : "pointer-events-none absolute opacity-0"
+            }`}
+          >
+            <span className="text-[0.8rem] uppercase tracking-[0.4em] text-primary-foreground">
+              {slide.eyebrow}
+            </span>
+            <h1 className="mt-6 text-6xl leading-[1.05] text-primary-foreground md:text-8xl lg:text-[7rem]">
+              {slide.title}
+            </h1>
+          </div>
+        ))}
+        <div className="mt-12 flex flex-wrap justify-center gap-4">
+          <a href="#get-involved" className="btn-gold">
+            Book A Consultation <ArrowRight className="size-4" strokeWidth={1.5} />
+          </a>
+        </div>
+      </div>
+
+      <div className="absolute right-8 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-4">
+        {HERO_SLIDES.map((slide, i) => (
+          <button
+            key={slide.src}
+            type="button"
+            aria-label={`Show slide ${i + 1}`}
+            onClick={() => setActive(i)}
+            className={`size-3 rounded-full border border-primary-foreground/70 transition-colors ${
+              i === active ? "bg-gold" : "bg-transparent"
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
 function Index() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -255,37 +346,8 @@ function Index() {
       <Header />
 
       {/* HERO */}
-      <section className="relative">
-        <img
-          src={hero}
-          alt="Darton Attorneys advocates reviewing a legal contract in their Dar es Salaam office"
-          className="absolute inset-0 size-full object-cover"
-          width={1920}
-          height={1088}
-        />
-        <div className="absolute inset-0 bg-navy-deep/75" />
-        <div className="relative mx-auto flex min-h-[640px] max-w-[1400px] flex-col justify-center px-6 py-28 lg:min-h-[780px]">
-          <span className="eyebrow flex items-center gap-4">
-            <span className="h-px w-10 bg-gold" />
-            Leave the law to us
-          </span>
-          <h1 className="mt-6 max-w-4xl text-5xl leading-[1.05] text-primary-foreground md:text-7xl lg:text-[5.2rem]">
-            Proven Result Partners In Legal Success
-          </h1>
-          <p className="mt-7 max-w-xl text-base leading-relaxed text-primary-foreground/80">
-            Darton Attorneys is a Dar es Salaam law firm delivering clear, decisive counsel to
-            businesses, institutions and private clients across Tanzania.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a href="#about" className="btn-gold">
-              Read More
-            </a>
-            <a href="#get-involved" className="btn-outline-gold">
-              Book A Consultation
-            </a>
-          </div>
-        </div>
-      </section>
+      <HeroSlideshow />
+
 
       {/* PRACTICE AREAS */}
       <section id="practice" className="section-pad">
@@ -521,7 +583,7 @@ function Index() {
           ].map(([value, label]) => (
             <div key={label} className="text-center">
               <p className="font-[var(--font-display)] text-5xl text-gold">
-                <AnimatedCounter value={value} />
+                <AnimatedCounter value={value ?? ""} />
               </p>
               <p className="mt-2 text-[0.72rem] uppercase tracking-[0.22em] text-primary-foreground/75">
                 {label}
