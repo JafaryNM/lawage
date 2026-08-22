@@ -583,7 +583,7 @@ function Index() {
           ].map(([value, label]) => (
             <div key={label} className="text-center">
               <p className="font-[var(--font-display)] text-5xl text-gold">
-                <AnimatedCounter value={value} />
+                <AnimatedCounter value={value ?? ""} />
               </p>
               <p className="mt-2 text-[0.72rem] uppercase tracking-[0.22em] text-primary-foreground/75">
                 {label}
