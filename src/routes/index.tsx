@@ -184,8 +184,8 @@ function AnimatedCounter({ value }: { value: string }) {
   
   // Parse numeric part and suffix (e.g. "480+" -> 480 and "+")
   const numericMatch = value.match(/^(\d+)(.*)$/);
-  const target = numericMatch ? parseInt(numericMatch[1], 10) : 0;
-  const suffix = numericMatch ? numericMatch[2] : "";
+  const target = numericMatch ? parseInt(numericMatch[1] ?? "0", 10) : 0;
+  const suffix = numericMatch ? (numericMatch[2] ?? "") : "";
 
   useEffect(() => {
     let startTimestamp: number | null = null;
