@@ -80,17 +80,21 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             }`}
           >
             {isSlideLight ? (
-              /* Light theme split column layout to match reference composition */
-              <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] w-full h-full bg-white">
-                <div className="relative w-full h-full flex items-end justify-center lg:justify-start lg:pl-12 xl:pl-20">
-                  <img
-                    src={slide.src}
-                    alt={slide.alt}
-                    className="h-[60vh] lg:h-[80vh] w-auto max-h-[85vh] object-contain object-bottom select-none"
-                  />
-                </div>
-                <div className="hidden lg:block bg-white w-full h-full" />
+              /* Light theme: full-bleed pale colonnade with statue bleeding off the bottom */
+              <div className="absolute inset-0 w-full h-full bg-white overflow-hidden">
+                <img
+                  src={columnsBg.url}
+                  alt="Pale marble courthouse colonnade"
+                  className="absolute inset-0 size-full object-cover opacity-70"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="absolute bottom-0 left-0 lg:left-[6%] h-[70vh] lg:h-[92vh] w-auto object-contain object-bottom select-none mix-blend-multiply"
+                />
               </div>
+
             ) : (
               /* Dark theme full-screen layout */
               <>
