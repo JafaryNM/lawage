@@ -466,107 +466,104 @@ function Index() {
 
       {/* PROJECTS / CASE STUDIES */}
       <section id="projects" className="section-pad bg-navy-deep overflow-hidden">
-        <div className="mx-auto max-w-[1400px] px-6 grid grid-cols-1 lg:grid-cols-[1fr_2.2fr] gap-12 items-center">
-          <div>
-            <span className="rule-gold eyebrow">Our Projects</span>
-            <h2 className="mt-4 text-4xl leading-[1.15] md:text-5xl text-primary-foreground font-display">
-              Selected Matters <br /> We Have <span className="italic font-medium">Handled.</span>
-            </h2>
-            
-            {/* Navigation Arrow Buttons & Page Indicator */}
-            <div className="mt-8 flex items-center gap-4">
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => scrollProjects("left")}
-                  className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
-                  aria-label="Previous project"
-                >
-                  <ArrowLeft className="size-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollProjects("right")}
-                  className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
-                  aria-label="Next project"
-                >
-                  <ArrowRight className="size-5" />
-                </button>
-              </div>
-              
-              {/* Circular Page Indicator */}
-              <div className="relative flex size-12 shrink-0 items-center justify-center rounded-full border border-white/20 text-xs font-semibold font-display text-white">
-                {activeProjectIndex + 1}/{PROJECTS.length}
-              </div>
+        <div className="mx-auto max-w-[1400px] px-6">
+          {/* Heading row: title left, circular counter right */}
+          <div className="flex items-start justify-between gap-8">
+            <div>
+              <h2 className="text-4xl leading-[1.15] md:text-5xl lg:text-[3.4rem] text-primary-foreground font-display max-w-3xl">
+                We are Provided Especially <br className="hidden md:block" /> Skilled Services to you.
+              </h2>
+              <span className="mt-6 block h-px w-20 bg-gold/70" />
+            </div>
+
+            <div className="hidden md:flex size-24 shrink-0 items-center justify-center rounded-full border border-gold/40 font-display text-lg text-gold">
+              {activeProjectIndex + 1}/{PROJECTS.length}
             </div>
           </div>
+        </div>
 
-          {/* Scroll container on the right */}
-          <div
-            ref={projectsScrollRef}
-            onScroll={handleProjectsScroll}
-            className="flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4"
-            style={{ scrollbarWidth: "none" }}
+        {/* Full-bleed carousel */}
+        <div
+          ref={projectsScrollRef}
+          onScroll={handleProjectsScroll}
+          className="mt-14 flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pl-6 lg:pl-[max(1.5rem,calc((100vw-1400px)/2))] pr-6 pb-4"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {PROJECTS.map((p, i) => {
+            const Icon = TAG_ICONS[p.tag] || ShieldCheck;
+            const isDark = i % 2 !== 0;
+            return (
+              <article
+                key={i}
+                className="group relative flex w-[320px] md:w-[700px] h-[400px] shrink-0 snap-start overflow-hidden"
+              >
+                {/* Left half: Image */}
+                <div className="w-2/5 md:w-1/2 h-full overflow-hidden">
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Right half: Text panel */}
+                <div className={`w-3/5 md:w-1/2 h-full p-7 md:p-10 flex flex-col justify-between relative ${
+                  isDark
+                    ? "bg-transparent text-primary-foreground border border-white/15 border-l-0"
+                    : "bg-background text-foreground"
+                }`}>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-display leading-snug tracking-tight">
+                      {p.title}
+                    </h3>
+                    <p className={`mt-4 text-sm leading-relaxed line-clamp-4 font-sans ${
+                      isDark ? "text-primary-foreground/70" : "text-muted-foreground"
+                    }`}>
+                      Diam magna consectetur nunc tristique consequat. Integer venenatis nec rutrum.
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between items-end mt-4">
+                    <div className={`flex size-11 items-center justify-center transition-colors duration-300 ${
+                      isDark
+                        ? "border border-white/25 text-white hover:bg-white hover:text-navy-deep"
+                        : "bg-gold text-navy-deep hover:bg-navy hover:text-gold"
+                    }`}>
+                      <ArrowRight className="size-4" strokeWidth={2} />
+                    </div>
+
+                    <div className={`opacity-15 shrink-0 ${isDark ? "text-white" : "text-gold"}`}>
+                      <Icon className="size-16" strokeWidth={1.2} />
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* Arrows */}
+        <div className="mx-auto max-w-[1400px] px-6 mt-8 flex gap-3">
+          <button
+            type="button"
+            onClick={() => scrollProjects("left")}
+            className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
+            aria-label="Previous project"
           >
-            {PROJECTS.map((p, i) => {
-              const Icon = TAG_ICONS[p.tag] || ShieldCheck;
-              const isEven = i % 2 !== 0;
-              return (
-                <article
-                  key={i}
-                  className="group relative flex w-[310px] md:w-[580px] h-[350px] shrink-0 snap-start overflow-hidden border border-white/5 bg-background shadow-md animate-in fade-in duration-300"
-                >
-                  {/* Left half: Image */}
-                  <div className="w-2/5 md:w-1/2 h-full overflow-hidden">
-                    <img
-                      src={p.img}
-                      alt={p.title}
-                      className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  
-                  {/* Right half: Text Content Box */}
-                  <div className={`w-3/5 md:w-1/2 h-full p-6 md:p-8 flex flex-col justify-between relative transition-colors duration-300 ${
-                    isEven
-                      ? "bg-navy-deep text-primary-foreground"
-                      : "bg-background text-foreground"
-                  }`}>
-                    <div>
-                      <h3 className="text-lg md:text-xl font-display leading-snug tracking-tight">
-                        {p.title}
-                      </h3>
-                      <p className={`mt-3 text-xs leading-relaxed line-clamp-4 ${
-                        isEven ? "text-primary-foreground/75" : "text-muted-foreground"
-                      }`}>
-                        Diam magna consectetur nunc tristique consequat. Integer venenatis nec rutrum. We provide diligent legal advocacy to resolve complex dispute scenarios and ensure regulatory compliance.
-                      </p>
-                    </div>
-                    
-                    <div className="flex justify-between items-end mt-4">
-                      {/* Arrow Button */}
-                      <div className={`flex size-10 items-center justify-center transition-colors duration-300 ${
-                        isEven
-                          ? "border border-white/20 text-white hover:bg-white hover:text-navy-deep"
-                          : "bg-gold text-navy-deep hover:bg-navy hover:text-gold"
-                      }`}>
-                        <ArrowRight className="size-4" strokeWidth={2} />
-                      </div>
-                      
-                      {/* Gold background tag icon outline */}
-                      <div className={`opacity-15 shrink-0 ${
-                        isEven ? "text-white" : "text-[#C49B7A]"
-                      }`}>
-                        <Icon className="size-14" strokeWidth={1.2} />
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+            <ArrowLeft className="size-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollProjects("right")}
+            className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
+            aria-label="Next project"
+          >
+            <ArrowRight className="size-5" />
+          </button>
         </div>
       </section>
+
 
       {/* MILESTONES */}
       <section className="section-pad">
