@@ -6,6 +6,8 @@ import { TextAnimate } from "@/registry/magicui/text-animate";
 import slide1 from "@/assets/slider-01-img-b2.png";
 import slide2 from "@/assets/demo-lawyer-blog-03.png";
 import slide3 from "@/assets/successful-diverse-business-people-discussing-contract.png";
+import columnsBg from "@/assets/hero-columns.jpg.asset.json";
+
 
 const HERO_SLIDES = [
   {
@@ -47,7 +49,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
   const handleActiveChange = (idx: number) => {
     setActive(idx);
     if (onThemeChange) {
-      onThemeChange(HERO_SLIDES[idx].theme as "light" | "dark");
+      onThemeChange(HERO_SLIDES[idx]!.theme as "light" | "dark");
     }
   };
 
@@ -56,7 +58,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
       setActive((i) => {
         const next = (i + 1) % HERO_SLIDES.length;
         if (onThemeChange) {
-          onThemeChange(HERO_SLIDES[next].theme as "light" | "dark");
+          onThemeChange(HERO_SLIDES[next]!.theme as "light" | "dark");
         }
         return next;
       });
@@ -64,7 +66,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
     return () => window.clearInterval(id);
   }, [onThemeChange]);
 
-  const activeSlide = HERO_SLIDES[active];
+  const activeSlide = HERO_SLIDES[active]!;
   const isLight = activeSlide.theme === "light";
 
   return (
@@ -80,17 +82,21 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             }`}
           >
             {isSlideLight ? (
-              /* Light theme split column layout to match reference composition */
-              <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] w-full h-full bg-white">
-                <div className="relative w-full h-full flex items-end justify-center lg:justify-start lg:pl-12 xl:pl-20">
-                  <img
-                    src={slide.src}
-                    alt={slide.alt}
-                    className="h-[60vh] lg:h-[80vh] w-auto max-h-[85vh] object-contain object-bottom select-none"
-                  />
-                </div>
-                <div className="hidden lg:block bg-white w-full h-full" />
+              /* Light theme: full-bleed pale colonnade with statue bleeding off the bottom */
+              <div className="absolute inset-0 w-full h-full bg-white overflow-hidden">
+                <img
+                  src={columnsBg.url}
+                  alt="Pale marble courthouse colonnade"
+                  className="absolute inset-0 size-full object-cover opacity-70"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
+                />
               </div>
+
             ) : (
               /* Dark theme full-screen layout */
               <>
@@ -106,36 +112,32 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
         );
       })}
 
-      {/* Dynamic Overlay Gradient for overall layout blending */}
-      {isLight && (
-        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent pointer-events-none z-5" />
-      )}
-
       {/* Vertical Social Follow Us Bar (Bottom Left) */}
       <div className={`absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 transition-colors duration-1000 ${
-        isLight ? "text-navy" : "text-white/60"
+        isLight ? "text-navy/70" : "text-white/60"
       }`}>
-        <div className="flex flex-col gap-4 text-xs font-semibold tracking-[0.2em] uppercase [writing-mode:vertical-lr] rotate-180 items-center">
-          <span className="h-10 w-px bg-current opacity-30 mb-2" />
-          Follow Us
-        </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           <a href="#" className="hover:text-gold transition-colors"><Facebook className="size-4" strokeWidth={1.5} /></a>
           <a href="#" className="hover:text-gold transition-colors"><Twitter className="size-4" strokeWidth={1.5} /></a>
           <a href="#" className="hover:text-gold transition-colors"><Instagram className="size-4" strokeWidth={1.5} /></a>
+        </div>
+        <span className="h-12 w-px bg-current opacity-30" />
+        <div className="text-[0.7rem] font-medium tracking-[0.25em] uppercase [writing-mode:vertical-lr] rotate-180 font-sans">
+          Follow Us
         </div>
       </div>
 
       {/* Text Content Grid Wrapper */}
       <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 ${
         isLight
-          ? "grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] min-h-screen min-h-[100dvh] items-center"
+          ? "grid grid-cols-1 lg:grid-cols-2 min-h-screen min-h-[100dvh] items-center"
           : "flex min-h-screen min-h-[100dvh] flex-col justify-center items-center text-center"
       }`}>
         {isLight ? (
           /* Left column: Empty to balance the Lady Justice statue layout */
           <div className="hidden lg:block w-full h-full" />
         ) : null}
+
 
         {/* Right column (or Centered wrapper for dark slides) */}
         <div key={active} className={`w-full animate-in fade-in duration-700 ${

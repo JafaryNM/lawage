@@ -654,8 +654,8 @@ function Index() {
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <div className="size-36 rounded-full overflow-hidden border border-border bg-muted mb-4 shadow-sm animate-in fade-in duration-300">
                 <img
-                  src={TESTIMONIALS[activeTestimonial].img}
-                  alt={TESTIMONIALS[activeTestimonial].name}
+                  src={TESTIMONIALS[activeTestimonial]!.img}
+                  alt={TESTIMONIALS[activeTestimonial]!.name}
                   className="size-full object-cover object-top"
                   loading="lazy"
                   width={200}
@@ -663,10 +663,10 @@ function Index() {
                 />
               </div>
               <h3 className="text-base font-semibold text-foreground uppercase tracking-wider font-sans">
-                {TESTIMONIALS[activeTestimonial].name}
+                {TESTIMONIALS[activeTestimonial]!.name}
               </h3>
               <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1 font-sans">
-                {TESTIMONIALS[activeTestimonial].role}
+                {TESTIMONIALS[activeTestimonial]!.role}
               </p>
             </div>
             
@@ -682,7 +682,7 @@ function Index() {
                 
                 {/* Testimony paragraph quote */}
                 <p className="text-lg md:text-2xl font-medium leading-relaxed text-foreground/90 italic font-display">
-                  "{TESTIMONIALS[activeTestimonial].text}"
+                  "{TESTIMONIALS[activeTestimonial]!.text}"
                 </p>
                 
                 {/* Bottom slideshow dot indicators */}
