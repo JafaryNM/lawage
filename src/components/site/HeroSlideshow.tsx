@@ -93,7 +93,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
                 <img
                   src={slide.src}
                   alt={slide.alt}
-                  className="absolute bottom-0 left-0 lg:left-[6%] h-[70vh] lg:h-[92vh] w-auto object-contain object-bottom select-none mix-blend-multiply"
+                  className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
                 />
               </div>
 
