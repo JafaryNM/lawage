@@ -49,7 +49,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
   const handleActiveChange = (idx: number) => {
     setActive(idx);
     if (onThemeChange) {
-      onThemeChange(HERO_SLIDES[idx].theme as "light" | "dark");
+      onThemeChange(HERO_SLIDES[idx]!.theme as "light" | "dark");
     }
   };
 
@@ -58,7 +58,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
       setActive((i) => {
         const next = (i + 1) % HERO_SLIDES.length;
         if (onThemeChange) {
-          onThemeChange(HERO_SLIDES[next].theme as "light" | "dark");
+          onThemeChange(HERO_SLIDES[next]!.theme as "light" | "dark");
         }
         return next;
       });
@@ -66,7 +66,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
     return () => window.clearInterval(id);
   }, [onThemeChange]);
 
-  const activeSlide = HERO_SLIDES[active];
+  const activeSlide = HERO_SLIDES[active]!;
   const isLight = activeSlide.theme === "light";
 
   return (
