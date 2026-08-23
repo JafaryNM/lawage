@@ -112,36 +112,32 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
         );
       })}
 
-      {/* Dynamic Overlay Gradient for overall layout blending */}
-      {isLight && (
-        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent pointer-events-none z-5" />
-      )}
-
       {/* Vertical Social Follow Us Bar (Bottom Left) */}
       <div className={`absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 transition-colors duration-1000 ${
-        isLight ? "text-navy" : "text-white/60"
+        isLight ? "text-navy/70" : "text-white/60"
       }`}>
-        <div className="flex flex-col gap-4 text-xs font-semibold tracking-[0.2em] uppercase [writing-mode:vertical-lr] rotate-180 items-center">
-          <span className="h-10 w-px bg-current opacity-30 mb-2" />
-          Follow Us
-        </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           <a href="#" className="hover:text-gold transition-colors"><Facebook className="size-4" strokeWidth={1.5} /></a>
           <a href="#" className="hover:text-gold transition-colors"><Twitter className="size-4" strokeWidth={1.5} /></a>
           <a href="#" className="hover:text-gold transition-colors"><Instagram className="size-4" strokeWidth={1.5} /></a>
+        </div>
+        <span className="h-12 w-px bg-current opacity-30" />
+        <div className="text-[0.7rem] font-medium tracking-[0.25em] uppercase [writing-mode:vertical-lr] rotate-180 font-sans">
+          Follow Us
         </div>
       </div>
 
       {/* Text Content Grid Wrapper */}
       <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 ${
         isLight
-          ? "grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] min-h-screen min-h-[100dvh] items-center"
+          ? "grid grid-cols-1 lg:grid-cols-2 min-h-screen min-h-[100dvh] items-center"
           : "flex min-h-screen min-h-[100dvh] flex-col justify-center items-center text-center"
       }`}>
         {isLight ? (
           /* Left column: Empty to balance the Lady Justice statue layout */
           <div className="hidden lg:block w-full h-full" />
         ) : null}
+
 
         {/* Right column (or Centered wrapper for dark slides) */}
         <div key={active} className={`w-full animate-in fade-in duration-700 ${
