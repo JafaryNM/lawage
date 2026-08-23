@@ -6,6 +6,8 @@ import { TextAnimate } from "@/registry/magicui/text-animate";
 import slide1 from "@/assets/slider-01-img-b2.png";
 import slide2 from "@/assets/demo-lawyer-blog-03.png";
 import slide3 from "@/assets/successful-diverse-business-people-discussing-contract.png";
+import columnsBg from "@/assets/hero-columns.jpg.asset.json";
+
 
 const HERO_SLIDES = [
   {
