@@ -1,54 +1,27 @@
 import { useEffect, useState } from "react";
-import { Menu, Search, X, ShoppingCart, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, Search, X, ShoppingCart, ArrowRight } from "lucide-react";
 import logo from "@/assets/darton-logo.png";
 
 const NAV_ITEMS = [
   {
     label: "Home",
-    href: "#home",
-    dropdown: [
-      { label: "Welcome Slide", href: "#home" },
-      { label: "Practice Areas", href: "#practice" },
-      { label: "Who We Are", href: "#about" },
-    ]
+    href: "#home"
   },
   {
-    label: "Pages",
-    href: "#about",
-    dropdown: [
-      { label: "Who We Are", href: "#about" },
-      { label: "Our Journey", href: "#faq" },
-      { label: "Our Team", href: "#team" },
-      { label: "FAQ", href: "#faq" },
-    ]
+    label: "About Us",
+    href: "#about"
   },
   {
     label: "Service",
-    href: "#practice",
-    dropdown: [
-      { label: "Corporate & Commercial", href: "#practice" },
-      { label: "Litigation & Arbitration", href: "#practice" },
-      { label: "Land & Property Law", href: "#practice" },
-      { label: "Family Law", href: "#practice" },
-      { label: "Employment & Labour", href: "#practice" },
-      { label: "Tax & Regulatory", href: "#practice" },
-    ]
+    href: "#practice"
   },
   {
     label: "Portfolio",
-    href: "#projects",
-    dropdown: [
-      { label: "Selected Matters", href: "#projects" },
-      { label: "Recent Work", href: "#projects" },
-    ]
+    href: "#projects"
   },
   {
     label: "Blog",
-    href: "#insights",
-    dropdown: [
-      { label: "Latest Commentary", href: "#insights" },
-      { label: "Legal Insights", href: "#insights" },
-    ]
+    href: "#insights"
   },
   {
     label: "Contact Us",
@@ -63,7 +36,6 @@ interface HeaderProps {
 export function Header({ theme = "dark" }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [stuck, setStuck] = useState(false);
-  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 60);
@@ -107,44 +79,13 @@ export function Header({ theme = "dark" }: HeaderProps) {
             <div
               key={item.label}
               className="relative py-3"
-              onMouseEnter={() => setHoveredMenu(item.label)}
-              onMouseLeave={() => setHoveredMenu(null)}
             >
               <a
                 href={item.href}
                 className="flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.18em] transition-colors duration-200 hover:text-gold"
               >
                 {item.label}
-                {item.dropdown && (
-                  <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" />
-                )}
               </a>
-
-              {item.dropdown && hoveredMenu === item.label && (
-                <div
-                  className={`absolute left-0 top-full z-50 w-60 border shadow-lg transition-all duration-200 animate-in fade-in-50 slide-in-from-top-2 ${
-                    isHeaderLight
-                      ? "border-border bg-white text-foreground"
-                      : "border-white/10 bg-navy-deep text-white"
-                  }`}
-                >
-                  <div className="py-2.5">
-                    {item.dropdown.map((subItem) => (
-                      <a
-                        key={subItem.label}
-                        href={subItem.href}
-                        className={`block px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.12em] transition-colors duration-150 ${
-                          isHeaderLight
-                            ? "hover:bg-muted hover:text-gold text-foreground"
-                            : "hover:bg-navy/80 hover:text-gold text-white"
-                        }`}
-                      >
-                        {subItem.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </nav>
@@ -194,26 +135,12 @@ export function Header({ theme = "dark" }: HeaderProps) {
                 <div className="flex items-center justify-between py-2">
                   <a
                     href={item.href}
-                    onClick={() => !item.dropdown && setOpen(false)}
+                    onClick={() => setOpen(false)}
                     className="text-[0.8rem] uppercase tracking-[0.18em] text-foreground font-medium"
                   >
                     {item.label}
                   </a>
                 </div>
-                {item.dropdown && (
-                  <div className="pl-4 pb-2 flex flex-col gap-2">
-                    {item.dropdown.map((subItem) => (
-                      <a
-                        key={subItem.label}
-                        href={subItem.href}
-                        onClick={() => setOpen(false)}
-                        className="text-[0.72rem] uppercase tracking-[0.12em] text-muted-foreground hover:text-gold py-1"
-                      >
-                        {subItem.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
             

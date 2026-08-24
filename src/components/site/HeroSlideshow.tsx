@@ -10,14 +10,6 @@ import slideReport from "@/assets/executive-correcting-report.png";
 
 const HERO_SLIDES = [
   {
-    src: slideStatue,
-    alt: "Lady Justice statue in front of marble columns",
-    eyebrow: "Leave Court To Us",
-    title: "A law firm with a passion for success",
-    desc: "The lawyers are both experienced and highly skilled.",
-    cutout: true,
-  },
-  {
     src: slideCafe,
     alt: "Advocate taking notes during a client meeting",
     eyebrow: "Trusted Counsel For",
@@ -32,6 +24,14 @@ const HERO_SLIDES = [
     title: "Legal Detail",
     desc: "Every clause reviewed, every risk documented before you sign.",
     cutout: false,
+  },
+  {
+    src: slideStatue,
+    alt: "Lady Justice statue in front of marble columns",
+    eyebrow: "Leave Court To Us",
+    title: "A law firm with a passion for success",
+    desc: "The lawyers are both experienced and highly skilled.",
+    cutout: true,
   },
 ];
 
@@ -125,7 +125,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
           <h1 className={`mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display tracking-tight font-medium transition-colors duration-1000 ${
             isCutout ? "text-navy" : "text-primary-foreground"
           }`}>
-            {active === 0 ? (
+            {isCutout ? (
               <>
                 A law firm with a <br className="hidden lg:block" />
                 <span className="text-gold border-b-2 border-gold/70 pb-1 italic font-medium">passion</span> for success
