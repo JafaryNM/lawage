@@ -64,18 +64,11 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
 
   const activeSlide = HERO_SLIDES[active]!;
 
+  const isCutout = activeSlide.cutout;
+
   return (
     <section className="relative overflow-hidden w-full min-h-screen min-h-[100dvh] flex flex-col justify-center bg-white">
-      {/* Shared pale colonnade backdrop */}
-      <img
-        src={columnsBg}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 size-full object-cover opacity-70"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
-
-      {/* Slide subjects, anchored bottom-left in the left column */}
+      {/* Slides */}
       {HERO_SLIDES.map((slide, i) => (
         <div
           key={slide.src}
@@ -84,20 +77,33 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
           }`}
         >
           {slide.cutout ? (
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
-            />
+            <>
+              <img
+                src={columnsBg}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 size-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
+              />
+            </>
           ) : (
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[78vh] w-[80%] lg:w-[46%] object-cover object-center select-none"
-            />
+            <>
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                className="absolute inset-0 size-full object-cover object-center select-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/60" />
+            </>
           )}
         </div>
       ))}
+
 
       {/* Vertical Social Follow Us Bar (Bottom Left) */}
       <div className="absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 text-navy">
