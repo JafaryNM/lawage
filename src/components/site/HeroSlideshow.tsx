@@ -3,20 +3,10 @@ import { useEffect, useState } from "react";
 
 import { TextAnimate } from "@/registry/magicui/text-animate";
 
-import columnsBg from "@/assets/hero-columns.png";
-import slideStatue from "@/assets/slider-01-img-b2.png";
 import slideCafe from "@/assets/clarisse-meyer-jKU2NneZAbI-unsplash.jpg";
-import slideReport from "@/assets/executive-correcting-report.png";
+import slideReport from "@/assets/domestic-violence-law-wooden-table.jpg";
 
 const HERO_SLIDES = [
-  {
-    src: slideCafe,
-    alt: "Advocate taking notes during a client meeting",
-    eyebrow: "Trusted Counsel For",
-    title: "Legal Clarity",
-    desc: "Clear, precise guidance for Tanzanian commercial and tax matters.",
-    cutout: false,
-  },
   {
     src: slideReport,
     alt: "Attorney reviewing and marking a legal document",
@@ -26,12 +16,12 @@ const HERO_SLIDES = [
     cutout: false,
   },
   {
-    src: slideStatue,
-    alt: "Lady Justice statue in front of marble columns",
-    eyebrow: "Leave Court To Us",
-    title: "A law firm with a passion for success",
-    desc: "The lawyers are both experienced and highly skilled.",
-    cutout: true,
+    src: slideCafe,
+    alt: "Advocate taking notes during a client meeting",
+    eyebrow: "Trusted Counsel For",
+    title: "Legal Clarity",
+    desc: "Clear, precise guidance for Tanzanian commercial and tax matters.",
+    cutout: false,
   },
 ];
 
@@ -57,6 +47,8 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
 
   const isCutout = activeSlide.cutout;
 
+  const isCentered = true;
+
   return (
     <section className="relative overflow-hidden w-full min-h-screen min-h-[100dvh] flex flex-col justify-center bg-white">
       {/* Slides */}
@@ -69,12 +61,6 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
         >
           {slide.cutout ? (
             <>
-              <img
-                src={columnsBg}
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 size-full object-cover opacity-70"
-              />
               <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
               <img
                 src={slide.src}
@@ -87,7 +73,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
               <img
                 src={slide.src}
                 alt={slide.alt}
-                className="absolute inset-0 size-full object-cover object-center select-none"
+                className={`absolute inset-0 size-full object-cover select-none ${slide.position || "object-center"}`}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/60" />
             </>
@@ -112,10 +98,17 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
       </div>
 
       {/* Text Content Grid Wrapper — identical position on every slide */}
-      <div className="relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] min-h-screen min-h-[100dvh] items-center">
-        <div className="hidden lg:block w-full h-full" />
+      <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 min-h-screen min-h-[100dvh] flex items-center ${
+        isCentered ? "justify-center" : "grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]"
+      }`}>
+        {!isCentered && <div className="hidden lg:block w-full h-full" />}
 
-        <div key={active} className="w-full flex flex-col items-start text-left animate-in fade-in duration-700">
+        <div
+          key={active}
+          className={`w-full flex flex-col animate-in fade-in duration-700 ${
+            isCentered ? "items-center text-center max-w-3xl" : "items-start text-left"
+          }`}
+        >
           <span className={`block text-[0.8rem] uppercase tracking-[0.4em] font-sans ${
             isCutout ? "text-muted-foreground" : "text-primary-foreground/85"
           }`}>
@@ -150,7 +143,9 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             {activeSlide.desc}
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4 z-10 justify-start">
+          <div className={`mt-10 flex flex-wrap gap-4 z-10 w-full ${
+            isCentered ? "justify-center" : "justify-start"
+          }`}>
             <a href="#projects" className="btn-gold font-sans">
               Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
             </a>

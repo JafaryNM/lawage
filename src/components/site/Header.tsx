@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, Search, X, ShoppingCart, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import logo from "@/assets/darton-logo.png";
 
 const NAV_ITEMS = [
@@ -44,16 +44,14 @@ export function Header({ theme = "dark" }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const isHeaderLight = stuck || theme === "light";
+  const isHeaderLight = true;
 
   return (
     <header
-      className={`z-50 transition-all duration-300 ${
+      className={`z-50 transition-all duration-300 bg-white border-b border-black/5 ${
         stuck
-          ? "fixed inset-x-0 top-0 bg-background/95 backdrop-blur-md shadow-[0_4px_24px_rgba(13,27,52,0.12)]"
-          : isHeaderLight
-          ? "absolute inset-x-0 top-0 bg-transparent border-b border-black/5"
-          : "absolute inset-x-0 top-0 bg-transparent border-b border-white/5"
+          ? "fixed inset-x-0 top-0 shadow-[0_4px_24px_rgba(13,27,52,0.06)]"
+          : "absolute inset-x-0 top-0"
       }`}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4 lg:py-5">
@@ -96,16 +94,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
             isHeaderLight ? "text-foreground" : "text-white"
           }`}
         >
-          <button className="p-1.5 hover:text-gold transition-colors cursor-pointer" aria-label="Search site">
-            <Search className="size-5" strokeWidth={1.5} />
-          </button>
-          
-          <button className="relative p-1.5 hover:text-gold transition-colors cursor-pointer" aria-label="Shopping cart">
-            <ShoppingCart className="size-5" strokeWidth={1.5} />
-            <span className="absolute -top-1 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#EA580C] text-[9px] font-bold text-white font-sans">
-              0
-            </span>
-          </button>
+
 
           <a
             href="#projects"
@@ -144,19 +133,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
               </div>
             ))}
             
-            {/* Mobile cart / search indicators */}
-            <div className="flex items-center gap-6 border-t border-border mt-4 pt-4 pb-2">
-              <button className="flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.18em] text-foreground">
-                <Search className="size-5 text-foreground" strokeWidth={1.5} /> Search
-              </button>
-              
-              <button className="relative flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.18em] text-foreground font-sans">
-                <ShoppingCart className="size-5 text-foreground" strokeWidth={1.5} /> Cart
-                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#EA580C] text-[9px] font-bold text-white">
-                  0
-                </span>
-              </button>
-            </div>
+
           </nav>
         </div>
       )}

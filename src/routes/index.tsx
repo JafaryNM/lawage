@@ -17,6 +17,9 @@ import {
   ShieldCheck,
   Twitter,
   Users,
+  User,
+  Linkedin,
+  Instagram,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -24,8 +27,9 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 
+import logo from "@/assets/darton-logo.png";
 import hero from "@/assets/hero.jpg";
-import about from "@/assets/about.jpg";
+import about from "@/assets/judges-gavel-book-wooden-table-law-justice-concept-background.jpg";
 import p1 from "@/assets/p1.jpg";
 import p2 from "@/assets/p2.jpg";
 import p3 from "@/assets/p3.jpg";
@@ -33,9 +37,9 @@ import p4 from "@/assets/p4.jpg";
 import t1 from "@/assets/t1.jpg";
 import t2 from "@/assets/t2.jpg";
 import t3 from "@/assets/t3.jpg";
-import b1 from "@/assets/b1.jpg";
-import b2 from "@/assets/b2.jpg";
-import b3 from "@/assets/b3.jpg";
+import b1 from "@/assets/imagesv2.jpg";
+import b2 from "@/assets/images.jpg";
+import b3 from "@/assets/business-partners-sitting-cafe.jpg";
 import c1 from "@/assets/c1.jpg";
 import c2 from "@/assets/c2.jpg";
 
@@ -54,8 +58,8 @@ export const Route = createFileRoute("/")({
         content:
           "Trusted Tanzanian advocates for corporate, litigation, land, family, employment and tax matters.",
       },
-      { property: "og:image", content: hero },
-      { name: "twitter:image", content: hero },
+      { property: "og:image", content: logo },
+      { name: "twitter:image", content: logo },
     ],
   }),
   component: Index,
@@ -128,9 +132,9 @@ const MILESTONES = [
 ];
 
 const TEAM = [
-  { img: t1, name: "Adv. Daniel Mushi", role: "Managing Partner" },
-  { img: t2, name: "Adv. Neema Kilonzo", role: "Partner — Corporate" },
-  { img: t3, name: "Adv. Baraka Mwakyusa", role: "Senior Associate — Litigation" },
+  { name: "Amb. Mwanaidi Sinare Maajar", role: "Chair and Partner" },
+  { name: "Dr. Alex Thomas Nguluma", role: "Managing Partner" },
+  { name: "Hon. Dr. Fauz Twaib", role: "Senior Partner" },
 ];
 
 const TESTIMONIALS = [
@@ -280,6 +284,17 @@ function Index() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const projectsScrollRef = useRef<HTMLDivElement>(null);
+  const teamScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTeam = (direction: "left" | "right") => {
+    if (teamScrollRef.current) {
+      const scrollAmount = 304; // card width (280) + gap (24)
+      teamScrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth"
+      });
+    }
+  };
 
   const scrollProjects = (direction: "left" | "right") => {
     if (projectsScrollRef.current) {
@@ -486,7 +501,7 @@ function Index() {
         <div
           ref={projectsScrollRef}
           onScroll={handleProjectsScroll}
-          className="mt-14 flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pl-6 lg:pl-[max(1.5rem,calc((100vw-1400px)/2))] pr-6 pb-4"
+          className="mt-14 flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 services-slider-container"
           style={{ scrollbarWidth: "none" }}
         >
           {PROJECTS.map((p, i) => {
@@ -590,40 +605,76 @@ function Index() {
               Leading experts
             </h2>
           </div>
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-[1150px] mx-auto">
+          <div
+            ref={teamScrollRef}
+            className={
+              TEAM.length > 3
+                ? "mt-14 flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 w-full"
+                : "mt-14 flex flex-wrap gap-6 justify-center max-w-[1150px] mx-auto"
+            }
+            style={
+              TEAM.length > 3
+                ? {
+                    scrollbarWidth: "none",
+                    paddingLeft: "max(1.5rem, calc((100vw - 1150px) / 2 + 1.5rem))",
+                    paddingRight: "max(1.5rem, calc((100vw - 1150px) / 2 + 1.5rem))",
+                  }
+                : undefined
+            }
+          >
             {TEAM.map((m) => (
-              <article key={m.name} className="group flex flex-col items-center text-center">
-                <div className="relative overflow-hidden w-full aspect-[4/5] bg-background mb-6">
-                  <img
-                    src={m.img}
-                    alt={`${m.name}, ${m.role} at Darton Attorneys`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                    width={700}
-                    height={860}
-                  />
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-[#C49B7A]/80 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a href="#" className="text-white hover:text-navy transition-colors">
-                      <Facebook className="size-5" />
-                    </a>
-                    <a href="#" className="text-white hover:text-navy transition-colors">
-                      <Globe className="size-5" />
-                    </a>
-                    <a href="#" className="text-white hover:text-navy transition-colors">
-                      <Twitter className="size-5" />
-                    </a>
-                  </div>
+              <article key={m.name} className="w-[280px] shrink-0 snap-start bg-white border border-border overflow-hidden shadow-sm flex flex-col">
+                {/* Person Placeholder Icon Area */}
+                <div className="relative w-full aspect-square bg-slate-100 flex items-center justify-center text-slate-400">
+                  <User className="size-24 stroke-[1]" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-foreground tracking-tight">{m.name}</h3>
-                  <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                {/* Info Area */}
+                <div className="p-6 text-center flex flex-col items-center">
+                  <h3 className="text-sm font-semibold tracking-[0.12em] text-[#152833] uppercase min-h-[40px] flex items-center justify-center">
+                    {m.name}
+                  </h3>
+                  <p className="mt-1.5 text-[0.7rem] uppercase tracking-[0.15em] font-medium text-gold">
                     {m.role}
                   </p>
+                  
+                  {/* Social Icons - Always Visible */}
+                  <div className="mt-5 flex justify-center gap-5 text-gold">
+                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} Facebook`}>
+                      <Facebook className="size-4" />
+                    </a>
+                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} LinkedIn`}>
+                      <Linkedin className="size-4" />
+                    </a>
+                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} Twitter`}>
+                      <Twitter className="size-4" />
+                    </a>
+                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} Instagram`}>
+                      <Instagram className="size-4" />
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
+
+          {TEAM.length > 3 && (
+            <div className="mt-8 flex justify-center gap-4">
+              <button
+                onClick={() => scrollTeam("left")}
+                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors hover:bg-gold hover:text-white"
+                aria-label="Previous team members"
+              >
+                <ArrowLeft className="size-5" />
+              </button>
+              <button
+                onClick={() => scrollTeam("right")}
+                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors hover:bg-gold hover:text-white"
+                aria-label="Next team members"
+              >
+                <ArrowRight className="size-5" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

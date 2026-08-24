@@ -283,3 +283,21 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.services-slider-container {
+  margin-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .services-slider-container {
+    margin-left: calc(1.5rem + 130px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-slider-container {
+    margin-left: max(1.5rem + 185px, calc((100vw - 1400px) / 2 + 1.5rem + 185px));
+    padding-right: max(1.5rem, calc((100vw - 1400px) / 2 + 1.5rem));
+  }
+}
