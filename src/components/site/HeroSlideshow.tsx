@@ -64,18 +64,11 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
 
   const activeSlide = HERO_SLIDES[active]!;
 
+  const isCutout = activeSlide.cutout;
+
   return (
     <section className="relative overflow-hidden w-full min-h-screen min-h-[100dvh] flex flex-col justify-center bg-white">
-      {/* Shared pale colonnade backdrop */}
-      <img
-        src={columnsBg}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 size-full object-cover opacity-70"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
-
-      {/* Slide subjects, anchored bottom-left in the left column */}
+      {/* Slides */}
       {HERO_SLIDES.map((slide, i) => (
         <div
           key={slide.src}
@@ -84,23 +77,38 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
           }`}
         >
           {slide.cutout ? (
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
-            />
+            <>
+              <img
+                src={columnsBg}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 size-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
+              />
+            </>
           ) : (
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[78vh] w-[80%] lg:w-[46%] object-cover object-center select-none"
-            />
+            <>
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                className="absolute inset-0 size-full object-cover object-center select-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/60" />
+            </>
           )}
         </div>
       ))}
 
+
       {/* Vertical Social Follow Us Bar (Bottom Left) */}
-      <div className="absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 text-navy">
+      <div className={`absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 transition-colors duration-1000 ${
+        isCutout ? "text-navy" : "text-primary-foreground/80"
+      }`}>
         <div className="flex flex-col gap-4">
           <a href="#" className="hover:text-gold transition-colors"><Facebook className="size-4" strokeWidth={1.5} /></a>
           <a href="#" className="hover:text-gold transition-colors"><Twitter className="size-4" strokeWidth={1.5} /></a>
@@ -117,11 +125,15 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
         <div className="hidden lg:block w-full h-full" />
 
         <div key={active} className="w-full flex flex-col items-start text-left animate-in fade-in duration-700">
-          <span className="block text-[0.8rem] uppercase tracking-[0.4em] font-sans text-muted-foreground">
+          <span className={`block text-[0.8rem] uppercase tracking-[0.4em] font-sans ${
+            isCutout ? "text-muted-foreground" : "text-primary-foreground/85"
+          }`}>
             {activeSlide.eyebrow}
           </span>
 
-          <h1 className="mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display tracking-tight font-medium text-navy">
+          <h1 className={`mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display tracking-tight font-medium transition-colors duration-1000 ${
+            isCutout ? "text-navy" : "text-primary-foreground"
+          }`}>
             {active === 0 ? (
               <>
                 A law firm with a <br className="hidden lg:block" />
@@ -141,7 +153,9 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             )}
           </h1>
 
-          <p className="mt-6 text-sm md:text-base leading-relaxed max-w-xl font-sans text-muted-foreground">
+          <p className={`mt-6 text-sm md:text-base leading-relaxed max-w-xl font-sans ${
+            isCutout ? "text-muted-foreground" : "text-primary-foreground/80"
+          }`}>
             {activeSlide.desc}
           </p>
 
@@ -151,7 +165,11 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             </a>
             <a
               href="#get-involved"
-              className="inline-flex items-center gap-2 border border-[#152833] text-[#152833] text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 hover:bg-[#152833] hover:text-white transition-colors duration-300 font-sans"
+              className={`inline-flex items-center gap-2 border text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors duration-300 font-sans ${
+                isCutout
+                  ? "border-[#152833] text-[#152833] hover:bg-[#152833] hover:text-white"
+                  : "border-white/70 text-primary-foreground hover:bg-white hover:text-navy-deep"
+              }`}
             >
               Contact Us <ArrowRight className="size-4" strokeWidth={1.5} />
             </a>
@@ -167,12 +185,13 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             type="button"
             aria-label={`Show slide ${i + 1}`}
             onClick={() => setActive(i)}
-            className={`size-3 rounded-full border border-navy/30 transition-all duration-300 cursor-pointer ${
-              i === active ? "bg-navy" : "bg-transparent hover:scale-110"
-            }`}
+            className={`size-3 rounded-full border transition-all duration-300 cursor-pointer ${
+              isCutout ? "border-navy/30" : "border-white/70"
+            } ${i === active ? (isCutout ? "bg-navy" : "bg-gold") : "bg-transparent hover:scale-110"}`}
           />
         ))}
       </div>
+
     </section>
   );
 }
