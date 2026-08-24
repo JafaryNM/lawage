@@ -5,9 +5,8 @@ import { TextAnimate } from "@/registry/magicui/text-animate";
 
 import columnsBg from "@/assets/hero-columns.png";
 import slideStatue from "@/assets/slider-01-img-b2.png";
-import slideCafe from "@/assets/business-meeting-cafe.png";
+import slideCafe from "@/assets/clarisse-meyer-jKU2NneZAbI-unsplash.jpg";
 import slideReport from "@/assets/executive-correcting-report.png";
-import slideContract from "@/assets/successful-diverse-business-people-discussing-contract.png";
 
 const HERO_SLIDES = [
   {
@@ -32,14 +31,6 @@ const HERO_SLIDES = [
     eyebrow: "Precision In Every",
     title: "Legal Detail",
     desc: "Every clause reviewed, every risk documented before you sign.",
-    cutout: false,
-  },
-  {
-    src: slideContract,
-    alt: "Business professionals discussing a contract together",
-    eyebrow: "Creative Solutions For",
-    title: "Legal Problems",
-    desc: "Robust, commercial answers to your corporate operations.",
     cutout: false,
   },
 ];
