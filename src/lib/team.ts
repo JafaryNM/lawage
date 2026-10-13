@@ -1,6 +1,6 @@
-import t1 from "@/assets/t1.jpg";
-import t2 from "@/assets/t2.jpg";
-import t3 from "@/assets/t3.jpg";
+import t1 from "@/assets/team-1.jpg";
+import t2 from "@/assets/team-2.jpg";
+import t3 from "@/assets/team-3.jpg";
 
 // Sample photos — replace with the attorneys' real portraits.
 export const TEAM = [

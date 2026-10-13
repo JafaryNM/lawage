@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 
-import defaultBanner from "@/assets/judges-gavel-book-wooden-table-law-justice-concept-background.jpg";
+import defaultBanner from "@/assets/gavel-books-wooden-desk.jpg";
 
 type Crumb = { label: string; to?: string };
 

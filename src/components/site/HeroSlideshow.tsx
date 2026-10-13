@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 
 import { TextAnimate } from "@/registry/magicui/text-animate";
 
-import slideCafe from "@/assets/clarisse-meyer-jKU2NneZAbI-unsplash.jpg";
-import slideReport from "@/assets/domestic-violence-law-wooden-table.jpg";
+import slideCafe from "@/assets/hero-advocate-notes.jpg";
+import slideReport from "@/assets/hero-legal-review.jpg";
 
 const HERO_SLIDES = [
   {
     src: slideReport,
-    alt: "Attorney reviewing and marking a legal document",
+    alt: "Advocate taking notes on a contract draft with a client",
     eyebrow: "Precision In Every",
     title: "Legal Detail",
     desc: "Every clause reviewed, every risk documented before you sign.",
@@ -17,7 +17,7 @@ const HERO_SLIDES = [
   },
   {
     src: slideCafe,
-    alt: "Advocate taking notes during a client meeting",
+    alt: "Advocate making notes at his office desk",
     eyebrow: "Trusted Counsel For",
     title: "Legal Clarity",
     desc: "Clear, precise guidance for Tanzanian commercial and tax matters.",

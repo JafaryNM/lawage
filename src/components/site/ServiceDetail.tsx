@@ -7,7 +7,7 @@ import { FlatIcon } from "@/components/site/FlatIcon";
 import { PageBanner } from "@/components/site/PageBanner";
 import { SERVICES, type Service } from "@/lib/services";
 
-import banner from "@/assets/domestic-violence-law-wooden-table.jpg";
+import banner from "@/assets/hero-legal-review.jpg";
 
 const CONTACTS = [
   { Icon: MapPin, text: "Masaki, Chole Road, Dar es Salaam, Tanzania" },

@@ -1,9 +1,9 @@
-import companiesImg from "@/assets/b1.jpg";
-import landImg from "@/assets/b2.jpg";
-import contractsImg from "@/assets/b3.jpg";
-import arbitrationImg from "@/assets/c1.jpg";
-import estatesImg from "@/assets/clarisse-meyer-jKU2NneZAbI-unsplash.jpg";
-import taxImg from "@/assets/demo-lawyer-blog-03.png";
+import companiesImg from "@/assets/post-companies.jpg";
+import landImg from "@/assets/post-land.jpg";
+import contractsImg from "@/assets/post-contracts.jpg";
+import arbitrationImg from "@/assets/post-arbitration.jpg";
+import estatesImg from "@/assets/post-estates.jpg";
+import taxImg from "@/assets/post-tax.jpg";
 
 export type Post = {
   slug: string;

@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Globe, Handshake, Send } from "lucide-react";
 import logo from "@/assets/darton-logo.png";
-import ctaBg from "@/assets/business-meeting-cafe.png";
+import ctaBg from "@/assets/client-consultation-cafe.jpg";
 
 export function Footer() {
   return (

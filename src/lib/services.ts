@@ -1,11 +1,11 @@
 import type { FlatIconName } from "@/components/site/FlatIcon";
 
-import corporateImg from "@/assets/p1.jpg";
-import litigationImg from "@/assets/p2.jpg";
-import familyImg from "@/assets/p3.jpg";
-import landImg from "@/assets/p4.jpg";
-import employmentImg from "@/assets/successful-diverse-business-people-discussing-contract.png";
-import taxImg from "@/assets/executive-correcting-report.png";
+import corporateImg from "@/assets/service-corporate.jpg";
+import litigationImg from "@/assets/service-litigation.jpg";
+import familyImg from "@/assets/service-family.jpg";
+import landImg from "@/assets/service-land.jpg";
+import employmentImg from "@/assets/service-employment.jpg";
+import taxImg from "@/assets/service-tax.jpg";
 
 export type Service = {
   slug: string;

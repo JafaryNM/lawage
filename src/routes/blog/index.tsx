@@ -21,7 +21,7 @@ import { SERVICES } from "@/lib/services";
 import { POSTS, formatPostDate, type Post } from "@/lib/posts";
 
 import logo from "@/assets/darton-logo.png";
-import banner from "@/assets/b1.jpg";
+import banner from "@/assets/post-companies.jpg";
 
 type BlogSearch = {
   q?: string | undefined;

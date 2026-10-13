@@ -9,7 +9,7 @@ import { Partners } from "@/components/site/Partners";
 import { TEAM } from "@/lib/team";
 
 import logo from "@/assets/darton-logo.png";
-import storyImg from "@/assets/dar-es-salaam-view.jpg";
+import storyImg from "@/assets/about-story.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -68,7 +68,7 @@ function About() {
             <div className="relative aspect-[12/13] overflow-hidden rounded-tl-[90px] rounded-br-[90px] md:rounded-tl-[120px] md:rounded-br-[120px] lg:aspect-auto lg:min-h-[420px] lg:flex-1">
               <img
                 src={storyImg}
-                alt="View of the Dar es Salaam skyline and harbour from the Darton Attorneys office"
+                alt="Advocate at a desk with law books, gavel and a statue of Lady Justice"
                 className="absolute inset-0 size-full object-cover"
                 loading="lazy"
               />

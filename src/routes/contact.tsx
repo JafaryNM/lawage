@@ -8,7 +8,7 @@ import { FlatIcon } from "@/components/site/FlatIcon";
 import { PageBanner } from "@/components/site/PageBanner";
 
 import logo from "@/assets/darton-logo.png";
-import banner from "@/assets/successful-diverse-business-people-discussing-contract.png";
+import banner from "@/assets/contact-banner.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
