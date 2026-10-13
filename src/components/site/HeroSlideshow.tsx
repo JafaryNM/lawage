@@ -135,7 +135,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
               Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
             </a>
             <a
-              href="#get-involved"
+              href="/contact"
               className={`inline-flex items-center gap-2 border bg-transparent text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors duration-300 font-sans ${
                 isCutout
                   ? "border-[#1b2445] text-[#1b2445] hover:bg-[#1b2445] hover:text-white"

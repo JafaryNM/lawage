@@ -79,7 +79,7 @@ export function Footer() {
             <ul className="mt-6 space-y-3.5 text-sm text-muted-foreground">
               {[
                 ["Who We Are", "/about"],
-                ["Practice Areas", "/#practice"],
+                ["Practice Areas", "/services"],
                 ["Attorneys Profiles", "/#team"],
                 ["Our Projects", "/#projects"],
               ].map(([label, href]) => (

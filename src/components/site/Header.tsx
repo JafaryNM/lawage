@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   },
   {
     label: "Service",
-    href: "/#practice"
+    href: "/services"
   },
   {
     label: "Portfolio",
@@ -21,11 +21,11 @@ const NAV_ITEMS = [
   },
   {
     label: "Blog",
-    href: "/#insights"
+    href: "/blog"
   },
   {
     label: "Contact Us",
-    href: "/#get-involved"
+    href: "/contact"
   }
 ];
 

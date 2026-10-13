@@ -1,17 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
   Award,
   Briefcase,
-  Building2,
   Facebook,
-  Gavel,
   Globe,
-  Handshake,
-  Landmark,
   Scale,
-  ShieldCheck,
   Twitter,
   Users,
   Linkedin,
@@ -22,21 +17,14 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { HeroSlideshow } from "@/components/site/HeroSlideshow";
+import { Partners } from "@/components/site/Partners";
+import { ServicesGrid } from "@/components/site/ServicesGrid";
+import { TEAM } from "@/lib/team";
+import { POSTS, formatPostDate } from "@/lib/posts";
+import { SERVICES } from "@/lib/services";
 
 import logo from "@/assets/darton-logo.png";
-import t1 from "@/assets/t1.jpg";
-import t2 from "@/assets/t2.jpg";
-import t3 from "@/assets/t3.jpg";
-import northvale from "@/assets/partners/northvale.svg";
-import asterion from "@/assets/partners/asterion.svg";
-import kivuko from "@/assets/partners/kivuko.svg";
-import lumora from "@/assets/partners/lumora.svg";
-import vantera from "@/assets/partners/vantera.svg";
-import oakline from "@/assets/partners/oakline.svg";
 import about from "@/assets/judges-gavel-book-wooden-table-law-justice-concept-background.jpg";
-import b1 from "@/assets/imagesv2.jpg";
-import b2 from "@/assets/images.jpg";
-import b3 from "@/assets/business-partners-sitting-cafe.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -59,81 +47,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const PRACTICE = [
-  {
-    icon: Building2,
-    title: "Corporate & Commercial",
-    text: "Company formation, governance, contracts, mergers and regulatory compliance for Tanzanian and foreign businesses.",
-  },
-  {
-    icon: Gavel,
-    title: "Litigation & Arbitration",
-    text: "Robust representation before Tanzanian courts and tribunals, and in commercial arbitration proceedings.",
-  },
-  {
-    icon: Landmark,
-    title: "Land & Property Law",
-    text: "Title verification, conveyancing, leases, land disputes and real estate transaction structuring.",
-  },
-  {
-    icon: Users,
-    title: "Family Law",
-    text: "Matrimonial matters, custody, succession and estate administration handled with discretion and care.",
-  },
-  {
-    icon: Handshake,
-    title: "Employment & Labour",
-    text: "Contracts, disciplinary processes, restructuring and representation at the Commission for Mediation.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Tax & Regulatory",
-    text: "Tax planning, TRA disputes, licensing and advisory on Tanzania's evolving regulatory framework.",
-  },
-];
-
-// Sample photos — replace with the attorneys' real portraits.
-const TEAM = [
-  { name: "Amb. Mwanaidi Sinare Maajar", role: "Chair and Partner", photo: t2 },
-  { name: "Dr. Alex Thomas Nguluma", role: "Managing Partner", photo: t1 },
-  { name: "Hon. Dr. Fauz Twaib", role: "Senior Partner", photo: t3 },
-  // Demo entries to fill the slideshow — replace with real team members.
-  { name: "Neema Kassim", role: "Senior Associate", photo: t2 },
-  { name: "Baraka Mollel", role: "Associate", photo: t1 },
-  { name: "Daniel Mushi", role: "Associate", photo: t3 },
-];
-
-// Demo partner logos (fictional brands) — replace with the firm's real partners.
-const PARTNERS = [
-  { name: "Northvale Holdings", logo: northvale },
-  { name: "Asterion Capital", logo: asterion },
-  { name: "Kivuko Trust", logo: kivuko },
-  { name: "Lumora", logo: lumora },
-  { name: "Vantera Insurance", logo: vantera },
-  { name: "Oakline & Co", logo: oakline },
-];
-
-const POSTS = [
-  {
-    img: b1,
-    tag: "Corporate",
-    title: "Understanding the Companies Act obligations for directors",
-    date: "12 August 2026",
-  },
-  {
-    img: b2,
-    tag: "Property",
-    title: "Land title verification in Dar es Salaam: what to check first",
-    date: "28 July 2026",
-  },
-  {
-    img: b3,
-    tag: "Contracts",
-    title: "Drafting enforceable commercial contracts under Tanzanian law",
-    date: "09 July 2026",
-  },
-];
 
 function AnimatedCounter({ value }: { value: string }) {
   const [count, setCount] = useState(0);
@@ -289,33 +202,17 @@ function Index() {
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {PRACTICE.map(({ icon: Icon, title, text }) => (
-              <article
-                key={title}
-                className="group flex gap-6 rounded-[8px] bg-brand p-8 md:p-10 transition-colors duration-300 hover:bg-brand-deep"
-              >
-                <Icon
-                  className="size-12 shrink-0 text-white transition-transform duration-300 group-hover:-translate-y-1"
-                  strokeWidth={1}
-                />
-                <div>
-                  <h3 className="text-2xl leading-snug text-white">{title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-white/75 transition-colors duration-300 group-hover:text-white/90">
-                    {text}
-                  </p>
-                </div>
-              </article>
-            ))}
+          <div className="mt-14">
+            <ServicesGrid />
           </div>
 
           <div className="mt-14 flex justify-center">
-            <a
-              href="#get-involved"
+            <Link
+              to="/services"
               className="inline-flex items-center gap-2 bg-brand px-6 py-3.5 text-sm text-white transition-colors duration-300 hover:bg-brand-deep"
             >
               View All Practice Areas <ArrowRight className="size-4" strokeWidth={1.5} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -421,46 +318,22 @@ function Index() {
         </div>
       </section>
 
-      {/* PARTNERS */}
-      <section id="partners" className="bg-white py-[70px]">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <SectionHeading eyebrow="Our Partners" title="Trusted Affiliations" center />
-
-          {/* Logo slideshow: the list is rendered twice so the loop is seamless */}
-          <div className="partners-marquee mt-14 overflow-hidden">
-            <div className="partners-track flex w-max items-center">
-              {[...PARTNERS, ...PARTNERS].map((partner, i) => (
-                <div
-                  key={`${partner.name}-${i}`}
-                  aria-hidden={i >= PARTNERS.length}
-                  className="flex h-20 w-[180px] shrink-0 items-center justify-center px-6 md:w-[240px]"
-                >
-                  <img
-                    src={partner.logo}
-                    alt={i < PARTNERS.length ? partner.name : ""}
-                    className="max-h-16 w-auto max-w-full object-contain grayscale opacity-60 transition duration-300 hover:grayscale-0 hover:opacity-100"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Partners />
 
       {/* INSIGHTS */}
       <section id="insights" className="section-pad bg-[#f0f0f0]">
         <div className="mx-auto max-w-[1200px] px-6">
           <SectionHeading eyebrow="Legal Insights" title="Our Latest Commentary" center />
           <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {POSTS.map((post) => (
-              <a
-                key={post.title}
-                href="#insights"
+            {[...POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map((post) => (
+              <Link
+                key={post.slug}
+                to="/blog/$slug"
+                params={{ slug: post.slug }}
                 className="group relative block aspect-[19/20] overflow-hidden rounded-[8px]"
               >
                 <img
-                  src={post.img}
+                  src={post.image}
                   alt={post.title}
                   className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -472,11 +345,11 @@ function Index() {
                   <div className="transition-transform duration-500 lg:translate-y-4 lg:group-hover:translate-y-0">
                     <h3 className="text-2xl leading-snug text-white">{post.title}</h3>
                     <p className="mt-3 text-sm text-white/80">
-                      {post.tag} · {post.date}
+                      {SERVICES.find((sv) => sv.slug === post.area)?.title} · {formatPostDate(post.date)}
                     </p>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
