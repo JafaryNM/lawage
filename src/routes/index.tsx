@@ -2,22 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
+  Award,
+  Briefcase,
   Building2,
   Facebook,
   Gavel,
   Globe,
   Handshake,
-  Heart,
-  Home,
   Landmark,
-  Minus,
-  Plus,
-  Quote,
   Scale,
   ShieldCheck,
   Twitter,
   Users,
-  User,
   Linkedin,
   Instagram,
 } from "lucide-react";
@@ -28,20 +24,19 @@ import { Footer } from "@/components/site/Footer";
 import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 
 import logo from "@/assets/darton-logo.png";
-import hero from "@/assets/hero.jpg";
-import about from "@/assets/judges-gavel-book-wooden-table-law-justice-concept-background.jpg";
-import p1 from "@/assets/p1.jpg";
-import p2 from "@/assets/p2.jpg";
-import p3 from "@/assets/p3.jpg";
-import p4 from "@/assets/p4.jpg";
 import t1 from "@/assets/t1.jpg";
 import t2 from "@/assets/t2.jpg";
 import t3 from "@/assets/t3.jpg";
+import northvale from "@/assets/partners/northvale.svg";
+import asterion from "@/assets/partners/asterion.svg";
+import kivuko from "@/assets/partners/kivuko.svg";
+import lumora from "@/assets/partners/lumora.svg";
+import vantera from "@/assets/partners/vantera.svg";
+import oakline from "@/assets/partners/oakline.svg";
+import about from "@/assets/judges-gavel-book-wooden-table-law-justice-concept-background.jpg";
 import b1 from "@/assets/imagesv2.jpg";
 import b2 from "@/assets/images.jpg";
 import b3 from "@/assets/business-partners-sitting-cafe.jpg";
-import c1 from "@/assets/c1.jpg";
-import c2 from "@/assets/c2.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -98,64 +93,25 @@ const PRACTICE = [
   },
 ];
 
-const SERVICES = [
-  { img: p1, title: "Corporate Advisory", href: "#practice" },
-  { img: p2, title: "Court Litigation", href: "#practice" },
-  { img: p3, title: "Family Matters", href: "#practice" },
-  { img: p4, title: "Land & Conveyancing", href: "#practice" },
-];
-
-const PROJECTS = [
-  { img: c1, title: "Cross-Border Acquisition", tag: "Corporate", tall: true },
-  { img: p1, title: "Banking Facility Advisory", tag: "Finance", tall: false },
-  { img: c2, title: "High Court Appeal Win", tag: "Litigation", tall: false },
-  { img: p4, title: "Industrial Land Title", tag: "Property", tall: true },
-  { img: p3, title: "Estate Administration", tag: "Family", tall: false },
-  { img: p2, title: "Regulatory Compliance", tag: "Advisory", tall: false },
-];
-
-const TAG_ICONS: Record<string, any> = {
-  Corporate: Building2,
-  Finance: Landmark,
-  Litigation: Scale,
-  Property: Home,
-  Family: Users,
-  Advisory: ShieldCheck,
-};
-
-const MILESTONES = [
-  { year: "2012", title: "Firm Founded", text: "Darton Attorneys opens its doors in Dar es Salaam." },
-  { year: "2015", title: "Corporate Desk", text: "Dedicated corporate and commercial practice established." },
-  { year: "2018", title: "Litigation Growth", text: "Appearances extended across the High Court divisions." },
-  { year: "2021", title: "Land Practice", text: "Specialist land and conveyancing team introduced." },
-  { year: "2024", title: "Regional Reach", text: "Advisory work extended across the East African region." },
-];
-
+// Sample photos — replace with the attorneys' real portraits.
 const TEAM = [
-  { name: "Amb. Mwanaidi Sinare Maajar", role: "Chair and Partner" },
-  { name: "Dr. Alex Thomas Nguluma", role: "Managing Partner" },
-  { name: "Hon. Dr. Fauz Twaib", role: "Senior Partner" },
+  { name: "Amb. Mwanaidi Sinare Maajar", role: "Chair and Partner", photo: t2 },
+  { name: "Dr. Alex Thomas Nguluma", role: "Managing Partner", photo: t1 },
+  { name: "Hon. Dr. Fauz Twaib", role: "Senior Partner", photo: t3 },
+  // Demo entries to fill the slideshow — replace with real team members.
+  { name: "Neema Kassim", role: "Senior Associate", photo: t2 },
+  { name: "Baraka Mollel", role: "Associate", photo: t1 },
+  { name: "Daniel Mushi", role: "Associate", photo: t3 },
 ];
 
-const TESTIMONIALS = [
-  {
-    img: t2,
-    name: "Iliena Mwangosi",
-    role: "Managing Director, Logistics",
-    text: "Darton Attorneys restructured our shareholding and commercial contracts with real precision. Their advice was practical, timely and commercially aware at every stage.",
-  },
-  {
-    img: t1,
-    name: "Joseph Thomas",
-    role: "Finance Director",
-    text: "They represented us in a tax dispute and kept us informed. The outcome exceeded what we thought was realistic.",
-  },
-  {
-    img: p3,
-    name: "Grace Ndosi",
-    role: "Private Client",
-    text: "A difficult family matter handled with dignity and complete confidentiality. I always felt heard and properly advised.",
-  },
+// Demo partner logos (fictional brands) — replace with the firm's real partners.
+const PARTNERS = [
+  { name: "Northvale Holdings", logo: northvale },
+  { name: "Asterion Capital", logo: asterion },
+  { name: "Kivuko Trust", logo: kivuko },
+  { name: "Lumora", logo: lumora },
+  { name: "Vantera Insurance", logo: vantera },
+  { name: "Oakline & Co", logo: oakline },
 ];
 
 const POSTS = [
@@ -163,44 +119,19 @@ const POSTS = [
     img: b1,
     tag: "Corporate",
     title: "Understanding the Companies Act obligations for directors",
-    desc: "Key directors' duties under the Tanzanian Companies Act, including filing requirements and regulatory liabilities.",
     date: "12 August 2026",
-    likes: 65,
   },
   {
     img: b2,
     tag: "Property",
     title: "Land title verification in Dar es Salaam: what to check first",
-    desc: "A practical guide to checking land registry indexes, planning details and title certificates in Dar es Salaam.",
     date: "28 July 2026",
-    likes: 42,
   },
   {
     img: b3,
     tag: "Contracts",
     title: "Drafting enforceable commercial contracts under Tanzanian law",
-    desc: "Critical elements to ensure commercial agreements are binding and fully enforceable under local statutes.",
     date: "09 July 2026",
-    likes: 58,
-  },
-];
-
-const FAQS = [
-  {
-    q: "How do I book a consultation with Darton Attorneys?",
-    a: "Send an enquiry through the form on this page or call our Dar es Salaam office. We respond to every enquiry within one working day and will confirm a consultation slot with the relevant attorney.",
-  },
-  {
-    q: "How are your legal fees structured?",
-    a: "Depending on the matter we work on hourly rates, fixed fees or agreed milestones. You receive a written engagement letter setting out the scope and fees before any work begins.",
-  },
-  {
-    q: "Do you handle matters outside Dar es Salaam?",
-    a: "Yes. We act for clients across Tanzania and coordinate with correspondent counsel in other jurisdictions in the East African region where required.",
-  },
-  {
-    q: "Is my information kept confidential?",
-    a: "Absolutely. All communications are covered by advocate-client privilege and handled under strict internal confidentiality protocols.",
   },
 ];
 
@@ -264,7 +195,7 @@ function SectionHeading({
 }) {
   return (
     <div className={center ? "text-center" : ""}>
-      <span className="rule-gold eyebrow">{eyebrow}</span>
+      <span className="rule-line eyebrow">{eyebrow}</span>
       <h2
         className={`mt-4 max-w-3xl text-4xl leading-[1.15] md:text-5xl ${
           center ? "mx-auto" : ""
@@ -279,72 +210,31 @@ function SectionHeading({
 
 
 function Index() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const projectsScrollRef = useRef<HTMLDivElement>(null);
-  const teamScrollRef = useRef<HTMLDivElement>(null);
+  const teamTrackRef = useRef<HTMLDivElement>(null);
+  const teamPausedRef = useRef(false);
 
-  const scrollTeam = (direction: "left" | "right") => {
-    if (teamScrollRef.current) {
-      const scrollAmount = 304; // card width (280) + gap (24)
-      teamScrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth"
-      });
-    }
-  };
-
-  const scrollProjects = (direction: "left" | "right") => {
-    if (projectsScrollRef.current) {
-      const { scrollLeft, clientWidth } = projectsScrollRef.current;
-      const scrollAmount = clientWidth * 0.4;
-      const targetScroll = direction === "left"
-        ? scrollLeft - scrollAmount
-        : scrollLeft + scrollAmount;
-      projectsScrollRef.current.scrollTo({ left: targetScroll, behavior: "smooth" });
-    }
-  };
-
-  const handleProjectsScroll = () => {
-    if (projectsScrollRef.current) {
-      const { scrollLeft } = projectsScrollRef.current;
-      const cardWidth = window.innerWidth >= 768 ? 604 : 334;
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveProjectIndex(Math.min(Math.max(index, 0), PROJECTS.length - 1));
+  // Move the team slideshow by one card, wrapping around at either end
+  const slideTeam = (direction: 1 | -1) => {
+    const track = teamTrackRef.current;
+    const card = track?.querySelector("article");
+    if (!track || !card) return;
+    const step = card.offsetWidth + 32; // card width + gap-8
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (direction === 1 && track.scrollLeft >= maxScroll - 4) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+    } else if (direction === -1 && track.scrollLeft <= 4) {
+      track.scrollTo({ left: maxScroll, behavior: "smooth" });
+    } else {
+      track.scrollBy({ left: direction * step, behavior: "smooth" });
     }
   };
 
   useEffect(() => {
-    let intervalId: number;
-    const startAutoScroll = () => {
-      intervalId = window.setInterval(() => {
-        if (projectsScrollRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } = projectsScrollRef.current;
-          const cardWidth = window.innerWidth >= 768 ? 604 : 334;
-          
-          if (scrollLeft + clientWidth >= scrollWidth - 10) {
-            projectsScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-          } else {
-            projectsScrollRef.current.scrollTo({ left: scrollLeft + cardWidth, behavior: "smooth" });
-          }
-        }
-      }, 6000);
-    };
-    startAutoScroll();
-    return () => {
-      if (intervalId) {
-        window.clearInterval(intervalId);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
-    }, 7000);
-    return () => clearInterval(timer);
+    const id = window.setInterval(() => {
+      if (!teamPausedRef.current) slideTeam(1);
+    }, 5000);
+    return () => window.clearInterval(id);
   }, []);
 
   return (
@@ -355,90 +245,32 @@ function Index() {
       <HeroSlideshow onThemeChange={setHeroTheme} />
 
 
-      {/* PRACTICE AREAS */}
-      <section id="practice" className="section-pad">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <div className="flex flex-wrap items-end justify-between gap-8">
-            <SectionHeading eyebrow="Our Services" title="Our Legal Practice Areas" />
-            <a href="#get-involved" className="btn-gold">
-              Read More
-            </a>
-          </div>
-
-          <div className="mt-14 grid bg-background sm:grid-cols-2 lg:grid-cols-3">
-            {PRACTICE.map(({ icon: Icon, title, text }) => (
-              <article
-                key={title}
-                className="group bg-background p-10"
-              >
-                <div className="transition-transform duration-300 group-hover:-translate-y-2 flex flex-col h-full">
-                  <Icon
-                    className="size-11 text-gold"
-                    strokeWidth={1.2}
-                  />
-                  <h3 className="mt-6 text-2xl text-foreground">
-                    {title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground flex-grow">
-                    {text}
-                  </p>
-                  <a
-                    href="#get-involved"
-                    className="mt-6 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.22em] text-gold"
-                  >
-                    Read More <ArrowRight className="size-4" strokeWidth={1.5} />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className="section-pad bg-muted">
-        <div className="mx-auto grid max-w-[1400px] items-center gap-14 px-6 lg:grid-cols-2">
-          <div>
+      {/* ABOUT — card overlapping the bottom of the hero */}
+      <section id="about" className="relative z-20 -mt-16 md:-mt-24 px-6">
+        <div className="mx-auto grid max-w-[1400px] overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_rgba(0,0,0,0.08)] lg:grid-cols-2">
+          <div className="p-8 md:p-14">
             <SectionHeading eyebrow="Who We Are" title="A Leading Law Firm Rooted In Tanzania" />
             <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Darton Attorneys was founded on a simple conviction: clients deserve legal counsel
-              that is rigorous, honest and delivered on time. From our Dar es Salaam chambers we
-              serve corporations, financial institutions, public bodies and individuals with the
-              same standard of diligence.
+              Darton Attorneys delivers legal counsel that is rigorous, honest and on time. From
+              our Dar es Salaam chambers we serve corporations, institutions and individuals with
+              the same standard of diligence.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Our practice combines a deep grasp of Tanzanian statute and precedent with a
-              commercial understanding of the sectors our clients operate in.
-            </p>
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-              {[
-                "Integrity in every engagement",
-                "Commercially grounded advice",
-                "Responsive client service",
-                "Proven courtroom record",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-foreground">
-                  <Scale className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.6} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a href="#team" className="btn-gold mt-10">
+            <a href="#team" className="btn-brand mt-10">
               Meet Our Attorneys
             </a>
           </div>
 
-          <div className="relative">
+          <div className="relative min-h-[320px] lg:min-h-0">
             <img
               src={about}
               alt="Managing partner of Darton Attorneys in the firm's law library"
-              className="w-full object-cover"
+              className="absolute inset-0 size-full object-cover"
               loading="lazy"
               width={912}
               height={1104}
             />
-            <div className="absolute bottom-0 left-0 bg-navy px-10 py-8 text-primary-foreground">
-              <p className="font-[var(--font-display)] text-5xl text-gold">
+            <div className="absolute bottom-0 left-0 bg-brand px-10 py-8 text-primary-foreground">
+              <p className="font-[var(--font-display)] text-5xl text-white">
                 <AnimatedCounter value="14+" />
               </p>
               <p className="mt-1 text-xs uppercase tracking-[0.22em]">Years of practice</p>
@@ -447,326 +279,68 @@ function Index() {
         </div>
       </section>
 
-      {/* WHAT WE DO */}
-      <section className="section-pad">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <SectionHeading
-            eyebrow="What We Do"
-            title="A Passion For Justice, The Experience To Win"
-            center
-          />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((s) => (
-              <a key={s.title} href={s.href} className="group relative block overflow-hidden">
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                />
-                <div className="absolute inset-0 bg-navy-deep/45 transition-colors duration-300 group-hover:bg-navy-deep/70" />
-                <div className="absolute inset-x-0 bottom-0 p-7">
-                  <h3 className="text-2xl text-primary-foreground">{s.title}</h3>
-                  <span className="mt-3 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.22em] text-gold">
-                    Click Here <ArrowRight className="size-4" strokeWidth={1.5} />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS / CASE STUDIES */}
-      <section id="projects" className="section-pad bg-navy-deep overflow-hidden">
-        <div className="mx-auto max-w-[1400px] px-6">
-          {/* Heading row: title left, circular counter right */}
-          <div className="flex items-start justify-between gap-8">
-            <div>
-              <h2 className="text-4xl leading-[1.15] md:text-5xl lg:text-[3.4rem] text-primary-foreground font-display max-w-3xl">
-                We are Provided Especially <br className="hidden md:block" /> Skilled Services to you.
-              </h2>
-              <span className="mt-6 block h-px w-20 bg-gold/70" />
-            </div>
-
-            <div className="hidden md:flex size-24 shrink-0 items-center justify-center rounded-full border border-gold/40 font-display text-lg text-gold">
-              {activeProjectIndex + 1}/{PROJECTS.length}
-            </div>
-          </div>
-        </div>
-
-        {/* Full-bleed carousel */}
-        <div
-          ref={projectsScrollRef}
-          onScroll={handleProjectsScroll}
-          className="mt-14 flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 services-slider-container"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {PROJECTS.map((p, i) => {
-            const Icon = TAG_ICONS[p.tag] || ShieldCheck;
-            const isDark = i % 2 !== 0;
-            return (
-              <article
-                key={i}
-                className="group relative flex w-[320px] md:w-[700px] h-[400px] shrink-0 snap-start overflow-hidden"
-              >
-                {/* Left half: Image */}
-                <div className="w-2/5 md:w-1/2 h-full overflow-hidden">
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Right half: Text panel */}
-                <div className={`w-3/5 md:w-1/2 h-full p-7 md:p-10 flex flex-col justify-between relative ${
-                  isDark
-                    ? "bg-transparent text-primary-foreground border border-white/15 border-l-0"
-                    : "bg-background text-foreground"
-                }`}>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-display leading-snug tracking-tight">
-                      {p.title}
-                    </h3>
-                    <p className={`mt-4 text-sm leading-relaxed line-clamp-4 font-sans ${
-                      isDark ? "text-primary-foreground/70" : "text-muted-foreground"
-                    }`}>
-                      Diam magna consectetur nunc tristique consequat. Integer venenatis nec rutrum.
-                    </p>
-                  </div>
-
-                  <div className="flex justify-between items-end mt-4">
-                    <div className={`flex size-11 items-center justify-center transition-colors duration-300 ${
-                      isDark
-                        ? "border border-white/25 text-white hover:bg-white hover:text-navy-deep"
-                        : "bg-gold text-navy-deep hover:bg-navy hover:text-gold"
-                    }`}>
-                      <ArrowRight className="size-4" strokeWidth={2} />
-                    </div>
-
-                    <div className={`opacity-15 shrink-0 ${isDark ? "text-white" : "text-gold"}`}>
-                      <Icon className="size-16" strokeWidth={1.2} />
-                    </div>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-
-        {/* Arrows */}
-        <div className="mx-auto max-w-[1400px] px-6 mt-8 flex gap-3">
-          <button
-            type="button"
-            onClick={() => scrollProjects("left")}
-            className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
-            aria-label="Previous project"
-          >
-            <ArrowLeft className="size-5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollProjects("right")}
-            className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-gold hover:text-navy-deep transition-all duration-300 cursor-pointer"
-            aria-label="Next project"
-          >
-            <ArrowRight className="size-5" />
-          </button>
-        </div>
-      </section>
-
-
-      {/* MILESTONES */}
-      <section className="section-pad">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <SectionHeading eyebrow="Our Journey" title="Milestones In Our Practice" center />
-          <div className="mt-14 grid gap-px bg-border md:grid-cols-3 lg:grid-cols-5">
-            {MILESTONES.map((m) => (
-              <div key={m.year} className="bg-background p-8">
-                <p className="font-[var(--font-display)] text-4xl text-gold">{m.year}</p>
-                <h3 className="mt-4 text-xl text-foreground">{m.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section id="team" className="section-pad bg-muted">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <div className="text-center mb-14">
-            <span className="rule-gold eyebrow">Meet Our People</span>
-            <h2 className="mt-4 text-4xl leading-[1.15] md:text-5xl text-foreground font-display">
-              Leading experts
+      {/* PRACTICE AREAS */}
+      <section id="practice" className="bg-background py-[70px]">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <div className="text-center">
+            <span className="rule-line eyebrow">Our Services</span>
+            <h2 className="mt-4 text-4xl leading-[1.15] md:text-5xl text-foreground">
+              Our Legal Practice Areas
             </h2>
           </div>
-          <div
-            ref={teamScrollRef}
-            className={
-              TEAM.length > 3
-                ? "mt-14 flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4 w-full"
-                : "mt-14 flex flex-wrap gap-6 justify-center max-w-[1150px] mx-auto"
-            }
-            style={
-              TEAM.length > 3
-                ? {
-                    scrollbarWidth: "none",
-                    paddingLeft: "max(1.5rem, calc((100vw - 1150px) / 2 + 1.5rem))",
-                    paddingRight: "max(1.5rem, calc((100vw - 1150px) / 2 + 1.5rem))",
-                  }
-                : undefined
-            }
-          >
-            {TEAM.map((m) => (
-              <article key={m.name} className="w-[280px] shrink-0 snap-start bg-white border border-border overflow-hidden shadow-sm flex flex-col">
-                {/* Person Placeholder Icon Area */}
-                <div className="relative w-full aspect-square bg-slate-100 flex items-center justify-center text-slate-400">
-                  <User className="size-24 stroke-[1]" />
-                </div>
-                {/* Info Area */}
-                <div className="p-6 text-center flex flex-col items-center">
-                  <h3 className="text-sm font-semibold tracking-[0.12em] text-[#152833] uppercase min-h-[40px] flex items-center justify-center">
-                    {m.name}
-                  </h3>
-                  <p className="mt-1.5 text-[0.7rem] uppercase tracking-[0.15em] font-medium text-gold">
-                    {m.role}
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {PRACTICE.map(({ icon: Icon, title, text }) => (
+              <article
+                key={title}
+                className="group flex gap-6 rounded-[8px] bg-brand p-8 md:p-10 transition-colors duration-300 hover:bg-brand-deep"
+              >
+                <Icon
+                  className="size-12 shrink-0 text-white transition-transform duration-300 group-hover:-translate-y-1"
+                  strokeWidth={1}
+                />
+                <div>
+                  <h3 className="text-2xl leading-snug text-white">{title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-white/75 transition-colors duration-300 group-hover:text-white/90">
+                    {text}
                   </p>
-                  
-                  {/* Social Icons - Always Visible */}
-                  <div className="mt-5 flex justify-center gap-5 text-gold">
-                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} Facebook`}>
-                      <Facebook className="size-4" />
-                    </a>
-                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} LinkedIn`}>
-                      <Linkedin className="size-4" />
-                    </a>
-                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} Twitter`}>
-                      <Twitter className="size-4" />
-                    </a>
-                    <a href="#" className="hover:text-[#152833] transition-colors" aria-label={`${m.name} Instagram`}>
-                      <Instagram className="size-4" />
-                    </a>
-                  </div>
                 </div>
               </article>
             ))}
           </div>
 
-          {TEAM.length > 3 && (
-            <div className="mt-8 flex justify-center gap-4">
-              <button
-                onClick={() => scrollTeam("left")}
-                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors hover:bg-gold hover:text-white"
-                aria-label="Previous team members"
-              >
-                <ArrowLeft className="size-5" />
-              </button>
-              <button
-                onClick={() => scrollTeam("right")}
-                className="flex size-11 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors hover:bg-gold hover:text-white"
-                aria-label="Next team members"
-              >
-                <ArrowRight className="size-5" />
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section id="testimonials" className="section-pad overflow-hidden">
-        <div className="mx-auto max-w-[1100px] px-6">
-          {/* Header with Circular Index progress */}
-          <div className="flex items-center justify-between gap-6 border-b border-border pb-6 mb-12">
-            <div>
-              <h2 className="text-3xl md:text-5xl text-foreground font-display tracking-tight leading-none">
-                What Our Clients Say
-              </h2>
-              <span className="mt-4 block h-[2px] w-12 bg-gold" />
-            </div>
-            
-            {/* Index circle indicator */}
-            <div className="relative flex size-14 shrink-0 items-center justify-center rounded-full border border-gold/40 text-sm font-semibold font-display text-gold">
-              {activeTestimonial + 1}/{TESTIMONIALS.length}
-            </div>
-          </div>
-          
-          {/* Content: round profile image left, quote text + stars right */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8 md:gap-14 items-center min-h-[220px]">
-            {/* Left profile Column */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <div className="size-36 rounded-full overflow-hidden border border-border bg-muted mb-4 shadow-sm animate-in fade-in duration-300">
-                <img
-                  src={TESTIMONIALS[activeTestimonial]!.img}
-                  alt={TESTIMONIALS[activeTestimonial]!.name}
-                  className="size-full object-cover object-top"
-                  loading="lazy"
-                  width={200}
-                  height={200}
-                />
-              </div>
-              <h3 className="text-base font-semibold text-foreground uppercase tracking-wider font-sans">
-                {TESTIMONIALS[activeTestimonial]!.name}
-              </h3>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1 font-sans">
-                {TESTIMONIALS[activeTestimonial]!.role}
-              </p>
-            </div>
-            
-            {/* Right quote content Column */}
-            <div className="relative flex justify-between items-start gap-8">
-              <div className="flex-grow animate-in fade-in slide-in-from-right-3 duration-500">
-                {/* 5 Stars Rating */}
-                <div className="flex gap-1 text-gold mb-5 justify-center md:justify-start">
-                  {[...Array(5)].map((_, idx) => (
-                    <span key={idx} className="text-lg">★</span>
-                  ))}
-                </div>
-                
-                {/* Testimony paragraph quote */}
-                <p className="text-lg md:text-2xl font-medium leading-relaxed text-foreground/90 italic font-display">
-                  "{TESTIMONIALS[activeTestimonial]!.text}"
-                </p>
-                
-                {/* Bottom slideshow dot indicators */}
-                <div className="mt-8 flex gap-2.5 justify-center md:justify-start">
-                  {TESTIMONIALS.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveTestimonial(idx)}
-                      className={`h-2 transition-all duration-300 cursor-pointer rounded-none ${
-                        idx === activeTestimonial ? "w-6 bg-gold" : "w-2 bg-muted hover:bg-gold/40"
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
-              
-              {/* Giant quote icon */}
-              <Quote className="size-20 text-muted-foreground/15 shrink-0 hidden sm:block rotate-180" strokeWidth={1} />
-            </div>
+          <div className="mt-14 flex justify-center">
+            <a
+              href="#get-involved"
+              className="inline-flex items-center gap-2 bg-brand px-6 py-3.5 text-sm text-white transition-colors duration-300 hover:bg-brand-deep"
+            >
+              View All Practice Areas <ArrowRight className="size-4" strokeWidth={1.5} />
+            </a>
           </div>
         </div>
       </section>
 
       {/* COUNTERS */}
-      <section className="bg-navy py-16">
-        <div className="mx-auto grid max-w-[1400px] gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section id="projects" className="bg-brand py-[70px]">
+        <div className="mx-auto max-w-[1400px] px-6 text-center">
+          <span className="rule-line font-display text-[1.05rem] uppercase tracking-[0.28em] text-white">
+            Our Track Record
+          </span>
+          <h2 className="mt-4 text-4xl leading-[1.15] text-white md:text-5xl">
+            Results That Speak For Themselves
+          </h2>
+        </div>
+        <div className="mx-auto mt-14 grid max-w-[1400px] gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            ["480+", "Matters concluded"],
-            ["320+", "Clients advised"],
-            ["14", "Years in practice"],
-            ["9", "Practice areas"],
-          ].map(([value, label]) => (
-            <div key={label} className="text-center">
-              <p className="font-[var(--font-display)] text-5xl text-gold">
-                <AnimatedCounter value={value ?? ""} />
+            { icon: Briefcase, value: "480+", label: "Matters concluded" },
+            { icon: Users, value: "320+", label: "Clients advised" },
+            { icon: Award, value: "14", label: "Years in practice" },
+            { icon: Scale, value: "9", label: "Practice areas" },
+          ].map(({ icon: Icon, value, label }) => (
+            <div key={label} className="flex flex-col items-center text-center">
+              <Icon className="size-11 text-white" strokeWidth={1.2} />
+              <p className="mt-5 font-[var(--font-display)] text-5xl text-white">
+                <AnimatedCounter value={value} />
               </p>
               <p className="mt-2 text-[0.72rem] uppercase tracking-[0.22em] text-primary-foreground/75">
                 {label}
@@ -776,78 +350,137 @@ function Index() {
         </div>
       </section>
 
-      {/* INSIGHTS */}
-      <section id="insights" className="section-pad">
-        <div className="mx-auto max-w-[1400px] px-6">
-          <SectionHeading eyebrow="Legal Insights" title="Our Latest Commentary" center />
-          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {POSTS.map((post) => (
+      {/* TEAM */}
+      <section id="team" className="section-pad bg-[#f0f0f0]">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <SectionHeading eyebrow="Meet Our People" title="Leading Experts" center />
+
+          <div
+            ref={teamTrackRef}
+            onMouseEnter={() => (teamPausedRef.current = true)}
+            onMouseLeave={() => (teamPausedRef.current = false)}
+            className="scrollbar-none mt-14 flex snap-x snap-mandatory gap-8 overflow-x-auto"
+          >
+            {TEAM.map((m) => (
               <article
-                key={post.title}
-                className="group flex flex-col bg-background shadow-md border border-border/10 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                key={m.name}
+                className="group w-full shrink-0 snap-start overflow-hidden rounded-[8px] sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]"
               >
-                <div className="relative overflow-hidden aspect-[16/10]">
+                <div className="relative aspect-[11/10] overflow-hidden bg-muted">
                   <img
-                    src={post.img}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={m.photo}
+                    alt={m.name}
+                    className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
-                    width={800}
-                    height={600}
                   />
-                </div>
-                
-                <div className="p-7 flex flex-col flex-grow">
-                  <h3 className="text-xl font-semibold leading-snug text-foreground hover:text-gold transition-colors duration-200">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-grow">
-                    {post.desc}
-                  </p>
-                  
-                  <div className="mt-6 pt-5 border-t border-border/60 flex justify-between items-center text-xs text-muted-foreground">
-                    <span>{post.date}</span>
-                    <span className="flex items-center gap-1">
-                      <Heart className="size-4 text-[#EA580C] fill-[#EA580C]" />
-                      {post.likes}
-                    </span>
+                  {/* Social links slide up on hover */}
+                  <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 translate-y-full items-center gap-6 rounded-t-[6px] bg-white px-7 py-3 text-brand transition-transform duration-300 group-hover:translate-y-0">
+                    {[
+                      { Icon: Facebook, label: "Facebook" },
+                      { Icon: Twitter, label: "Twitter" },
+                      { Icon: Linkedin, label: "LinkedIn" },
+                      { Icon: Instagram, label: "Instagram" },
+                    ].map(({ Icon, label }) => (
+                      <a
+                        key={label}
+                        href="#"
+                        aria-label={`${m.name} ${label}`}
+                        className="transition-colors hover:text-brand-deep"
+                      >
+                        <Icon className="size-4" />
+                      </a>
+                    ))}
                   </div>
+                </div>
+                <div className="bg-brand px-6 py-7 text-center">
+                  <h3 className="text-xl text-white">{m.name}</h3>
+                  <p className="mt-1.5 text-sm text-white/75">{m.role}</p>
                 </div>
               </article>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* FAQ */}
-      <section id="faq" className="section-pad bg-muted">
-        <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <SectionHeading eyebrow="FAQ" title="Answers Before You Instruct Us" />
-          <div className="divide-y divide-border border-y border-border">
-            {FAQS.map((f, i) => (
-              <div key={f.q}>
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="flex w-full items-center justify-between gap-6 py-6 text-left"
-                >
-                  <span className="font-[var(--font-display)] text-xl text-foreground">{f.q}</span>
-                  {openFaq === i ? (
-                    <Minus className="size-5 shrink-0 text-gold" strokeWidth={1.5} />
-                  ) : (
-                    <Plus className="size-5 shrink-0 text-gold" strokeWidth={1.5} />
-                  )}
-                </button>
-                {openFaq === i && (
-                  <p className="pb-6 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
-                )}
-              </div>
-            ))}
+          <div className="mt-10 flex justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => slideTeam(-1)}
+              className="flex size-11 items-center justify-center rounded-full border border-brand/40 text-brand transition-colors hover:bg-brand hover:text-white"
+              aria-label="Previous team members"
+            >
+              <ArrowLeft className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => slideTeam(1)}
+              className="flex size-11 items-center justify-center rounded-full border border-brand/40 text-brand transition-colors hover:bg-brand hover:text-white"
+              aria-label="Next team members"
+            >
+              <ArrowRight className="size-5" />
+            </button>
           </div>
         </div>
       </section>
 
+      {/* PARTNERS */}
+      <section id="partners" className="bg-white py-[70px]">
+        <div className="mx-auto max-w-[1400px] px-6">
+          <SectionHeading eyebrow="Our Partners" title="Trusted Affiliations" center />
+
+          {/* Logo slideshow: the list is rendered twice so the loop is seamless */}
+          <div className="partners-marquee mt-14 overflow-hidden">
+            <div className="partners-track flex w-max items-center">
+              {[...PARTNERS, ...PARTNERS].map((partner, i) => (
+                <div
+                  key={`${partner.name}-${i}`}
+                  aria-hidden={i >= PARTNERS.length}
+                  className="flex h-20 w-[180px] shrink-0 items-center justify-center px-6 md:w-[240px]"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={i < PARTNERS.length ? partner.name : ""}
+                    className="max-h-16 w-auto max-w-full object-contain grayscale opacity-60 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INSIGHTS */}
+      <section id="insights" className="section-pad">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <SectionHeading eyebrow="Legal Insights" title="Our Latest Commentary" center />
+          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {POSTS.map((post) => (
+              <a
+                key={post.title}
+                href="#insights"
+                className="group relative block aspect-[19/20] overflow-hidden rounded-[8px]"
+              >
+                <img
+                  src={post.img}
+                  alt={post.title}
+                  className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  width={800}
+                  height={600}
+                />
+                {/* Details: always shown on touch screens, revealed on hover on desktop */}
+                <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-brand-deep/95 via-brand-deep/60 to-brand-deep/20 p-8 text-center transition-opacity duration-500 lg:opacity-0 lg:group-hover:opacity-100">
+                  <div className="transition-transform duration-500 lg:translate-y-4 lg:group-hover:translate-y-0">
+                    <h3 className="text-2xl leading-snug text-white">{post.title}</h3>
+                    <p className="mt-3 text-sm text-white/80">
+                      {post.tag} · {post.date}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

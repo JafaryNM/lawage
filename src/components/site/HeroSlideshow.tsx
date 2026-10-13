@@ -1,4 +1,4 @@
-import { ArrowRight, Facebook, Twitter, Instagram } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { TextAnimate } from "@/registry/magicui/text-animate";
@@ -50,12 +50,12 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
   const isCentered = true;
 
   return (
-    <section className="relative overflow-hidden w-full min-h-screen min-h-[100dvh] flex flex-col justify-center bg-white">
+    <section className="relative overflow-hidden w-full min-h-[560px] h-[80vh] h-[80dvh] flex flex-col justify-center bg-white">
       {/* Slides */}
       {HERO_SLIDES.map((slide, i) => (
         <div
           key={slide.src}
-          className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${
+          className={`absolute inset-0 w-full h-full ${
             i === active ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
           }`}
         >
@@ -65,7 +65,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
               <img
                 src={slide.src}
                 alt={slide.alt}
-                className="absolute bottom-0 left-0 lg:left-[4%] h-[55vh] lg:h-[88vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
+                className="absolute bottom-0 left-0 lg:left-[4%] h-[45vh] lg:h-[72vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
               />
             </>
           ) : (
@@ -82,30 +82,15 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
       ))}
 
 
-      {/* Vertical Social Follow Us Bar (Bottom Left) */}
-      <div className={`absolute left-8 bottom-12 z-20 hidden md:flex flex-col items-center gap-6 transition-colors duration-1000 ${
-        isCutout ? "text-navy" : "text-primary-foreground/80"
-      }`}>
-        <div className="flex flex-col gap-4">
-          <a href="#" className="hover:text-gold transition-colors"><Facebook className="size-4" strokeWidth={1.5} /></a>
-          <a href="#" className="hover:text-gold transition-colors"><Twitter className="size-4" strokeWidth={1.5} /></a>
-          <a href="#" className="hover:text-gold transition-colors"><Instagram className="size-4" strokeWidth={1.5} /></a>
-        </div>
-        <span className="h-12 w-px bg-current opacity-30" />
-        <div className="text-[0.7rem] font-medium tracking-[0.25em] uppercase [writing-mode:vertical-lr] rotate-180 font-sans">
-          Follow Us
-        </div>
-      </div>
-
       {/* Text Content Grid Wrapper — identical position on every slide */}
-      <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 min-h-screen min-h-[100dvh] flex items-center ${
+      <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 min-h-[560px] h-[80vh] h-[80dvh] flex items-center ${
         isCentered ? "justify-center" : "grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]"
       }`}>
         {!isCentered && <div className="hidden lg:block w-full h-full" />}
 
         <div
           key={active}
-          className={`w-full flex flex-col animate-in fade-in duration-700 ${
+          className={`w-full flex flex-col ${
             isCentered ? "items-center text-center max-w-3xl" : "items-start text-left"
           }`}
         >
@@ -116,7 +101,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
           </span>
 
           <h1 className={`mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display tracking-tight font-medium transition-colors duration-1000 ${
-            isCutout ? "text-navy" : "text-primary-foreground"
+            isCutout ? "text-brand" : "text-primary-foreground"
           }`}>
             {isCutout ? (
               <>
@@ -146,15 +131,15 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
           <div className={`mt-10 flex flex-wrap gap-4 z-10 w-full ${
             isCentered ? "justify-center" : "justify-start"
           }`}>
-            <a href="#projects" className="btn-gold font-sans">
+            <a href="#projects" className="btn-brand font-sans">
               Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
             </a>
             <a
               href="#get-involved"
-              className={`inline-flex items-center gap-2 border text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors duration-300 font-sans ${
+              className={`inline-flex items-center gap-2 border bg-transparent text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors duration-300 font-sans ${
                 isCutout
-                  ? "border-[#152833] text-[#152833] hover:bg-[#152833] hover:text-white"
-                  : "border-white/70 text-primary-foreground hover:bg-white hover:text-navy-deep"
+                  ? "border-[#1b2445] text-[#1b2445] hover:bg-[#1b2445] hover:text-white"
+                  : "border-white/70 text-primary-foreground hover:bg-white hover:text-[#1b2445]"
               }`}
             >
               Contact Us <ArrowRight className="size-4" strokeWidth={1.5} />
@@ -172,8 +157,8 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             aria-label={`Show slide ${i + 1}`}
             onClick={() => setActive(i)}
             className={`size-3 rounded-full border transition-all duration-300 cursor-pointer ${
-              isCutout ? "border-navy/30" : "border-white/70"
-            } ${i === active ? (isCutout ? "bg-navy" : "bg-gold") : "bg-transparent hover:scale-110"}`}
+              isCutout ? "border-brand/30" : "border-white/70"
+            } ${i === active ? (isCutout ? "bg-brand" : "bg-gold") : "bg-transparent hover:scale-110"}`}
           />
         ))}
       </div>

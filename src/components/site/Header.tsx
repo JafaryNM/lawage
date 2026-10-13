@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, MapPin, Phone, Mail, Facebook, Linkedin, Twitter, Instagram } from "lucide-react";
 import logo from "@/assets/darton-logo.png";
 
 const NAV_ITEMS = [
@@ -50,10 +50,52 @@ export function Header({ theme = "dark" }: HeaderProps) {
     <header
       className={`z-50 transition-all duration-300 bg-white border-b border-black/5 ${
         stuck
-          ? "fixed inset-x-0 top-0 shadow-[0_4px_24px_rgba(13,27,52,0.06)]"
+          ? "fixed inset-x-0 top-0 shadow-[0_4px_24px_rgba(109,20,41,0.08)]"
           : "absolute inset-x-0 top-0"
       }`}
     >
+      {/* Top info banner (collapses once the header sticks) */}
+      {!stuck && (
+        <div className="bg-brand text-white">
+          <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-2.5 text-[0.72rem] tracking-[0.08em]">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+              <span className="hidden items-center gap-2 lg:flex">
+                <MapPin className="size-3.5" strokeWidth={1.5} />
+                Masaki, Chole Road, Dar es Salaam, Tanzania
+              </span>
+              <a href="tel:+255222000000" className="flex items-center gap-2 transition-colors hover:text-gold">
+                <Phone className="size-3.5" strokeWidth={1.5} />
+                +255 22 200 0000
+              </a>
+              <a
+                href="mailto:info@dartonattorneys.co.tz"
+                className="hidden items-center gap-2 transition-colors hover:text-gold sm:flex"
+              >
+                <Mail className="size-3.5" strokeWidth={1.5} />
+                info@dartonattorneys.co.tz
+              </a>
+            </div>
+            <div className="flex items-center gap-4">
+              {[
+                { Icon: Facebook, label: "Facebook" },
+                { Icon: Linkedin, label: "LinkedIn" },
+                { Icon: Twitter, label: "Twitter" },
+                { Icon: Instagram, label: "Instagram" },
+              ].map(({ Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={`Darton Attorneys ${label}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  <Icon className="size-3.5" strokeWidth={1.5} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4 lg:py-5">
         <a href="#home" className="shrink-0">
           <img
@@ -80,7 +122,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
             >
               <a
                 href={item.href}
-                className="flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.18em] transition-colors duration-200 hover:text-gold"
+                className="flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.18em] transition-colors duration-200 hover:text-brand"
               >
                 {item.label}
               </a>
@@ -98,7 +140,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
 
           <a
             href="#projects"
-            className="ml-2 inline-flex items-center gap-2 bg-[#C49B7A] text-white text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors hover:bg-white hover:text-[#C49B7A] border border-transparent hover:border-[#C49B7A]"
+            className="ml-2 inline-flex items-center gap-2 bg-brand text-white text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors hover:bg-brand-deep border border-transparent"
           >
             Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
           </a>
