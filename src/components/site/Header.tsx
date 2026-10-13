@@ -16,10 +16,6 @@ const NAV_ITEMS = [
     href: "/services"
   },
   {
-    label: "Portfolio",
-    href: "/#projects"
-  },
-  {
     label: "Blog",
     href: "/blog"
   },

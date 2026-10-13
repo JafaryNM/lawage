@@ -81,7 +81,6 @@ export function Footer() {
                 ["Who We Are", "/about"],
                 ["Practice Areas", "/services"],
                 ["Attorneys Profiles", "/#team"],
-                ["Our Projects", "/#projects"],
               ].map(([label, href]) => (
                 <li key={label}>
                   <a href={href} className="transition-colors hover:text-brand font-medium">
