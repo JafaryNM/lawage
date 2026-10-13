@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Headphones, MapPin, Send } from "lucide-react";
+import { Clock, Send } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FlatIcon } from "@/components/site/FlatIcon";
 import { PageBanner } from "@/components/site/PageBanner";
 
 import logo from "@/assets/darton-logo.png";
@@ -76,7 +77,7 @@ function Contact() {
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               <div className="group rounded-[8px] border border-border bg-white px-6 py-10 text-center transition-colors duration-300 hover:border-brand">
                 <span className="mx-auto flex size-[72px] items-center justify-center rounded-full border border-brand/40 text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
-                  <MapPin className="size-7" strokeWidth={1.3} />
+                  <FlatIcon name="location-alt" className="size-7" />
                 </span>
                 <h3 className="mt-6 text-2xl text-foreground">Location</h3>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{ADDRESS}</p>
@@ -84,7 +85,7 @@ function Contact() {
 
               <div className="rounded-[8px] border border-brand bg-white px-6 py-10 text-center">
                 <span className="mx-auto flex size-[72px] items-center justify-center rounded-full bg-brand text-white">
-                  <Headphones className="size-7" strokeWidth={1.3} />
+                  <FlatIcon name="user-headset" className="size-7" />
                 </span>
                 <h3 className="mt-6 text-2xl text-foreground">Talk To Us</h3>
                 <p className="mt-4 space-y-1 text-sm leading-relaxed text-muted-foreground">

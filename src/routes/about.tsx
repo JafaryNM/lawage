@@ -1,16 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Compass,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Scale,
-  Target,
-  Twitter,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FlatIcon, type FlatIconName } from "@/components/site/FlatIcon";
 import { PageBanner } from "@/components/site/PageBanner";
 import { Partners } from "@/components/site/Partners";
 import { TEAM } from "@/lib/team";
@@ -44,17 +37,17 @@ const SOCIALS = [
 
 const PILLARS = [
   {
-    icon: Target,
+    icon: "bullseye-arrow" as FlatIconName,
     title: "Our Mission",
     text: "To deliver legal counsel that is rigorous, honest and on time, helping our clients make confident decisions in every matter they bring to us.",
   },
   {
-    icon: Scale,
+    icon: "balance-scale-left" as FlatIconName,
     title: "Our Values",
     text: "We hold ourselves to the highest ethical standards, acting with integrity, confidentiality and accountability to our clients and the community.",
   },
   {
-    icon: Compass,
+    icon: "compass-alt" as FlatIconName,
     title: "Our Approach",
     text: "We pair a deep grasp of Tanzanian statute and precedent with a commercial understanding of our clients' sectors, so our advice is practical as well as sound.",
   },
@@ -104,8 +97,8 @@ function About() {
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
               Over the years our practice has grown from a corporate desk into a full-service firm
-              covering litigation, land, family, employment and tax matters, with advisory work
-              that now reaches across the East African region.
+              covering litigation, land, family, employment and tax matters, with advisory work that
+              now reaches across the East African region.
             </p>
 
             <div className="mt-10 grid gap-8 rounded-[8px] bg-[#f0f0f0] p-8 md:grid-cols-2 md:p-10">
@@ -115,7 +108,7 @@ function About() {
                   className={`flex gap-4 ${i === PILLARS.length - 1 ? "md:col-span-2" : ""}`}
                 >
                   <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-brand text-white">
-                    <p.icon className="size-6" strokeWidth={1.5} />
+                    <FlatIcon name={p.icon} className="size-6" />
                   </div>
                   <div>
                     <h3 className="text-2xl text-brand">{p.title}</h3>

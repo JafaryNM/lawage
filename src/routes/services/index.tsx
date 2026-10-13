@@ -1,10 +1,23 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
+import { ServiceDetail } from "@/components/site/ServiceDetail";
 import { SERVICES } from "@/lib/services";
 
-// /services opens the detail view of the first practice area; the sidebar there lists them all
+import logo from "@/assets/darton-logo.png";
+
+// /services shows the first practice area in the full detail layout; the sidebar links to the rest
 export const Route = createFileRoute("/services/")({
-  beforeLoad: () => {
-    throw redirect({ to: "/services/$slug", params: { slug: SERVICES[0]!.slug } });
-  },
+  head: () => ({
+    meta: [
+      { title: "Practice Areas | Darton Attorneys" },
+      {
+        name: "description",
+        content:
+          "Corporate, litigation, land, family, employment and tax legal services from Darton Attorneys in Dar es Salaam, Tanzania.",
+      },
+      { property: "og:title", content: "Practice Areas | Darton Attorneys" },
+      { property: "og:image", content: logo },
+    ],
+  }),
+  component: () => <ServiceDetail service={SERVICES[0]!} />,
 });

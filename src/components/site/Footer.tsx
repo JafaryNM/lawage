@@ -143,7 +143,18 @@ export function Footer() {
 
         <div className="border-t border-border">
           <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <p>© {new Date().getFullYear()} Darton Attorneys. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} Darton Attorneys. All rights reserved. Icons by{" "}
+              <a
+                href="https://www.flaticon.com/uicons"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-brand"
+              >
+                Flaticon
+              </a>
+              .
+            </p>
             <div className="flex gap-6 font-medium">
               <a href="#privacy" className="hover:text-brand transition-colors">Privacy policy</a>
               <a href="#terms" className="hover:text-brand transition-colors">Terms and conditions</a>

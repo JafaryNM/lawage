@@ -1,4 +1,4 @@
-import { Building2, Gavel, Handshake, Landmark, ShieldCheck, Users, type LucideIcon } from "lucide-react";
+import type { FlatIconName } from "@/components/site/FlatIcon";
 
 import corporateImg from "@/assets/p1.jpg";
 import litigationImg from "@/assets/p2.jpg";
@@ -9,7 +9,7 @@ import taxImg from "@/assets/executive-correcting-report.png";
 
 export type Service = {
   slug: string;
-  icon: LucideIcon;
+  icon: FlatIconName;
   title: string;
   /** One-line summary used on cards */
   text: string;
@@ -24,7 +24,7 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     slug: "corporate-commercial",
-    icon: Building2,
+    icon: "building",
     title: "Corporate & Commercial",
     text: "Company formation, governance, contracts, mergers and regulatory compliance for Tanzanian and foreign businesses.",
     image: corporateImg,
@@ -46,7 +46,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "litigation-arbitration",
-    icon: Gavel,
+    icon: "gavel",
     title: "Litigation & Arbitration",
     text: "Robust representation before Tanzanian courts and tribunals, and in commercial arbitration proceedings.",
     image: litigationImg,
@@ -68,7 +68,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "land-property",
-    icon: Landmark,
+    icon: "house-chimney",
     title: "Land & Property Law",
     text: "Title verification, conveyancing, leases, land disputes and real estate transaction structuring.",
     image: landImg,
@@ -90,7 +90,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "family-law",
-    icon: Users,
+    icon: "family",
     title: "Family Law",
     text: "Matrimonial matters, custody, succession and estate administration handled with discretion and care.",
     image: familyImg,
@@ -112,7 +112,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "employment-labour",
-    icon: Handshake,
+    icon: "handshake-trust",
     title: "Employment & Labour",
     text: "Contracts, disciplinary processes, restructuring and representation at the Commission for Mediation.",
     image: employmentImg,
@@ -134,7 +134,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "tax-regulatory",
-    icon: ShieldCheck,
+    icon: "calculator-math-tax",
     title: "Tax & Regulatory",
     text: "Tax planning, TRA disputes, licensing and advisory on Tanzania's evolving regulatory framework.",
     image: taxImg,

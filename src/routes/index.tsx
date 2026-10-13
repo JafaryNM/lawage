@@ -1,21 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Award,
-  Briefcase,
-  Facebook,
-  Globe,
-  Scale,
-  Twitter,
-  Users,
-  Linkedin,
-  Instagram,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Facebook, Globe, Twitter, Linkedin, Instagram } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FlatIcon, type FlatIconName } from "@/components/site/FlatIcon";
 import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 import { Partners } from "@/components/site/Partners";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
@@ -51,7 +40,7 @@ export const Route = createFileRoute("/")({
 function AnimatedCounter({ value }: { value: string }) {
   const [count, setCount] = useState(0);
   const elementRef = useRef<HTMLSpanElement>(null);
-  
+
   // Parse numeric part and suffix (e.g. "480+" -> 480 and "+")
   const numericMatch = value.match(/^(\d+)(.*)$/);
   const target = numericMatch ? parseInt(numericMatch[1] ?? "0", 10) : 0;
@@ -77,7 +66,7 @@ function AnimatedCounter({ value }: { value: string }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (elementRef.current) {
@@ -92,7 +81,12 @@ function AnimatedCounter({ value }: { value: string }) {
     };
   }, [target]);
 
-  return <span ref={elementRef}>{count}{suffix}</span>;
+  return (
+    <span ref={elementRef}>
+      {count}
+      {suffix}
+    </span>
+  );
 }
 
 function SectionHeading({
@@ -119,8 +113,6 @@ function SectionHeading({
     </div>
   );
 }
-
-
 
 function Index() {
   const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
@@ -157,16 +149,15 @@ function Index() {
       {/* HERO */}
       <HeroSlideshow onThemeChange={setHeroTheme} />
 
-
       {/* ABOUT — card overlapping the bottom of the hero */}
       <section id="about" className="relative z-20 -mt-16 md:-mt-24 px-6">
         <div className="mx-auto grid max-w-[1400px] overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_rgba(0,0,0,0.08)] lg:grid-cols-2">
           <div className="p-8 md:p-14">
             <SectionHeading eyebrow="Who We Are" title="A Leading Law Firm Rooted In Tanzania" />
             <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Darton Attorneys delivers legal counsel that is rigorous, honest and on time. From
-              our Dar es Salaam chambers we serve corporations, institutions and individuals with
-              the same standard of diligence.
+              Darton Attorneys delivers legal counsel that is rigorous, honest and on time. From our
+              Dar es Salaam chambers we serve corporations, institutions and individuals with the
+              same standard of diligence.
             </p>
             <a href="#team" className="btn-brand mt-10">
               Meet Our Attorneys
@@ -228,14 +219,18 @@ function Index() {
           </h2>
         </div>
         <div className="mx-auto mt-14 grid max-w-[1400px] gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Briefcase, value: "480+", label: "Matters concluded" },
-            { icon: Users, value: "320+", label: "Clients advised" },
-            { icon: Award, value: "14", label: "Years in practice" },
-            { icon: Scale, value: "9", label: "Practice areas" },
-          ].map(({ icon: Icon, value, label }) => (
+          {(
+            [
+              { icon: "thin-briefcase-blank", value: "480+", label: "Matters concluded" },
+              { icon: "thin-users-alt", value: "320+", label: "Clients advised" },
+              { icon: "thin-award", value: "14", label: "Years in practice" },
+              { icon: "thin-balance-scale-right", value: "9", label: "Practice areas" },
+            ] satisfies { icon: FlatIconName; value: string; label: string }[]
+          ).map(({ icon, value, label }) => (
             <div key={label} className="flex flex-col items-center text-center">
-              <Icon className="size-11 text-white" strokeWidth={1.2} />
+              <span className="flex size-24 items-center justify-center rounded-full border border-white/40 bg-white/10">
+                <FlatIcon name={icon} className="size-12 text-white" />
+              </span>
               <p className="mt-5 font-[var(--font-display)] text-5xl text-white">
                 <AnimatedCounter value={value} />
               </p>
@@ -325,32 +320,36 @@ function Index() {
         <div className="mx-auto max-w-[1200px] px-6">
           <SectionHeading eyebrow="Legal Insights" title="Our Latest Commentary" center />
           <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {[...POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map((post) => (
-              <Link
-                key={post.slug}
-                to="/blog/$slug"
-                params={{ slug: post.slug }}
-                className="group relative block aspect-[19/20] overflow-hidden rounded-[8px]"
-              >
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                />
-                {/* Details: always shown on touch screens, revealed on hover on desktop */}
-                <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-brand-deep/95 via-brand-deep/60 to-brand-deep/20 p-8 text-center transition-opacity duration-500 lg:opacity-0 lg:group-hover:opacity-100">
-                  <div className="transition-transform duration-500 lg:translate-y-4 lg:group-hover:translate-y-0">
-                    <h3 className="text-2xl leading-snug text-white">{post.title}</h3>
-                    <p className="mt-3 text-sm text-white/80">
-                      {SERVICES.find((sv) => sv.slug === post.area)?.title} · {formatPostDate(post.date)}
-                    </p>
+            {[...POSTS]
+              .sort((a, b) => b.date.localeCompare(a.date))
+              .slice(0, 3)
+              .map((post) => (
+                <Link
+                  key={post.slug}
+                  to="/blog/$slug"
+                  params={{ slug: post.slug }}
+                  className="group relative block aspect-[19/20] overflow-hidden rounded-[8px]"
+                >
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    width={800}
+                    height={600}
+                  />
+                  {/* Details: always shown on touch screens, revealed on hover on desktop */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-brand-deep/95 via-brand-deep/60 to-brand-deep/20 p-8 text-center transition-opacity duration-500 lg:opacity-0 lg:group-hover:opacity-100">
+                    <div className="transition-transform duration-500 lg:translate-y-4 lg:group-hover:translate-y-0">
+                      <h3 className="text-2xl leading-snug text-white">{post.title}</h3>
+                      <p className="mt-3 text-sm text-white/80">
+                        {SERVICES.find((sv) => sv.slug === post.area)?.title} ·{" "}
+                        {formatPostDate(post.date)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
           </div>
         </div>
       </section>
