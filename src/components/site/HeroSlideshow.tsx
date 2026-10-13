@@ -84,7 +84,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
                 alt={slide.alt}
                 className="absolute inset-0 size-full object-cover object-top select-none"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/70" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/75 to-black/85" />
             </>
           )}
         </div>
