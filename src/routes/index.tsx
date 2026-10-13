@@ -13,7 +13,7 @@ import { POSTS, formatPostDate } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
 
 import logo from "@/assets/darton-logo.png";
-import about from "@/assets/scales-of-justice.png";
+import about from "@/assets/gavel-books-wooden-desk.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -167,11 +167,11 @@ function Index() {
           <div className="relative min-h-[320px] lg:min-h-0">
             <img
               src={about}
-              alt="Bronze scales of justice resting on stacked stone blocks beside a classical column"
+              alt="Judge's gavel resting on a row of law books"
               className="absolute inset-0 size-full object-cover"
               loading="lazy"
-              width={1280}
-              height={1920}
+              width={2400}
+              height={1600}
             />
             <div className="absolute bottom-0 left-0 bg-brand px-10 py-8 text-primary-foreground">
               <p className="font-[var(--font-display)] text-5xl text-white">
