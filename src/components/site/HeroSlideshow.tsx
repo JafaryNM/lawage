@@ -110,7 +110,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
           </span>
 
           <h1 className={`mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display tracking-tight font-medium transition-colors duration-1000 ${
-            isCutout ? "text-brand" : "text-primary-foreground bg-brand/60 px-6 py-2 md:px-8 md:py-3 backdrop-blur-[2px]"
+            isCutout ? "text-brand" : "text-primary-foreground"
           }`}>
             {isCutout ? (
               <>
@@ -166,8 +166,8 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
             aria-label={`Show slide ${i + 1}`}
             onClick={() => setActive(i)}
             className={`size-3 rounded-full border transition-all duration-300 cursor-pointer ${
-              isCutout ? "border-brand/30" : "border-white/60"
-            } ${i === active ? "bg-brand scale-125" : "bg-brand/40 hover:bg-brand/70 hover:scale-110"}`}
+              isCutout ? "border-brand/30" : "border-white/70"
+            } ${i === active ? (isCutout ? "bg-brand" : "bg-gold") : "bg-transparent hover:scale-110"}`}
           />
         ))}
       </div>
