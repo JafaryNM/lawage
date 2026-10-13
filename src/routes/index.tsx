@@ -449,7 +449,7 @@ function Index() {
       </section>
 
       {/* INSIGHTS */}
-      <section id="insights" className="section-pad">
+      <section id="insights" className="section-pad bg-[#f0f0f0]">
         <div className="mx-auto max-w-[1200px] px-6">
           <SectionHeading eyebrow="Legal Insights" title="Our Latest Commentary" center />
           <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">

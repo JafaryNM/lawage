@@ -5,27 +5,27 @@ import logo from "@/assets/darton-logo.png";
 const NAV_ITEMS = [
   {
     label: "Home",
-    href: "#home"
+    href: "/"
   },
   {
     label: "About Us",
-    href: "#about"
+    href: "/about"
   },
   {
     label: "Service",
-    href: "#practice"
+    href: "/#practice"
   },
   {
     label: "Portfolio",
-    href: "#projects"
+    href: "/#projects"
   },
   {
     label: "Blog",
-    href: "#insights"
+    href: "/#insights"
   },
   {
     label: "Contact Us",
-    href: "#get-involved"
+    href: "/#get-involved"
   }
 ];
 
@@ -97,7 +97,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
       )}
 
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4 lg:py-5">
-        <a href="#home" className="shrink-0">
+        <a href="/" className="shrink-0">
           <img
             src={logo}
             alt="Darton Attorneys logo"
@@ -139,7 +139,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
 
 
           <a
-            href="#projects"
+            href="/#projects"
             className="ml-2 inline-flex items-center gap-2 bg-brand text-white text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors hover:bg-brand-deep border border-transparent"
           >
             Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />

@@ -63,7 +63,7 @@ export function Footer() {
               ].map(({ Icon, label }, i) => (
                 <a
                   key={i}
-                  href="#get-involved"
+                  href="/#get-involved"
                   aria-label={`Darton Attorneys ${label} profile`}
                   className="flex size-10 items-center justify-center border border-border text-muted-foreground hover:border-brand hover:text-brand transition-colors duration-200"
                 >
@@ -78,10 +78,10 @@ export function Footer() {
             <span className="mt-3 block h-[2px] w-8 bg-brand" />
             <ul className="mt-6 space-y-3.5 text-sm text-muted-foreground">
               {[
-                ["Who We Are", "#about"],
-                ["Practice Areas", "#practice"],
-                ["Attorneys Profiles", "#team"],
-                ["Our Projects", "#projects"],
+                ["Who We Are", "/about"],
+                ["Practice Areas", "/#practice"],
+                ["Attorneys Profiles", "/#team"],
+                ["Our Projects", "/#projects"],
               ].map(([label, href]) => (
                 <li key={label}>
                   <a href={href} className="transition-colors hover:text-brand font-medium">
