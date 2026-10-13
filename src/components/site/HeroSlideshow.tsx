@@ -73,7 +73,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
               <img
                 src={slide.src}
                 alt={slide.alt}
-                className="absolute inset-0 size-full object-cover select-none object-center"
+                className="absolute inset-0 size-full object-cover object-top select-none"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/60" />
             </>
