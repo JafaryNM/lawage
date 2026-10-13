@@ -5,6 +5,7 @@ import { TextAnimate } from "@/registry/magicui/text-animate";
 
 import slideCafe from "@/assets/hero-advocate-notes.jpg";
 import slideReport from "@/assets/hero-legal-review.jpg";
+import slideAgreement from "@/assets/hero-agreement.jpg";
 
 const HERO_SLIDES = [
   {
@@ -21,6 +22,14 @@ const HERO_SLIDES = [
     eyebrow: "Trusted Counsel For",
     title: "Legal Clarity",
     desc: "Clear, precise guidance for Tanzanian commercial and tax matters.",
+    cutout: false,
+  },
+  {
+    src: slideAgreement,
+    alt: "Advocate shaking hands with a client after concluding an agreement",
+    eyebrow: "Partners In Every",
+    title: "Agreement",
+    desc: "From negotiation to signature, we protect your interests at every step.",
     cutout: false,
   },
 ];
@@ -75,7 +84,7 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
                 alt={slide.alt}
                 className="absolute inset-0 size-full object-cover object-top select-none"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/60" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/70" />
             </>
           )}
         </div>
