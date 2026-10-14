@@ -63,8 +63,24 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
 
   const activeSlide = HERO_SLIDES[active]!;
 
+  // Swipe left/right on touch screens to change slide
+  const [touchX, setTouchX] = useState<number | null>(null);
+  const onTouchEnd = (endX: number) => {
+    if (touchX === null) return;
+    const dx = endX - touchX;
+    if (Math.abs(dx) > 50) {
+      const n = HERO_SLIDES.length;
+      setActive((i) => (dx < 0 ? (i + 1) % n : (i - 1 + n) % n));
+    }
+    setTouchX(null);
+  };
+
   return (
-    <section className="relative isolate w-full min-h-[600px] h-[88vh] h-[88dvh] overflow-hidden bg-black">
+    <section
+      onTouchStart={(e) => setTouchX(e.touches[0]?.clientX ?? null)}
+      onTouchEnd={(e) => onTouchEnd(e.changedTouches[0]?.clientX ?? 0)}
+      className="relative isolate w-full min-h-[620px] h-[88vh] h-[88svh] overflow-hidden bg-black md:h-[88dvh]"
+    >
       {/* Slides */}
       {HERO_SLIDES.map((slide, i) => (
         <div
@@ -90,13 +106,13 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
 
       {/* Caption card — bottom left, same position on every slide */}
       <div className="absolute inset-x-0 bottom-0 z-10">
-        <div className="mx-auto max-w-[1400px] px-6 pb-8 md:pb-12">
+        <div className="mx-auto max-w-[1400px] px-4 pb-6 sm:px-6 sm:pb-8 md:pb-12">
           <div
             key={active}
-            className="relative max-w-[640px] overflow-hidden bg-white p-8 text-foreground shadow-[0_24px_60px_rgba(20,18,40,0.35)] animate-in fade-in slide-in-from-bottom-6 duration-700 md:p-10"
+            className="relative max-w-[640px] overflow-hidden bg-white p-6 text-foreground shadow-[0_24px_60px_rgba(20,18,40,0.35)] animate-in fade-in slide-in-from-bottom-6 duration-700 sm:p-8 md:p-10"
           >
-            <span className="block h-0.5 w-12 bg-gold" />
-            <h1 className="mt-5 text-3xl leading-[1.15] text-brand md:text-[2.4rem]">
+            <span className="block h-0.5 w-10 bg-gold sm:w-12" />
+            <h1 className="mt-4 text-[1.6rem] leading-[1.15] text-brand sm:mt-5 sm:text-3xl md:text-[2.4rem]">
               <TextAnimate
                 animation="blurInDown"
                 by="character"
@@ -108,18 +124,18 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
                 {activeSlide.title}
               </TextAnimate>
             </h1>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">{activeSlide.desc}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:text-base">{activeSlide.desc}</p>
 
-            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8">
               <a
                 href="/#practice"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-[0.7rem] uppercase tracking-[0.22em] text-white transition-colors duration-300 hover:bg-brand"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-3 py-3 text-[0.62rem] uppercase tracking-[0.15em] text-white sm:px-6 sm:py-3.5 sm:text-[0.7rem] sm:tracking-[0.22em] transition-colors duration-300 hover:bg-brand"
               >
                 Practice Areas
               </a>
               <a
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-brand/30 px-6 py-3.5 text-[0.7rem] uppercase tracking-[0.22em] text-brand transition-colors duration-300 hover:border-brand hover:bg-brand hover:text-white"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-brand/30 px-3 py-3 text-[0.62rem] uppercase tracking-[0.15em] text-brand sm:px-6 sm:py-3.5 sm:text-[0.7rem] sm:tracking-[0.22em] transition-colors duration-300 hover:border-brand hover:bg-brand hover:text-white"
               >
                 Contact Us
                 <ArrowRight
@@ -132,8 +148,8 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
         </div>
       </div>
 
-      {/* Slide indicators — small rings, bottom right */}
-      <div className="absolute right-6 bottom-8 z-20 flex flex-col gap-2.5 md:right-8 md:bottom-12">
+      {/* Slide indicators — desktop only; on mobile visitors swipe between slides */}
+      <div className="absolute right-8 bottom-12 z-20 hidden flex-col gap-2.5 md:flex">
         {HERO_SLIDES.map((slide, i) => (
           <button
             key={slide.src}

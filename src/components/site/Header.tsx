@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Menu, X, MapPin, Phone, Mail, Facebook, Linkedin, Twitter, Instagram } from "lucide-react";
-import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import logo from "@/assets/lawage-logo.png";
 
 const NAV_ITEMS = [
@@ -129,24 +128,6 @@ export function Header({ theme = "dark" }: HeaderProps) {
           ))}
         </nav>
 
-        {/* Right side: Search, Cart, Button */}
-        <div
-          className={`hidden items-center gap-6 xl:flex transition-colors duration-300 ${
-            isHeaderLight ? "text-foreground" : "text-white"
-          }`}
-        >
-
-
-          <a
-            href="https://wa.me/255713282263"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 inline-flex items-center gap-2 bg-brand text-white text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors hover:bg-brand-deep"
-          >
-            <WhatsAppIcon className="size-4" /> WhatsApp Us
-          </a>
-        </div>
-        
         {/* Mobile menu trigger */}
         <button
           type="button"
