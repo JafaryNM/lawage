@@ -20,8 +20,9 @@
  */
 
 @theme inline {
-  --font-display: "Marcellus", serif;
-  --font-sans: "Marcellus", serif;
+  --font-display: var(--global-typography-primary-font-family), serif;
+  --font-sans: var(--global-typography-primary-font-family), serif;
+  --font-serif: var(--global-typography-primary-font-family), serif;
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-brand: var(--brand);
@@ -71,32 +72,33 @@
 }
 
 :root {
+  --global-typography-primary-font-family: "Marcellus";
   --radius: 0rem;
-  /* Darton brand palette: burgundy #6d1429 dominant, gold as accent */
-  --brand: oklch(0.355 0.122 13.1); /* #6d1429 */
-  --brand-deep: oklch(0.283 0.095 12.8); /* #4e0d1c */
-  --brand-soft: oklch(0.426 0.139 13.4); /* #8a2238 */
-  --gold: oklch(0.741 0.062 63);
-  --gold-soft: oklch(0.842 0.041 70);
+  /* Brand palette: indigo #211c4f dominant, orange #eb4224 as accent */
+  --brand: oklch(0.266 0.090 282.8); /* #211c4f */
+  --brand-deep: oklch(0.209 0.071 283.1); /* #151137 */
+  --brand-soft: oklch(0.348 0.105 283.8); /* #352f6e */
+  --gold: oklch(0.625 0.210 32.4); /* #eb4224 */
+  --gold-soft: oklch(0.713 0.155 33.8); /* #f37a5f */
   --background: oklch(1 0 0);
-  --foreground: oklch(0.240 0.026 6.9);
+  --foreground: oklch(0.240 0.030 287);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.240 0.026 6.9);
+  --card-foreground: oklch(0.240 0.030 287);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.240 0.026 6.9);
-  --primary: oklch(0.355 0.122 13.1);
+  --popover-foreground: oklch(0.240 0.030 287);
+  --primary: oklch(0.266 0.090 282.8);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.741 0.062 63);
-  --secondary-foreground: oklch(0.283 0.095 12.8);
-  --muted: oklch(0.970 0.006 15);
-  --muted-foreground: oklch(0.520 0.020 10);
-  --accent: oklch(0.355 0.122 13.1);
+  --secondary: oklch(0.625 0.210 32.4);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.970 0.006 287);
+  --muted-foreground: oklch(0.520 0.020 287);
+  --accent: oklch(0.266 0.090 282.8);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.915 0.010 15);
-  --input: oklch(0.915 0.010 15);
-  --ring: oklch(0.355 0.122 13.1);
+  --border: oklch(0.915 0.010 287);
+  --input: oklch(0.915 0.010 287);
+  --ring: oklch(0.266 0.090 282.8);
   --chart-1: oklch(0.646 0.222 41.116);
 
   --chart-2: oklch(0.6 0.118 184.704);
@@ -194,12 +196,9 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   padding: 1.05rem 2.4rem;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  transition: background-color 0.15s ease;
   &:hover {
     background-color: var(--brand-deep);
-    color: var(--gold);
   }
 }
 

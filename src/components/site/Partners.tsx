@@ -1,18 +1,18 @@
-import northvale from "@/assets/partners/northvale.svg";
-import asterion from "@/assets/partners/asterion.svg";
-import kivuko from "@/assets/partners/kivuko.svg";
-import lumora from "@/assets/partners/lumora.svg";
-import vantera from "@/assets/partners/vantera.svg";
-import oakline from "@/assets/partners/oakline.svg";
+import caspian from "@/assets/partners/caspian.jpg";
+import nrgi from "@/assets/partners/nrgi.jpg";
+import wetlands from "@/assets/partners/wetlands-international.jpg";
+import agathor from "@/assets/partners/agathor.jpg";
+import husk from "@/assets/partners/husk.jpg";
+import wipa from "@/assets/partners/wipa.jpg";
 
-// Demo partner logos (fictional brands) — replace with the firm's real partners.
+// LawAge's partners and clients
 const PARTNERS = [
-  { name: "Northvale Holdings", logo: northvale },
-  { name: "Asterion Capital", logo: asterion },
-  { name: "Kivuko Trust", logo: kivuko },
-  { name: "Lumora", logo: lumora },
-  { name: "Vantera Insurance", logo: vantera },
-  { name: "Oakline & Co", logo: oakline },
+  { name: "Caspian", logo: caspian },
+  { name: "Natural Resource Governance Institute", logo: nrgi },
+  { name: "Wetlands International", logo: wetlands },
+  { name: "Agathor", logo: agathor },
+  { name: "Husk Power Systems", logo: husk },
+  { name: "Wajibu – Institute of Public Accountability", logo: wipa },
 ];
 
 export function Partners() {
@@ -22,7 +22,7 @@ export function Partners() {
         <div className="text-center">
           <span className="rule-line eyebrow">Our Partners</span>
           <h2 className="mx-auto mt-4 max-w-3xl text-4xl leading-[1.15] text-foreground md:text-5xl">
-            Trusted Affiliations
+            Trusted <span className="text-brand">Affiliations</span>
           </h2>
         </div>
 
@@ -38,7 +38,7 @@ export function Partners() {
                 <img
                   src={partner.logo}
                   alt={i < PARTNERS.length ? partner.name : ""}
-                  className="max-h-16 w-auto max-w-full object-contain grayscale opacity-60 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                  className="max-h-16 w-auto max-w-full object-contain mix-blend-multiply grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
                   loading="lazy"
                 />
               </div>

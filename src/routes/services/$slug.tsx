@@ -3,7 +3,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ServiceDetail } from "@/components/site/ServiceDetail";
 import { SERVICES } from "@/lib/services";
 
-import logo from "@/assets/darton-logo.png";
+import logo from "@/assets/lawage-logo.png";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -14,9 +14,9 @@ export const Route = createFileRoute("/services/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.service.title} | Darton Attorneys` },
+          { title: `${loaderData.service.title} | LawAge Advocates & Consult` },
           { name: "description", content: loaderData.service.text },
-          { property: "og:title", content: `${loaderData.service.title} | Darton Attorneys` },
+          { property: "og:title", content: `${loaderData.service.title} | LawAge Advocates & Consult` },
           { property: "og:image", content: logo },
         ]
       : [],

@@ -7,7 +7,7 @@ import { PageBanner } from "@/components/site/PageBanner";
 import { SERVICES } from "@/lib/services";
 import { POSTS, formatPostDate } from "@/lib/posts";
 
-import logo from "@/assets/darton-logo.png";
+import logo from "@/assets/lawage-logo.png";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.post.title} | Darton Attorneys` },
+          { title: `${loaderData.post.title} | LawAge Advocates & Consult` },
           { name: "description", content: loaderData.post.excerpt },
           { property: "og:title", content: loaderData.post.title },
           { property: "og:image", content: logo },
@@ -39,7 +39,7 @@ function BlogPost() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <PageBanner title="Legal Insights" crumbs={[{ label: "Blog", to: "/blog" }, { label: post.title }]} image={post.image} />
+      <PageBanner title="Legal Updates" crumbs={[{ label: "Legal Updates", to: "/blog" }, { label: post.title }]} image={post.image} />
 
       <article className="section-pad">
         <div className="mx-auto max-w-[860px] px-6">
@@ -98,7 +98,7 @@ function BlogPost() {
       {/* MORE INSIGHTS */}
       <section className="section-pad bg-[#f0f0f0]">
         <div className="mx-auto max-w-[1200px] px-6">
-          <h2 className="text-center text-4xl text-foreground">More Insights</h2>
+          <h2 className="text-center text-4xl text-foreground">More <span className="text-brand">Insights</span></h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {related.map((p) => (
               <Link

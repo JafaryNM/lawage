@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 
 export interface TextAnimateProps {
   children: string;
@@ -53,35 +53,44 @@ export function TextAnimate({
     return () => observer.disconnect();
   }, [once, trigger]);
 
-  const tokens = useMemo(
-    () => (by === "word" ? children.split(" ") : children.split("")),
-    [children, by],
-  );
+  // Words, each split into tokens (characters, or the whole word); the index keeps the stagger running across words
+  const words = useMemo(() => {
+    let index = 0;
+    return children.split(" ").map((word) =>
+      (by === "word" ? [word] : word.split("")).map((token) => ({ token, index: index++ })),
+    );
+  }, [children, by]);
 
   return (
     <span ref={ref} className={`inline-block ${className}`} aria-label={children}>
-      {tokens.map((token, i) => (
-        <span
-          key={`${token}-${i}`}
-          className="text-animate-char"
-          data-animate={animation}
-          data-trigger={shouldAnimate ? "true" : "false"}
-
-          style={{
-            "--text-animate-index": i,
-            "--text-animate-duration": `${duration}s`,
-            "--text-animate-stagger": `${stagger}s`,
-            animationName: shouldAnimate
-              ? animation === "blurInUp"
-                ? "blur-in-up"
-                : "blur-in-down"
-              : "none",
-            opacity: shouldAnimate ? 1 : 0,
-          } as React.CSSProperties}
-        >
-          {token === " " ? "\u00A0" : token}
-          {by === "word" && i < tokens.length - 1 ? "\u00A0" : null}
-        </span>
+      {words.map((tokens, w) => (
+        <Fragment key={w}>
+          {/* Keep each word together so lines only wrap between words */}
+          <span className="inline-block whitespace-nowrap">
+            {tokens.map(({ token, index }) => (
+              <span
+                key={index}
+                className="text-animate-char"
+                data-animate={animation}
+                data-trigger={shouldAnimate ? "true" : "false"}
+                style={{
+                  "--text-animate-index": index,
+                  "--text-animate-duration": `${duration}s`,
+                  "--text-animate-stagger": `${stagger}s`,
+                  animationName: shouldAnimate
+                    ? animation === "blurInUp"
+                      ? "blur-in-up"
+                      : "blur-in-down"
+                    : "none",
+                  opacity: shouldAnimate ? 1 : 0,
+                } as React.CSSProperties}
+              >
+                {token}
+              </span>
+            ))}
+          </span>
+          {w < words.length - 1 ? " " : null}
+        </Fragment>
       ))}
     </span>
   );

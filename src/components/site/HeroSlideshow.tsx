@@ -3,34 +3,33 @@ import { useEffect, useState } from "react";
 
 import { TextAnimate } from "@/registry/magicui/text-animate";
 
-import slideCafe from "@/assets/hero-advocate-notes.jpg";
-import slideReport from "@/assets/hero-legal-review.jpg";
-import slideAgreement from "@/assets/hero-agreement.jpg";
+// Free photos from Pexels (Pexels licence: free for commercial use, no attribution required)
+import slideDesk from "@/assets/hero-advocate-desk.jpg";
+import slideReview from "@/assets/hero-contract-review.jpg";
+import slideHandshake from "@/assets/hero-advocate-handshake.jpg";
 
 const HERO_SLIDES = [
   {
-    src: slideReport,
-    alt: "Advocate taking notes on a contract draft with a client",
-    eyebrow: "Precision In Every",
-    title: "Legal Detail",
-    desc: "Every clause reviewed, every risk documented before you sign.",
-    cutout: false,
+    src: slideDesk,
+    position: "object-center",
+    alt: "Advocate writing at his desk beside the scales of justice",
+    title: "Trusted Legal Excellence for Every Client",
+    desc: "With over 9 years of experience, we deliver professional legal services tailored to protect your rights and achieve your goals.",
   },
   {
-    src: slideCafe,
-    alt: "Advocate making notes at his office desk",
-    eyebrow: "Trusted Counsel For",
-    title: "Legal Clarity",
-    desc: "Clear, precise guidance for Tanzanian commercial and tax matters.",
-    cutout: false,
+    src: slideReview,
+    // Frame higher so heads aren't cut off
+    position: "object-[center_15%]",
+    alt: "Advocate guiding a client through a contract",
+    title: "Professional Legal Solutions You Can Rely On",
+    desc: "From corporate law and litigation to legal advisory and compliance, we deliver results with integrity and excellence.",
   },
   {
-    src: slideAgreement,
-    alt: "Advocate shaking hands with a client after concluding an agreement",
-    eyebrow: "Partners In Every",
-    title: "Agreement",
-    desc: "From negotiation to signature, we protect your interests at every step.",
-    cutout: false,
+    src: slideHandshake,
+    position: "object-[center_15%]",
+    alt: "Advocate in court robes shaking hands with a client",
+    title: "Expert in Legal Specialties",
+    desc: "Suitable for complex legal, regulatory, and business environments.",
   },
 ];
 
@@ -39,7 +38,17 @@ interface HeroSlideshowProps {
 }
 
 export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
-  const [active, setActive] = useState(0);
+  const [active, setActiveIndex] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+
+  // Remember the outgoing slide so it can slide down while the new one drops in
+  const setActive = (next: number | ((i: number) => number)) => {
+    setActiveIndex((current) => {
+      const target = typeof next === "function" ? next(current) : next;
+      if (target !== current) setPrev(current);
+      return target;
+    });
+  };
 
   useEffect(() => {
     onThemeChange?.("light");
@@ -54,124 +63,89 @@ export function HeroSlideshow({ onThemeChange }: HeroSlideshowProps) {
 
   const activeSlide = HERO_SLIDES[active]!;
 
-  const isCutout = activeSlide.cutout;
-
-  const isCentered = true;
-
   return (
-    <section className="relative overflow-hidden w-full min-h-[560px] h-[80vh] h-[80dvh] flex flex-col justify-center bg-white">
+    <section className="relative isolate w-full min-h-[600px] h-[88vh] h-[88dvh] overflow-hidden bg-black">
       {/* Slides */}
       {HERO_SLIDES.map((slide, i) => (
         <div
           key={slide.src}
-          className={`absolute inset-0 w-full h-full ${
-            i === active ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
+          className={`absolute inset-0 ${
+            i === active
+              ? "translate-y-0 z-0 transition-transform duration-1000 ease-in-out"
+              : i === prev
+                ? "translate-y-full -z-10 pointer-events-none transition-transform duration-1000 ease-in-out"
+                : "-translate-y-full -z-10 pointer-events-none"
           }`}
         >
-          {slide.cutout ? (
-            <>
-              <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/90" />
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                className="absolute bottom-0 left-0 lg:left-[4%] h-[45vh] lg:h-[72vh] w-auto max-w-[70%] lg:max-w-[46%] object-contain object-bottom select-none mix-blend-multiply"
-              />
-            </>
-          ) : (
-            <>
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                className="absolute inset-0 size-full object-cover object-top select-none"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/75 to-black/85" />
-            </>
-          )}
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            className={`absolute inset-0 size-full object-cover select-none ${slide.position}`}
+          />
+          {/* Dark overlay to tone the photo down so the card stands out */}
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </div>
       ))}
 
-
-      {/* Text Content Grid Wrapper — identical position on every slide */}
-      <div className={`relative mx-auto w-full max-w-[1400px] px-6 py-28 z-10 min-h-[560px] h-[80vh] h-[80dvh] flex items-center ${
-        isCentered ? "justify-center" : "grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]"
-      }`}>
-        {!isCentered && <div className="hidden lg:block w-full h-full" />}
-
-        <div
-          key={active}
-          className={`w-full flex flex-col ${
-            isCentered ? "items-center text-center max-w-3xl" : "items-start text-left"
-          }`}
-        >
-          <span className={`block text-[0.8rem] uppercase tracking-[0.4em] font-sans ${
-            isCutout ? "text-muted-foreground" : "text-primary-foreground/85"
-          }`}>
-            {activeSlide.eyebrow}
-          </span>
-
-          <h1 className={`mt-5 text-4xl leading-[1.15] md:text-5xl lg:text-[4.2rem] font-display tracking-tight font-medium transition-colors duration-1000 ${
-            isCutout ? "text-brand" : "text-primary-foreground"
-          }`}>
-            {isCutout ? (
-              <>
-                A law firm with a <br className="hidden lg:block" />
-                <span className="text-gold border-b-2 border-gold/70 pb-1 italic font-medium">passion</span> for success
-              </>
-            ) : (
+      {/* Caption card — bottom left, same position on every slide */}
+      <div className="absolute inset-x-0 bottom-0 z-10">
+        <div className="mx-auto max-w-[1400px] px-6 pb-8 md:pb-12">
+          <div
+            key={active}
+            className="relative max-w-[640px] overflow-hidden bg-white p-8 text-foreground shadow-[0_24px_60px_rgba(20,18,40,0.35)] animate-in fade-in slide-in-from-bottom-6 duration-700 md:p-10"
+          >
+            <span className="block h-0.5 w-12 bg-gold" />
+            <h1 className="mt-5 text-3xl leading-[1.15] text-brand md:text-[2.4rem]">
               <TextAnimate
                 animation="blurInDown"
                 by="character"
                 once={false}
                 duration={0.7}
-                stagger={0.04}
+                stagger={0.03}
                 trigger={true}
               >
                 {activeSlide.title}
               </TextAnimate>
-            )}
-          </h1>
+            </h1>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">{activeSlide.desc}</p>
 
-          <p className={`mt-6 text-sm md:text-base leading-relaxed max-w-xl font-sans ${
-            isCutout ? "text-muted-foreground" : "text-primary-foreground/80"
-          }`}>
-            {activeSlide.desc}
-          </p>
-
-          <div className={`mt-10 flex flex-wrap gap-4 z-10 w-full ${
-            isCentered ? "justify-center" : "justify-start"
-          }`}>
-            <a href="#projects" className="btn-brand font-sans">
-              Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
-            </a>
-            <a
-              href="/contact"
-              className={`inline-flex items-center gap-2 border bg-transparent text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors duration-300 font-sans ${
-                isCutout
-                  ? "border-[#1b2445] text-[#1b2445] hover:bg-[#1b2445] hover:text-white"
-                  : "border-white/70 text-primary-foreground hover:bg-white hover:text-[#1b2445]"
-              }`}
-            >
-              Contact Us <ArrowRight className="size-4" strokeWidth={1.5} />
-            </a>
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <a
+                href="/#practice"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-[0.7rem] uppercase tracking-[0.22em] text-white transition-colors duration-300 hover:bg-brand"
+              >
+                Practice Areas
+              </a>
+              <a
+                href="/contact"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-brand/30 px-6 py-3.5 text-[0.7rem] uppercase tracking-[0.22em] text-brand transition-colors duration-300 hover:border-brand hover:bg-brand hover:text-white"
+              >
+                Contact Us
+                <ArrowRight
+                  className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                  strokeWidth={1.5}
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute right-8 top-1/2 z-20 flex -translate-y-1/2 flex-col gap-4">
+      {/* Slide indicators — small rings, bottom right */}
+      <div className="absolute right-6 bottom-8 z-20 flex flex-col gap-2.5 md:right-8 md:bottom-12">
         {HERO_SLIDES.map((slide, i) => (
           <button
             key={slide.src}
             type="button"
             aria-label={`Show slide ${i + 1}`}
             onClick={() => setActive(i)}
-            className={`size-3 rounded-full border transition-all duration-300 cursor-pointer ${
-              isCutout ? "border-brand/30" : "border-white/70"
-            } ${i === active ? (isCutout ? "bg-brand" : "bg-gold") : "bg-transparent hover:scale-110"}`}
+            className={`size-3.5 cursor-pointer rounded-full border-2 transition-all duration-300 ${
+              i === active ? "scale-110 border-gold" : "border-white hover:scale-110"
+            }`}
           />
         ))}
       </div>
-
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowRight, MapPin, Phone, Mail, Facebook, Linkedin, Twitter, Instagram } from "lucide-react";
-import logo from "@/assets/darton-logo.png";
+import { Menu, X, MapPin, Phone, Mail, Facebook, Linkedin, Twitter, Instagram } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import logo from "@/assets/lawage-logo.png";
 
 const NAV_ITEMS = [
   {
@@ -57,18 +58,18 @@ export function Header({ theme = "dark" }: HeaderProps) {
             <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
               <span className="hidden items-center gap-2 lg:flex">
                 <MapPin className="size-3.5" strokeWidth={1.5} />
-                Masaki, Chole Road, Dar es Salaam, Tanzania
+                Medeli, Tambukareli, Dodoma, Tanzania
               </span>
-              <a href="tel:+255222000000" className="flex items-center gap-2 transition-colors hover:text-gold">
+              <a href="tel:+255713282263" className="flex items-center gap-2 transition-colors hover:text-gold">
                 <Phone className="size-3.5" strokeWidth={1.5} />
-                +255 22 200 0000
+                +255 713 282263
               </a>
               <a
-                href="mailto:info@dartonattorneys.co.tz"
+                href="mailto:info@lawage.co.tz"
                 className="hidden items-center gap-2 transition-colors hover:text-gold sm:flex"
               >
                 <Mail className="size-3.5" strokeWidth={1.5} />
-                info@dartonattorneys.co.tz
+                info@lawage.co.tz
               </a>
             </div>
             <div className="flex items-center gap-4">
@@ -76,12 +77,14 @@ export function Header({ theme = "dark" }: HeaderProps) {
                 { Icon: Facebook, label: "Facebook" },
                 { Icon: Linkedin, label: "LinkedIn" },
                 { Icon: Twitter, label: "Twitter" },
-                { Icon: Instagram, label: "Instagram" },
-              ].map(({ Icon, label }) => (
+                { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/lawage_consult" },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
-                  aria-label={`Darton Attorneys ${label}`}
+                  href={href ?? "#"}
+                  target={href ? "_blank" : undefined}
+                  rel={href ? "noopener noreferrer" : undefined}
+                  aria-label={`LawAge Advocates & Consult ${label}`}
                   className="transition-colors hover:text-gold"
                 >
                   <Icon className="size-3.5" strokeWidth={1.5} />
@@ -96,12 +99,12 @@ export function Header({ theme = "dark" }: HeaderProps) {
         <a href="/" className="shrink-0">
           <img
             src={logo}
-            alt="Darton Attorneys logo"
+            alt="LawAge Advocates & Consult logo"
             className={`h-11 w-auto md:h-14 transition-all duration-300 ${
               isHeaderLight ? "" : "brightness-0 invert"
             }`}
-            width={520}
-            height={140}
+            width={679}
+            height={770}
           />
         </a>
 
@@ -135,10 +138,12 @@ export function Header({ theme = "dark" }: HeaderProps) {
 
 
           <a
-            href="/#projects"
-            className="ml-2 inline-flex items-center gap-2 bg-brand text-white text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors hover:bg-brand-deep border border-transparent"
+            href="https://wa.me/255713282263"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 inline-flex items-center gap-2 bg-brand text-white text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-6 py-3.5 transition-colors hover:bg-brand-deep"
           >
-            Recent Work <ArrowRight className="size-4" strokeWidth={1.5} />
+            <WhatsAppIcon className="size-4" /> WhatsApp Us
           </a>
         </div>
         
