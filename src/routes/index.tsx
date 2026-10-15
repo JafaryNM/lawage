@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Facebook, Twitter, Linkedin } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/site/Header";
@@ -8,6 +8,8 @@ import { FlatIcon, type FlatIconName } from "@/components/site/FlatIcon";
 import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 import { Partners } from "@/components/site/Partners";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
+import { SectionTitle } from "@/components/site/SectionTitle";
+import { TeamGrid } from "@/components/site/TeamGrid";
 import { TEAM } from "@/lib/team";
 import { POSTS, formatPostDate } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
@@ -160,19 +162,6 @@ function SectionHeading({
 
 function Index() {
   const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
-  const [activeMember, setActiveMember] = useState(0);
-  const teamPausedRef = useRef(false);
-
-  // Rotate the spotlighted attorney unless the visitor is browsing the roster
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      if (!teamPausedRef.current) setActiveMember((i) => (i + 1) % TEAM.length);
-    }, 5000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const member = TEAM[activeMember]!;
-
   return (
     <div className="min-h-screen bg-background">
       <Header theme={heroTheme} />
@@ -229,9 +218,9 @@ function Index() {
               </div>
             </div>
 
-            <a href="#team" className="btn-brand mt-10">
+            <Link to="/people" className="btn-brand mt-10">
               Meet Our Staff <ArrowUpRight className="size-4" strokeWidth={1.5} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -243,14 +232,9 @@ function Index() {
         style={{ backgroundImage: `url(${servicesBg})` }}
       >
         <div className="mx-auto max-w-[1200px] px-6">
-          <div className="text-center">
-            <span className="inline-block bg-[#f0e9e1] px-4 py-2.5 text-xs uppercase tracking-[0.12em] text-foreground">
-              Our Services
-            </span>
-            <h2 className="mt-6 text-4xl leading-[1.15] md:text-5xl text-foreground">
-              Our Legal <span className="text-brand">Practice Areas</span>
-            </h2>
-          </div>
+          <SectionTitle>
+            Our Legal <span className="text-brand">Practice Areas</span>
+          </SectionTitle>
 
           <div className="mt-14">
             <ServicesGrid limit={4} />
@@ -333,124 +317,11 @@ function Index() {
       </section>
 
 
-      {/* TEAM — spotlight portrait beside a numbered roster */}
-      <section id="team" className="section-pad bg-[#f4f3f8]">
+      {/* TEAM — plain portrait grid */}
+      <section id="team" className="section-pad bg-[#e4e6ee]">
         <div className="mx-auto max-w-[1200px] px-6">
-          <SectionHeading eyebrow="Our Team" title="Experienced Professionals." accent="Trusted Advisors." center />
-
-          <div
-            onMouseEnter={() => (teamPausedRef.current = true)}
-            onMouseLeave={() => (teamPausedRef.current = false)}
-            className="mt-14 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
-          >
-            {/* Spotlight */}
-            <div className="relative mr-5 mb-5 md:mr-7 md:mb-7">
-              <div className="absolute inset-0 translate-x-5 translate-y-5 border-2 border-gold md:translate-x-7 md:translate-y-7" />
-              <div className="relative aspect-[4/5] overflow-hidden bg-brand-deep sm:aspect-[5/5] lg:aspect-[4/5]">
-                {TEAM.map((m, i) => (
-                  <img
-                    key={`${m.name}-${i}`}
-                    src={m.photo}
-                    alt={m.name}
-                    loading="lazy"
-                    className={`absolute inset-0 size-full object-cover object-top transition-all duration-700 ${
-                      i === activeMember ? "scale-100 opacity-100" : "scale-105 opacity-0"
-                    }`}
-                  />
-                ))}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/80 via-transparent to-transparent" />
-
-                <span className="absolute top-5 left-5 bg-gold px-3 py-1.5 font-[var(--font-display)] text-sm tracking-[0.15em] text-white">
-                  {String(activeMember + 1).padStart(2, "0")} / {String(TEAM.length).padStart(2, "0")}
-                </span>
-
-                <div
-                  key={activeMember}
-                  className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-4 p-6 animate-in fade-in slide-in-from-bottom-4 duration-500 md:p-8"
-                >
-                  <div>
-                    <span className="block h-0.5 w-10 bg-gold" />
-                    <h3 className="mt-4 text-2xl leading-tight text-white md:text-3xl">{member.name}</h3>
-                    <p className="mt-1.5 text-xs uppercase tracking-[0.2em] text-white/80">{member.role}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    {[
-                      { Icon: Linkedin, label: "LinkedIn" },
-                      { Icon: Twitter, label: "Twitter" },
-                      { Icon: Facebook, label: "Facebook" },
-                    ].map(({ Icon, label }) => (
-                      <a
-                        key={label}
-                        href="#"
-                        aria-label={`${member.name} ${label}`}
-                        className="flex size-9 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-gold hover:bg-gold"
-                      >
-                        <Icon className="size-4" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Roster */}
-            <ol className="divide-y divide-brand/10 border-y border-brand/10">
-              {TEAM.map((m, i) => {
-                const isActive = i === activeMember;
-                return (
-                  <li key={`${m.name}-${i}`}>
-                    <button
-                      type="button"
-                      onClick={() => setActiveMember(i)}
-                      aria-current={isActive}
-                      className={`group relative flex w-full cursor-pointer items-center gap-5 px-4 py-4 text-left transition-colors duration-300 ${
-                        isActive ? "bg-brand" : "hover:bg-white"
-                      }`}
-                    >
-                      <span
-                        className={`absolute inset-y-0 left-0 w-1 bg-gold transition-opacity ${
-                          isActive ? "opacity-100" : "opacity-0"
-                        }`}
-                      />
-                      <span
-                        className={`w-7 font-[var(--font-display)] text-sm ${
-                          isActive ? "text-gold" : "text-brand/50"
-                        }`}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <img
-                        src={m.photo}
-                        alt=""
-                        loading="lazy"
-                        className={`size-12 shrink-0 rounded-full object-cover object-top ring-2 transition-all ${
-                          isActive ? "ring-gold" : "ring-transparent grayscale group-hover:grayscale-0"
-                        }`}
-                      />
-                      <span className="min-w-0 flex-1">
-                        <span className={`block truncate text-lg ${isActive ? "text-white" : "text-foreground"}`}>
-                          {m.name}
-                        </span>
-                        <span
-                          className={`block text-xs uppercase tracking-[0.15em] ${
-                            isActive ? "text-white/70" : "text-muted-foreground"
-                          }`}
-                        >
-                          {m.role}
-                        </span>
-                      </span>
-                      <ArrowUpRight
-                        className={`size-5 shrink-0 transition-all duration-300 ${
-                          isActive ? "rotate-45 text-gold" : "text-brand/40 group-hover:text-gold"
-                        }`}
-                        strokeWidth={1.5}
-                      />
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
+          <SectionTitle>Our Team of Experts</SectionTitle>
+          <TeamGrid members={TEAM} className="mt-14" />
         </div>
       </section>
 

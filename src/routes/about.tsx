@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Eye, Facebook, Flag, Instagram, Linkedin, Scale, Twitter, type LucideIcon } from "lucide-react";
+import { Check, Eye, Flag, Scale, type LucideIcon } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { WorkProcess } from "@/components/site/WorkProcess";
 import { Partners } from "@/components/site/Partners";
-import { SUPPORT_TEAM, TEAM, type TeamMember } from "@/lib/team";
+import { SectionTitle } from "@/components/site/SectionTitle";
+import { TeamGrid } from "@/components/site/TeamGrid";
+import { SUPPORT_TEAM, TEAM } from "@/lib/team";
 
 import logo from "@/assets/lawage-logo.png";
 import storyImg from "@/assets/about-judge-writing.jpg";
@@ -28,13 +30,6 @@ export const Route = createFileRoute("/about")({
   }),
   component: About,
 });
-
-const SOCIALS = [
-  { Icon: Linkedin, label: "LinkedIn" },
-  { Icon: Twitter, label: "Twitter" },
-  { Icon: Facebook, label: "Facebook" },
-  { Icon: Instagram, label: "Instagram" },
-];
 
 const VISION_MISSION: { icon: LucideIcon; title: string; text: string }[] = [
   {
@@ -59,66 +54,6 @@ const CORE_VALUES = [
   { title: "Client Focus", text: "We listen, understand, and tailor solutions to meet each client's unique needs." },
   { title: "Impact", text: "We strive to create meaningful legal, commercial, and social outcomes that make a lasting difference." },
 ];
-
-function SocialLinks({ name, light = false }: { name: string; light?: boolean }) {
-  return (
-    <div className="flex gap-2">
-      {SOCIALS.map(({ Icon, label }) => (
-        <a
-          key={label}
-          href="#"
-          aria-label={`${name} ${label}`}
-          className={`flex size-9 items-center justify-center rounded-full border transition-colors duration-300 hover:border-gold hover:bg-gold hover:text-white ${
-            light ? "border-white/30 text-white" : "border-brand/15 text-brand"
-          }`}
-        >
-          <Icon className="size-4" />
-        </a>
-      ))}
-    </div>
-  );
-}
-
-/** Photo card with name and role on a dark fade; social links rise in on hover */
-function TeamCard({ member }: { member: TeamMember }) {
-  return (
-    <article className="group relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#e9e8f0] shadow-[0_16px_40px_rgba(33,28,79,0.08)]">
-      <img
-        src={member.photo}
-        alt={member.name}
-        loading="lazy"
-        className={`absolute inset-0 size-full transition-transform duration-700 group-hover:scale-105 ${
-          member.logo ? "object-contain p-14 pb-32" : "object-cover object-top"
-        }`}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgb(21 17 55 / 0.95) 0%, rgb(21 17 55 / 0.7) 22%, rgb(21 17 55 / 0.3) 42%, rgb(21 17 55 / 0.08) 55%, transparent 65%)",
-        }}
-      />
-      <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
-
-      <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-        <h3 className="text-xl leading-snug">{member.name}</h3>
-        {member.credentials && (
-          <p className="mt-0.5 text-xs tracking-[0.12em] text-gold-soft">{member.credentials}</p>
-        )}
-        <p className="mt-1.5 text-[0.7rem] uppercase leading-relaxed tracking-[0.16em] text-white/75">{member.role}</p>
-        {!member.logo && (
-          <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 group-hover:grid-rows-[1fr]">
-            <div className="overflow-hidden">
-              <div className="pt-4">
-                <SocialLinks name={member.name} light />
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </article>
-  );
-}
 
 function About() {
   return (
@@ -250,80 +185,16 @@ function About() {
       {/* OUR SERVICE APPROACH — intro and photo beside a numbered timeline */}
       <WorkProcess />
 
-      {/* OUR TEAM */}
-      <section id="team" className="section-pad">
+      {/* OUR TEAM — plain portrait grid */}
+      <section id="team" className="section-pad bg-[#e4e6ee]">
         <div className="mx-auto max-w-[1200px] px-6">
-          <div className="text-center">
-            <span className="rule-line eyebrow">Our Team</span>
-            <h2 className="mx-auto mt-4 max-w-3xl text-4xl leading-[1.15] text-foreground md:text-5xl">
-              Experienced Professionals. <span className="text-brand">Trusted Advisors.</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              Our greatest strength lies in our people. Our team combines diverse legal expertise,
-              commercial insight, and a shared commitment to delivering practical, client-focused
-              solutions.
-            </p>
+          <SectionTitle>Our Team of Experts</SectionTitle>
+          <TeamGrid members={TEAM} className="mt-14" />
+
+          <div className="mt-24">
+            <SectionTitle>Our Professional Support Team</SectionTitle>
           </div>
-
-          {/* Managing Partner, featured */}
-          {(() => {
-            const [lead, ...rest] = TEAM;
-            if (!lead) return null;
-            return (
-              <>
-                <article className="mt-16 grid overflow-hidden rounded-3xl bg-brand text-white shadow-[0_30px_70px_rgba(33,28,79,0.25)] md:grid-cols-[0.8fr_1.2fr]">
-                  <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[440px]">
-                    <img
-                      src={lead.photo}
-                      alt={lead.name}
-                      loading="lazy"
-                      className="absolute inset-0 size-full object-cover object-top"
-                    />
-                  </div>
-                  <div className="relative flex flex-col justify-center overflow-hidden p-8 md:p-14">
-                    <Scale aria-hidden className="pointer-events-none absolute -right-10 -bottom-10 size-64 text-white/[0.04]" strokeWidth={1} />
-                    <span className="inline-flex items-center gap-3 self-start text-[0.7rem] uppercase tracking-[0.25em] text-gold">
-                      <span className="h-px w-8 bg-gold" />
-                      {lead.role}
-                    </span>
-                    <h3 className="mt-5 text-4xl leading-tight md:text-5xl">{lead.name}</h3>
-                    <p className="mt-6 max-w-lg text-base leading-[1.85] text-white/75">
-                      &ldquo;We listen carefully, advise strategically, act professionally, and remain committed to
-                      protecting our clients' interests through every stage of their legal journey.&rdquo;
-                    </p>
-                    <p className="mt-3 text-[0.7rem] uppercase tracking-[0.2em] text-white/45">
-                      The LawAge Advocates Promise
-                    </p>
-                    <div className="mt-8">
-                      <SocialLinks name={lead.name} light />
-                    </div>
-                  </div>
-                </article>
-
-                <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                  {rest.map((m) => (
-                    <TeamCard key={m.name} member={m} />
-                  ))}
-                </div>
-              </>
-            );
-          })()}
-
-          <div className="mt-24 text-center">
-            <h3 className="text-3xl text-foreground md:text-4xl">
-              Our Professional <span className="text-brand">Support Team</span>
-            </h3>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              Our legal practice is supported by a multidisciplinary team that ensures efficient service
-              delivery and seamless client support.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-12 grid max-w-[900px] gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SUPPORT_TEAM.map((m) => (
-              <TeamCard key={m.name} member={m} />
-            ))}
-          </div>
+          <TeamGrid members={SUPPORT_TEAM} className="mt-14" />
         </div>
       </section>
 

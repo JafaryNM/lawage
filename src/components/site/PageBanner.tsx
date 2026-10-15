@@ -14,7 +14,7 @@ interface PageBannerProps {
 
 export function PageBanner({ title, crumbs, image = defaultBanner }: PageBannerProps) {
   return (
-    <section className="relative flex h-[420px] items-center justify-center overflow-hidden pt-[130px] md:h-[460px]">
+    <section className="relative flex h-[420px] items-center justify-center overflow-hidden pt-[90px] md:h-[460px]">
       <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
       <div className="absolute inset-0 bg-brand-deep/70" />
       <div className="relative px-6 text-center">

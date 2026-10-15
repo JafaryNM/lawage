@@ -12,9 +12,15 @@ export type TeamMember = {
   role: string;
   photo: string;
   credentials?: string;
+  /** Full LinkedIn profile URL; until set, the LinkedIn icon shows but is not clickable */
+  linkedin?: string;
+  /** Personal work email; falls back to the firm inbox */
+  email?: string;
   /** Photo is a company logo: shown whole on a tinted background rather than cropped */
   logo?: boolean;
 };
+
+export const FIRM_EMAIL = "info@lawage.co.tz";
 
 // Team as listed in the LawAge Advocates firm profile
 export const TEAM: TeamMember[] = [

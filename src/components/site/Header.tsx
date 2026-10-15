@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, MapPin, Phone, Mail, Facebook, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import logo from "@/assets/lawage-logo.png";
 
 const NAV_ITEMS = [
@@ -14,6 +14,10 @@ const NAV_ITEMS = [
   {
     label: "Service",
     href: "/services"
+  },
+  {
+    label: "People",
+    href: "/people"
   },
   {
     label: "Blog",
@@ -50,50 +54,6 @@ export function Header({ theme = "dark" }: HeaderProps) {
           : "absolute inset-x-0 top-0"
       }`}
     >
-      {/* Top info banner (collapses once the header sticks) */}
-      {!stuck && (
-        <div className="bg-brand text-white">
-          <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-2.5 text-[0.72rem] tracking-[0.08em]">
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-              <span className="hidden items-center gap-2 lg:flex">
-                <MapPin className="size-3.5" strokeWidth={1.5} />
-                Medeli, Tambukareli, Dodoma, Tanzania
-              </span>
-              <a href="tel:+255713282263" className="flex items-center gap-2 transition-colors hover:text-gold">
-                <Phone className="size-3.5" strokeWidth={1.5} />
-                +255 713 282263
-              </a>
-              <a
-                href="mailto:info@lawage.co.tz"
-                className="hidden items-center gap-2 transition-colors hover:text-gold sm:flex"
-              >
-                <Mail className="size-3.5" strokeWidth={1.5} />
-                info@lawage.co.tz
-              </a>
-            </div>
-            <div className="flex items-center gap-4">
-              {[
-                { Icon: Facebook, label: "Facebook" },
-                { Icon: Linkedin, label: "LinkedIn" },
-                { Icon: Twitter, label: "Twitter" },
-                { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/lawage_consult" },
-              ].map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href ?? "#"}
-                  target={href ? "_blank" : undefined}
-                  rel={href ? "noopener noreferrer" : undefined}
-                  aria-label={`LawAge Advocates & Consult ${label}`}
-                  className="transition-colors hover:text-gold"
-                >
-                  <Icon className="size-3.5" strokeWidth={1.5} />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4 lg:py-5">
         <a href="/" className="shrink-0">
           <img

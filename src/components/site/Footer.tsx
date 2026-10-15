@@ -21,7 +21,7 @@ const QUICK_LINKS = [
   ["Home", "/"],
   ["Who We Are", "/about"],
   ["Practice Areas", "/services"],
-  ["Our Attorneys", "/#team"],
+  ["Our People", "/people"],
   ["Legal Insights", "/blog"],
   ["Contact Us", "/contact"],
 ] as const;
