@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Check, Eye, Flag, Scale, type LucideIcon } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
@@ -6,26 +5,15 @@ import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { WorkProcess } from "@/components/site/WorkProcess";
 import { Partners } from "@/components/site/Partners";
+import { pageMetadata } from "@/lib/seo";
 
-import logo from "@/assets/lawage-logo.png";
 import storyImg from "@/assets/about-judge-writing.jpg";
 import vmBg from "@/assets/law-library-justice.jpg";
 
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Us | LawAge Advocates & Consult" },
-      {
-        name: "description",
-        content:
-          "LawAge Advocates is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, combining legal excellence with commercial insight.",
-      },
-      { property: "og:title", content: "About Us | LawAge Advocates & Consult" },
-      { property: "og:image", content: logo },
-      { name: "twitter:image", content: logo },
-    ],
-  }),
-  component: About,
+export const metadata = pageMetadata({
+  title: "About Us | LawAge Advocates & Consult",
+  description:
+    "LawAge Advocates is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, combining legal excellence with commercial insight.",
 });
 
 const VISION_MISSION: { icon: LucideIcon; title: string; text: string }[] = [
@@ -42,17 +30,41 @@ const VISION_MISSION: { icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 const CORE_VALUES = [
-  { title: "Integrity", text: "We uphold the highest ethical and professional standards in everything we do." },
-  { title: "Innovation", text: "We embrace modern legal solutions and continuously improve the way we serve our clients." },
-  { title: "Excellence", text: "We are committed to delivering outstanding legal services and exceptional client experiences." },
-  { title: "Confidentiality", text: "We protect our clients' information with the highest level of trust and discretion." },
-  { title: "Professionalism", text: "We maintain competence, diligence, respect, and accountability in every engagement." },
-  { title: "Collaboration", text: "We work closely with clients, partners, and stakeholders to achieve shared success." },
-  { title: "Client Focus", text: "We listen, understand, and tailor solutions to meet each client's unique needs." },
-  { title: "Impact", text: "We strive to create meaningful legal, commercial, and social outcomes that make a lasting difference." },
+  {
+    title: "Integrity",
+    text: "We uphold the highest ethical and professional standards in everything we do.",
+  },
+  {
+    title: "Innovation",
+    text: "We embrace modern legal solutions and continuously improve the way we serve our clients.",
+  },
+  {
+    title: "Excellence",
+    text: "We are committed to delivering outstanding legal services and exceptional client experiences.",
+  },
+  {
+    title: "Confidentiality",
+    text: "We protect our clients' information with the highest level of trust and discretion.",
+  },
+  {
+    title: "Professionalism",
+    text: "We maintain competence, diligence, respect, and accountability in every engagement.",
+  },
+  {
+    title: "Collaboration",
+    text: "We work closely with clients, partners, and stakeholders to achieve shared success.",
+  },
+  {
+    title: "Client Focus",
+    text: "We listen, understand, and tailor solutions to meet each client's unique needs.",
+  },
+  {
+    title: "Impact",
+    text: "We strive to create meaningful legal, commercial, and social outcomes that make a lasting difference.",
+  },
 ];
 
-function About() {
+export default function About() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -65,7 +77,7 @@ function About() {
           <div className="relative mr-6 mb-6 md:mr-8 md:mb-8">
             <div className="absolute inset-0 translate-x-6 translate-y-6 border-2 border-gold md:translate-x-8 md:translate-y-8" />
             <img
-              src={storyImg}
+              src={storyImg.src}
               alt="Judge writing at her desk in a law library"
               className="relative aspect-[19/20] w-full object-cover"
               loading="lazy"
@@ -88,23 +100,23 @@ function About() {
               A Class Above <span className="text-brand">Legal Excellence</span>
             </h2>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              LawAge Advocates is a full-service Tanzanian law firm dedicated to delivering practical,
-              innovative, and results-oriented legal solutions to businesses, government institutions,
-              development partners, financial institutions, non-governmental organizations, and private
-              clients. With strategically located offices in Dodoma and Dar es Salaam, we combine legal
-              excellence with commercial insight to help our clients navigate complex legal and
-              regulatory environments with confidence.
+              LawAge Advocates is a full-service Tanzanian law firm dedicated to delivering
+              practical, innovative, and results-oriented legal solutions to businesses, government
+              institutions, development partners, financial institutions, non-governmental
+              organizations, and private clients. With strategically located offices in Dodoma and
+              Dar es Salaam, we combine legal excellence with commercial insight to help our clients
+              navigate complex legal and regulatory environments with confidence.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
               Our multidisciplinary team provides comprehensive legal and advisory services across
-              corporate and commercial law, litigation and dispute resolution, real estate, employment,
-              intellectual property, mining and energy, regulatory compliance, data protection, debt
-              recovery, and investment advisory.
+              corporate and commercial law, litigation and dispute resolution, real estate,
+              employment, intellectual property, mining and energy, regulatory compliance, data
+              protection, debt recovery, and investment advisory.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              We believe that outstanding legal service goes beyond interpreting the law. It requires
-              understanding our clients' industries, anticipating challenges, and delivering strategic
-              advice that creates long-term value.
+              We believe that outstanding legal service goes beyond interpreting the law. It
+              requires understanding our clients' industries, anticipating challenges, and
+              delivering strategic advice that creates long-term value.
             </p>
           </div>
         </div>
@@ -112,7 +124,13 @@ function About() {
 
       {/* VISION & MISSION — glass cards over a photo, joined by the LawAge emblem */}
       <section className="relative isolate overflow-hidden py-[70px] text-white md:py-28">
-        <img src={vmBg} alt="" aria-hidden loading="lazy" className="absolute inset-0 -z-10 size-full object-cover" />
+        <img
+          src={vmBg.src}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="absolute inset-0 -z-10 size-full object-cover"
+        />
         <div className="absolute inset-0 -z-10 bg-brand-deep/90" />
 
         <div className="mx-auto max-w-[1200px] px-6">
@@ -157,8 +175,8 @@ function About() {
               Our Core <span className="text-brand">Values</span>
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
-              Guided by integrity, professionalism, and excellence, we are committed to building lasting
-              partnerships founded on trust, responsiveness, and measurable results.
+              Guided by integrity, professionalism, and excellence, we are committed to building
+              lasting partnerships founded on trust, responsiveness, and measurable results.
             </p>
             <div className="mt-8 h-1 w-20 bg-gold" />
           </div>
@@ -170,7 +188,9 @@ function About() {
                   <Check className="size-4" strokeWidth={3} />
                 </span>
                 <div>
-                  <h3 className="text-2xl text-foreground transition-colors group-hover:text-brand">{title}</h3>
+                  <h3 className="text-2xl text-foreground transition-colors group-hover:text-brand">
+                    {title}
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
                 </div>
               </li>

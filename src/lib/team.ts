@@ -24,21 +24,21 @@ export const FIRM_EMAIL = "info@lawage.co.tz";
 
 // Team as listed in the LawAge Advocates firm profile
 export const TEAM: TeamMember[] = [
-  { name: "Stephen Wilbard Msechu", role: "Managing Partner", photo: stephen },
-  { name: "Robert Sylivester Majige", role: "Partner", photo: robert },
-  { name: "Derick Daudi Olotu", role: "Partner", photo: derick },
+  { name: "Stephen Wilbard Msechu", role: "Managing Partner", photo: stephen.src },
+  { name: "Robert Sylivester Majige", role: "Partner", photo: robert.src },
+  { name: "Derick Daudi Olotu", role: "Partner", photo: derick.src },
   {
     name: "Oliver Balilo Costa",
     credentials: "CMgr MCMI",
     role: "International Trade & Investment Facilitation Consultant",
-    photo: oliver,
+    photo: oliver.src,
   },
-  { name: "Innocent James Mongi", role: "Business Development Manager", photo: innocent },
+  { name: "Innocent James Mongi", role: "Business Development Manager", photo: innocent.src },
 ];
 
 // "Our Professional Support Team"
 export const SUPPORT_TEAM: TeamMember[] = [
-  { name: "Davis Betram Komba", role: "Legal Officer", photo: davis },
-  { name: "Secilia Dominick John", role: "Legal Officer & Administration Officer", photo: secilia },
-  { name: "Sidaga Waziri", role: "Information Technology Consultant, Hamasa Group", photo: hamasa },
+  { name: "Davis Betram Komba", role: "Legal Officer", photo: davis.src },
+  { name: "Secilia Dominick John", role: "Legal Officer & Administration Officer", photo: secilia.src },
+  { name: "Sidaga Waziri", role: "Information Technology Consultant, Hamasa Group", photo: hamasa.src },
 ];

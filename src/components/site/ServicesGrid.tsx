@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 
 import { FlatIcon } from "@/components/site/FlatIcon";
 import { SERVICES } from "@/lib/services";
@@ -10,8 +10,7 @@ export function ServicesGrid({ limit }: { limit?: number }) {
       {SERVICES.slice(0, limit).map(({ slug, icon, title, text, image }) => (
         <Link
           key={slug}
-          to="/services/$slug"
-          params={{ slug }}
+          href={`/services/${slug}`}
           className="group relative block md:py-10"
         >
           <div className="overflow-hidden md:absolute md:inset-y-0 md:right-0 md:w-1/2">

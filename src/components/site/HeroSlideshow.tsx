@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -10,14 +12,14 @@ import slideHandshake from "@/assets/hero-advocate-handshake.jpg";
 
 const HERO_SLIDES = [
   {
-    src: slideDesk,
+    src: slideDesk.src,
     position: "object-center",
     alt: "Advocate writing at his desk beside the scales of justice",
     title: "Trusted Legal Excellence for Every Client",
     desc: "With over 9 years of experience, we deliver professional legal services tailored to protect your rights and achieve your goals.",
   },
   {
-    src: slideReview,
+    src: slideReview.src,
     // Frame higher so heads aren't cut off
     position: "object-[center_15%]",
     alt: "Advocate guiding a client through a contract",
@@ -25,7 +27,7 @@ const HERO_SLIDES = [
     desc: "From corporate law and litigation to legal advisory and compliance, we deliver results with integrity and excellence.",
   },
   {
-    src: slideHandshake,
+    src: slideHandshake.src,
     position: "object-[center_15%]",
     alt: "Advocate in court robes shaking hands with a client",
     title: "Expert in Legal Specialties",

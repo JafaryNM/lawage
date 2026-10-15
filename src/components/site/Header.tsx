@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/lawage-logo.png";
@@ -57,7 +59,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4 lg:py-5">
         <a href="/" className="shrink-0">
           <img
-            src={logo}
+            src={logo.src}
             alt="LawAge Advocates & Consult logo"
             className={`h-11 w-auto md:h-14 transition-all duration-300 ${
               isHeaderLight ? "" : "brightness-0 invert"

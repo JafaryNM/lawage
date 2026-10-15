@@ -1,5 +1,6 @@
+"use client";
+
 import { useState, type FormEvent, type ReactNode } from "react";
-import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
@@ -8,28 +9,13 @@ import { PageBanner } from "@/components/site/PageBanner";
 
 import { SERVICES } from "@/lib/services";
 
-import logo from "@/assets/lawage-logo.png";
 import banner from "@/assets/contact-banner.jpg";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact Us | LawAge Advocates & Consult" },
-      {
-        name: "description",
-        content:
-          "Get in touch with LawAge Advocates & Consult in Dodoma and Dar es Salaam, Tanzania. Call, WhatsApp, email or send us a message about your legal matter.",
-      },
-      { property: "og:title", content: "Contact Us | LawAge Advocates & Consult" },
-      { property: "og:image", content: logo },
-    ],
-  }),
-  component: Contact,
-});
-
 // Details from lawage.co.tz/contact-us
-const ADDRESS = "Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania";
-const DAR_ADDRESS = "3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Box 75841, Dar es Salaam";
+const ADDRESS =
+  "Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania";
+const DAR_ADDRESS =
+  "3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Box 75841, Dar es Salaam";
 const MAP_QUERY = "Medeli, Tambukareli, Dodoma, Tanzania";
 const EMAIL = "info@lawage.co.tz";
 const PHONES = [
@@ -44,11 +30,15 @@ const inputClass =
 const INFO: { Icon: typeof MapPin; title: string; lines: { text: string; href?: string }[] }[] = [
   { Icon: MapPin, title: "Dodoma Office", lines: [{ text: ADDRESS }] },
   { Icon: MapPin, title: "Dar es Salaam Office", lines: [{ text: DAR_ADDRESS }] },
-  { Icon: Phone, title: "Call or WhatsApp", lines: PHONES.map(({ label, note, href }) => ({ text: `${label} · ${note}`, href })) },
+  {
+    Icon: Phone,
+    title: "Call or WhatsApp",
+    lines: PHONES.map(({ label, note, href }) => ({ text: `${label} · ${note}`, href })),
+  },
   { Icon: Mail, title: "Email Us", lines: [{ text: EMAIL, href: `mailto:${EMAIL}` }] },
 ];
 
-function Contact() {
+export function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", area: "", message: "" });
   const update = (key: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -65,7 +55,7 @@ function Contact() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <PageBanner title="Contact Us" crumbs={[{ label: "Contact Us" }]} image={banner} />
+      <PageBanner title="Contact Us" crumbs={[{ label: "Contact Us" }]} image={banner.src} />
 
       <section className="section-pad bg-[#f4f3f8]">
         <div className="mx-auto max-w-[1200px] px-6">
@@ -77,21 +67,27 @@ function Contact() {
               Let's Work <span className="text-brand">Together</span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              Whether you are establishing a business, expanding your investments, resolving a dispute,
-              protecting your assets, or navigating an evolving regulatory environment, LawAge Advocates is
-              ready to stand beside you as a trusted legal partner.
+              Whether you are establishing a business, expanding your investments, resolving a
+              dispute, protecting your assets, or navigating an evolving regulatory environment,
+              LawAge Advocates is ready to stand beside you as a trusted legal partner.
             </p>
           </div>
 
           <div className="mt-14 grid overflow-hidden bg-white shadow-[0_24px_60px_rgba(33,28,79,0.1)] lg:grid-cols-[0.85fr_1.15fr]">
             {/* INFO PANEL */}
             <div className="relative isolate overflow-hidden p-8 text-white md:p-12">
-              <img src={banner} alt="" aria-hidden className="absolute inset-0 -z-10 size-full object-cover" />
+              <img
+                src={banner.src}
+                alt=""
+                aria-hidden
+                className="absolute inset-0 -z-10 size-full object-cover"
+              />
               <div className="absolute inset-0 -z-10 bg-brand-deep/[0.93]" />
 
               <h3 className="text-3xl">Contact Information</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/70">
-                Reach us by phone, WhatsApp or email, or visit our offices in Dodoma and Dar es Salaam.
+                Reach us by phone, WhatsApp or email, or visit our offices in Dodoma and Dar es
+                Salaam.
               </p>
 
               <ul className="mt-10 space-y-8">
@@ -101,10 +97,16 @@ function Contact() {
                       <Icon className="size-5" strokeWidth={1.6} />
                     </span>
                     <div>
-                      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-white/60">{title}</p>
+                      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-white/60">
+                        {title}
+                      </p>
                       {lines.map(({ text, href }) =>
                         href ? (
-                          <a key={text} href={href} className="mt-1.5 block text-[0.95rem] transition-colors hover:text-gold">
+                          <a
+                            key={text}
+                            href={href}
+                            className="mt-1.5 block text-[0.95rem] transition-colors hover:text-gold"
+                          >
                             {text}
                           </a>
                         ) : (
@@ -117,7 +119,6 @@ function Contact() {
                   </li>
                 ))}
               </ul>
-
             </div>
 
             {/* FORM */}
@@ -131,16 +132,39 @@ function Contact() {
 
               <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
                 <Field label="Full Name">
-                  <input required placeholder="Your name" value={form.name} onChange={update("name")} className={inputClass} />
+                  <input
+                    required
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={update("name")}
+                    className={inputClass}
+                  />
                 </Field>
                 <Field label="Email">
-                  <input required type="email" placeholder="you@example.com" value={form.email} onChange={update("email")} className={inputClass} />
+                  <input
+                    required
+                    type="email"
+                    placeholder="you@example.com"
+                    value={form.email}
+                    onChange={update("email")}
+                    className={inputClass}
+                  />
                 </Field>
                 <Field label="Phone">
-                  <input type="tel" placeholder="+255 …" value={form.phone} onChange={update("phone")} className={inputClass} />
+                  <input
+                    type="tel"
+                    placeholder="+255 …"
+                    value={form.phone}
+                    onChange={update("phone")}
+                    className={inputClass}
+                  />
                 </Field>
                 <Field label="Practice Area">
-                  <select value={form.area} onChange={update("area")} className={`${inputClass} cursor-pointer`}>
+                  <select
+                    value={form.area}
+                    onChange={update("area")}
+                    className={`${inputClass} cursor-pointer`}
+                  >
                     <option value="">Select a practice area</option>
                     {SERVICES.map((s) => (
                       <option key={s.slug} value={s.title}>
@@ -189,10 +213,20 @@ function Contact() {
   );
 }
 
-function Field({ label, wide = false, children }: { label: string; wide?: boolean; children: ReactNode }) {
+function Field({
+  label,
+  wide = false,
+  children,
+}: {
+  label: string;
+  wide?: boolean;
+  children: ReactNode;
+}) {
   return (
     <label className={`block ${wide ? "sm:col-span-2" : ""}`}>
-      <span className="mb-2 block text-[0.7rem] uppercase tracking-[0.2em] text-foreground">{label}</span>
+      <span className="mb-2 block text-[0.7rem] uppercase tracking-[0.2em] text-foreground">
+        {label}
+      </span>
       {children}
     </label>
   );

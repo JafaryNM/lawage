@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import {
   ArrowUp,
   ArrowUpRight,
@@ -50,7 +52,7 @@ export function Footer() {
     <footer id="get-involved" className="relative isolate overflow-hidden bg-brand-deep text-white">
       {/* Oversized logo watermark */}
       <img
-        src={logo}
+        src={logo.src}
         alt=""
         aria-hidden
         className="pointer-events-none absolute -right-24 -bottom-24 -z-10 w-[520px] opacity-[0.04] brightness-0 invert select-none"
@@ -59,7 +61,7 @@ export function Footer() {
       {/* Call to action — photo band with navy overlay */}
       <div className="relative border-b border-white/10">
         <img
-          src={ctaBg}
+          src={ctaBg.src}
           alt=""
           aria-hidden
           loading="lazy"
@@ -87,7 +89,7 @@ export function Footer() {
               </span>
             </a>
             <Link
-              to="/contact"
+              href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-[0.72rem] uppercase tracking-[0.22em] text-white transition-colors duration-300 hover:bg-white hover:text-brand"
             >
               Book Appointment <ArrowUpRight className="size-4" strokeWidth={1.5} />
@@ -102,7 +104,7 @@ export function Footer() {
           {/* Brand + newsletter */}
           <div className="lg:col-span-5">
             <span className="inline-flex size-20 items-center justify-center rounded-full bg-white p-3.5">
-              <img src={logo} alt="LawAge Advocates & Consult logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
+              <img src={logo.src} alt="LawAge Advocates & Consult logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
             </span>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
               A full-service Tanzanian law firm delivering practical, innovative, and results-oriented
@@ -224,8 +226,8 @@ export function Footer() {
             .
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy-policy" hash="privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link to="/privacy-policy" hash="terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
+            <Link href="/privacy-policy#privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+            <Link href="/privacy-policy#terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

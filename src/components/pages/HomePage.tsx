@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -14,32 +16,9 @@ import { TEAM } from "@/lib/team";
 import { POSTS, formatPostDate } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
 
-import logo from "@/assets/lawage-logo.png";
 import about from "@/assets/gavel-books-wooden-desk.jpg";
 import servicesBg from "@/assets/services-dots-bg.jpg";
 import whyUsBg from "@/assets/scales-of-justice.jpg";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "LawAge Advocates & Consult | Trusted Legal Excellence for Every Client" },
-      {
-        name: "description",
-        content:
-          "LawAge Advocates & Consult is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, delivering practical, innovative and results-oriented legal solutions.",
-      },
-      { property: "og:title", content: "LawAge Advocates & Consult" },
-      {
-        property: "og:description",
-        content:
-          "High-impact legal and advisory solutions across Tanzania, East Africa and international markets.",
-      },
-      { property: "og:image", content: logo },
-      { name: "twitter:image", content: logo },
-    ],
-  }),
-  component: Index,
-});
 
 function AnimatedCounter({ value }: { value: string }) {
   const [count, setCount] = useState(0);
@@ -160,7 +139,7 @@ function SectionHeading({
   );
 }
 
-function Index() {
+export function HomePage() {
   const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
   return (
     <div className="min-h-screen bg-background">
@@ -175,7 +154,7 @@ function Index() {
           <div className="relative mr-6 mb-6 md:mr-8 md:mb-8">
             <div className="absolute inset-0 translate-x-6 translate-y-6 border-2 border-gold md:translate-x-8 md:translate-y-8" />
             <img
-              src={about}
+              src={about.src}
               alt="Judge's gavel resting on a row of law books"
               className="relative aspect-[19/20] w-full object-cover"
               loading="lazy"
@@ -193,9 +172,9 @@ function Index() {
               <span className="text-brand">Legal Excellence</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              LawAge Advocates is a full-service Tanzanian law firm dedicated to delivering practical,
-              innovative, and results-oriented legal solutions to businesses, government institutions,
-              development partners, financial institutions, NGOs, and private clients.
+              LawAge Advocates is a full-service Tanzanian law firm dedicated to delivering
+              practical, innovative, and results-oriented legal solutions to businesses, government
+              institutions, development partners, financial institutions, NGOs, and private clients.
             </p>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
               With offices in Dodoma and Dar es Salaam, we combine legal excellence with commercial
@@ -205,20 +184,24 @@ function Index() {
 
             <div className="mt-10 grid max-w-xl grid-cols-2 border-t border-gold pt-8">
               <div className="pr-6">
-                <p className="font-[var(--font-display)] text-xl text-foreground">Years of Excellence</p>
+                <p className="font-[var(--font-display)] text-xl text-foreground">
+                  Years of Excellence
+                </p>
                 <p className="mt-3 font-[var(--font-display)] text-5xl text-foreground md:text-6xl">
                   <AnimatedCounter value="9+" />
                 </p>
               </div>
               <div className="border-l border-border pl-6 md:pl-12">
-                <p className="font-[var(--font-display)] text-xl text-foreground">Trusted Clients</p>
+                <p className="font-[var(--font-display)] text-xl text-foreground">
+                  Trusted Clients
+                </p>
                 <p className="mt-3 font-[var(--font-display)] text-5xl text-foreground md:text-6xl">
                   <AnimatedCounter value="100+" />
                 </p>
               </div>
             </div>
 
-            <Link to="/team" className="btn-brand mt-10">
+            <Link href="/team" className="btn-brand mt-10">
               Meet Our Staff <ArrowUpRight className="size-4" strokeWidth={1.5} />
             </Link>
           </div>
@@ -229,7 +212,7 @@ function Index() {
       <section
         id="practice"
         className="bg-[#f7f5f2] bg-cover bg-center py-[70px] md:py-24"
-        style={{ backgroundImage: `url(${servicesBg})` }}
+        style={{ backgroundImage: `url(${servicesBg.src})` }}
       >
         <div className="mx-auto max-w-[1200px] px-6">
           <SectionTitle>
@@ -242,7 +225,7 @@ function Index() {
 
           <div className="mt-14 flex justify-center">
             <Link
-              to="/services"
+              href="/services"
               className="inline-flex items-center gap-2 bg-brand px-6 py-3.5 text-sm text-white transition-colors duration-300 hover:bg-brand-deep"
             >
               View More <ArrowRight className="size-4" strokeWidth={1.5} />
@@ -254,7 +237,7 @@ function Index() {
       {/* WHY CHOOSE US — full-bleed photo banner with strengths and client count */}
       <section id="projects" className="relative overflow-hidden py-[70px] md:py-28">
         <img
-          src={whyUsBg}
+          src={whyUsBg.src}
           alt=""
           aria-hidden
           loading="lazy"
@@ -268,16 +251,19 @@ function Index() {
             Why LawAge Advocates?
           </span>
           <h2 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.15] text-white md:text-5xl">
-            Strategic Legal Solutions. Lasting Partnerships. <span className="text-gold">Measurable Results.</span>
+            Strategic Legal Solutions. Lasting Partnerships.{" "}
+            <span className="text-gold">Measurable Results.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white/85">
             We do more than provide legal advice—we become trusted partners in our clients' success.
             We combine legal expertise, commercial understanding, and strategic thinking to deliver
-            practical solutions that help our clients achieve their objectives while managing legal and
-            regulatory risks.
+            practical solutions that help our clients achieve their objectives while managing legal
+            and regulatory risks.
           </p>
 
-          <p className="mt-14 text-[0.72rem] uppercase tracking-[0.22em] text-gold">What Sets Us Apart</p>
+          <p className="mt-14 text-[0.72rem] uppercase tracking-[0.22em] text-gold">
+            What Sets Us Apart
+          </p>
           <div className="mt-8 grid gap-10 text-left sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
             {SETS_APART.map(({ icon, title, text }, i) => (
               <div key={title} className="border-t border-white/20 pt-6">
@@ -299,7 +285,9 @@ function Index() {
                 <span className="font-[var(--font-display)] text-5xl text-gold md:text-6xl">
                   <AnimatedCounter value="100+" />
                 </span>
-                <span className="text-sm uppercase tracking-[0.18em] text-white">Trusted Clients</span>
+                <span className="text-sm uppercase tracking-[0.18em] text-white">
+                  Trusted Clients
+                </span>
               </p>
               <p className="max-w-md text-sm leading-relaxed text-white/75">
                 Multinational corporations, government institutions, NGOs &amp; civil society,
@@ -307,7 +295,7 @@ function Index() {
               </p>
             </div>
             <Link
-              to="/contact"
+              href="/contact"
               className="inline-flex shrink-0 items-center gap-2 bg-gold px-7 py-4 text-sm uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:bg-white hover:text-brand"
             >
               Book Appointment <ArrowUpRight className="size-4" strokeWidth={1.5} />
@@ -315,7 +303,6 @@ function Index() {
           </div>
         </div>
       </section>
-
 
       {/* TEAM — plain portrait grid */}
       <section id="team" className="section-pad bg-[#e4e6ee]">
@@ -333,11 +320,14 @@ function Index() {
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionHeading eyebrow="Legal Insights" title="Our Latest" accent="Commentary" />
             <Link
-              to="/blog"
+              href="/blog"
               className="group inline-flex shrink-0 items-center gap-2 border-b border-brand/30 pb-1 text-[0.72rem] uppercase tracking-[0.22em] text-brand transition-colors hover:border-gold hover:text-gold"
             >
               View All Insights
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+              <ArrowRight
+                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                strokeWidth={1.5}
+              />
             </Link>
           </div>
 
@@ -355,8 +345,7 @@ function Index() {
               <div className="mt-14 grid gap-8 lg:grid-cols-[1.25fr_1fr]">
                 {/* Featured */}
                 <Link
-                  to="/blog/$slug"
-                  params={{ slug: featured.slug }}
+                  href={`/blog/${featured.slug}`}
                   className="group relative flex min-h-[480px] flex-col justify-end overflow-hidden"
                 >
                   <img
@@ -368,15 +357,21 @@ function Index() {
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/60 to-brand-deep/5" />
 
                   <span className="absolute top-6 left-6 flex flex-col items-center bg-gold px-4 py-3 text-white">
-                    <span className="font-[var(--font-display)] text-3xl leading-none">{day(featured.date)}</span>
-                    <span className="mt-1 text-[0.65rem] uppercase tracking-[0.2em]">{month(featured.date)}</span>
+                    <span className="font-[var(--font-display)] text-3xl leading-none">
+                      {day(featured.date)}
+                    </span>
+                    <span className="mt-1 text-[0.65rem] uppercase tracking-[0.2em]">
+                      {month(featured.date)}
+                    </span>
                   </span>
 
                   <div className="relative p-7 md:p-10">
                     <span className="inline-block bg-white/15 px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.2em] text-white backdrop-blur-sm">
                       {areaTitle(featured.area)}
                     </span>
-                    <h3 className="mt-4 text-2xl leading-snug text-white md:text-[2rem]">{featured.title}</h3>
+                    <h3 className="mt-4 text-2xl leading-snug text-white md:text-[2rem]">
+                      {featured.title}
+                    </h3>
                     <p className="mt-3 line-clamp-2 max-w-xl text-sm leading-relaxed text-white/75">
                       {featured.excerpt}
                     </p>
@@ -392,8 +387,7 @@ function Index() {
                   {rest.map((post) => (
                     <Link
                       key={post.slug}
-                      to="/blog/$slug"
-                      params={{ slug: post.slug }}
+                      href={`/blog/${post.slug}`}
                       className="group grid overflow-hidden bg-white transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(33,28,79,0.12)] sm:grid-cols-[42%_1fr]"
                     >
                       <div className="relative aspect-[16/10] overflow-hidden sm:aspect-auto">
@@ -412,7 +406,9 @@ function Index() {
                           {post.title}
                         </h3>
                         <div className="mt-auto flex items-center justify-between gap-4 pt-5">
-                          <span className="text-xs text-muted-foreground">{formatPostDate(post.date)}</span>
+                          <span className="text-xs text-muted-foreground">
+                            {formatPostDate(post.date)}
+                          </span>
                           <span className="flex size-9 items-center justify-center rounded-full border border-brand/20 text-brand transition-colors group-hover:border-gold group-hover:bg-gold group-hover:text-white">
                             <ArrowUpRight className="size-4" strokeWidth={1.5} />
                           </span>

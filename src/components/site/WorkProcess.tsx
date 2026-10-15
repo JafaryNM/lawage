@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ArrowUpRight, ClipboardCheck, Handshake, Lightbulb, MessagesSquare, type LucideIcon } from "lucide-react";
 
 // "Our Service Approach" from the firm profile
@@ -81,7 +81,7 @@ export function WorkProcess() {
 
         <div className="mt-14 flex justify-center">
           <Link
-            to="/contact"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-[0.78rem] uppercase tracking-[0.18em] text-white transition-colors hover:bg-brand"
           >
             Let's Work Together <ArrowUpRight className="size-4" strokeWidth={1.5} />

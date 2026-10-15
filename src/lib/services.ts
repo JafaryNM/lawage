@@ -34,7 +34,7 @@ export const SERVICES: Service[] = [
     icon: "building",
     title: "Corporate & Commercial Law",
     text: "Incorporation, governance, commercial contracts, restructuring, mergers and acquisitions, and investment advisory.",
-    image: corporateImg,
+    image: corporateImg.src,
     headline: "Legal Foundations for Growing Businesses",
     intro: [
       "We support companies with incorporation, governance, commercial contracts, restructuring, mergers and acquisitions, and ongoing corporate advisory services.",
@@ -54,7 +54,7 @@ export const SERVICES: Service[] = [
     icon: "gavel",
     title: "Litigation & Dispute Resolution",
     text: "Representation in complex civil, commercial, labour and land litigation, and the resolution of disputes.",
-    image: litigationImg,
+    image: litigationImg.src,
     headline: "Strategic, Results-Oriented Representation",
     intro: [
       "We advise and represent clients in complex civil, commercial, labour and land disputes, before courts and through negotiated settlement.",
@@ -74,7 +74,7 @@ export const SERVICES: Service[] = [
     icon: "compass-alt",
     title: "Mining & Natural Resources",
     text: "Licensing, mineral rights, local content compliance, mining agreements, regulatory advisory and project development support.",
-    image: miningImg,
+    image: miningImg.src,
     headline: "Specialised Advisory for the Extractives Sector",
     intro: [
       "As Tanzania's legal and regulatory landscape continues to evolve, we provide specialised legal solutions that address sector-specific requirements in mining and natural resources.",
@@ -95,7 +95,7 @@ export const SERVICES: Service[] = [
     icon: "bullseye-arrow",
     title: "Energy & Infrastructure",
     text: "Legal advisory for energy projects, utilities, infrastructure development, renewable energy investments and PPPs.",
-    image: energyImg,
+    image: energyImg.src,
     headline: "Legal Support for Energy and Infrastructure Projects",
     intro: [
       "We provide legal advisory for energy projects, utilities, infrastructure development, regulatory approvals, renewable energy investments, and public-private partnerships.",
@@ -116,7 +116,7 @@ export const SERVICES: Service[] = [
     icon: "award",
     title: "Intellectual Property",
     text: "Protection, registration, commercialization, licensing and enforcement of trademarks, copyrights, patents and designs.",
-    image: ipImg,
+    image: ipImg.src,
     headline: "Protect and Commercialise Your Ideas",
     intro: [
       "We advise on the protection, registration, commercialization, licensing, enforcement, and management of trademarks, copyrights, patents, industrial designs, and related intellectual assets.",
@@ -136,7 +136,7 @@ export const SERVICES: Service[] = [
     icon: "balance-scale-right",
     title: "Data Protection & Privacy",
     text: "Compliance with the Personal Data Protection Act, privacy policies, data security, compliance audits and regulatory engagement.",
-    image: dataImg,
+    image: dataImg.src,
     headline: "Compliance with Tanzania's Data Protection Law",
     intro: [
       "We advise organizations on compliance with the Personal Data Protection Act, governance frameworks, privacy policies, data security, compliance audits, and regulatory engagement.",
@@ -157,7 +157,7 @@ export const SERVICES: Service[] = [
     icon: "calculator-math-tax",
     title: "Tax & Regulatory Compliance",
     text: "Legal support on tax disputes, regulatory compliance, licensing, corporate governance and dealings with regulators.",
-    image: taxImg,
+    image: taxImg.src,
     headline: "Navigating Tax and Regulatory Requirements",
     intro: [
       "We provide legal support on tax disputes, regulatory compliance, licensing requirements, corporate governance, and interactions with regulatory authorities.",
@@ -177,7 +177,7 @@ export const SERVICES: Service[] = [
     icon: "briefcase-blank",
     title: "Debt Recovery & Insolvency",
     text: "Debt recovery strategies, negotiated settlements, judgment enforcement, insolvency advisory and business recovery.",
-    image: debtImg,
+    image: debtImg.src,
     headline: "Structured Solutions for Debt Recovery",
     intro: [
       "We develop effective debt recovery strategies, negotiate settlements, enforce judgments, and provide insolvency advisory and business recovery solutions.",
@@ -197,7 +197,7 @@ export const SERVICES: Service[] = [
     icon: "handshake-trust",
     title: "Insurance Law",
     text: "Advising insurers, businesses and policyholders on claims, policy interpretation, liability, compliance and disputes.",
-    image: insuranceImg,
+    image: insuranceImg.src,
     headline: "Expert Support on Insurance Matters",
     intro: [
       "We advise insurers, businesses, and policyholders on insurance claims, policy interpretation, liability, regulatory compliance, and dispute resolution.",
@@ -217,7 +217,7 @@ export const SERVICES: Service[] = [
     icon: "house-chimney",
     title: "Real Estate & Conveyancing",
     text: "Property acquisition and conveyancing, land due diligence, transfers and registration, and real estate investments.",
-    image: landImg,
+    image: landImg.src,
     headline: "Secure Every Step of Your Property Transaction",
     intro: [
       "Land and property are often the most valuable assets our clients hold. We advise and represent clients on property acquisition and conveyancing.",
@@ -237,7 +237,7 @@ export const SERVICES: Service[] = [
     icon: "user-headset",
     title: "Employment & Human Resources",
     text: "Employment and human resource advisory, employment matters for organizations, and labour disputes.",
-    image: employmentImg,
+    image: employmentImg.src,
     headline: "Practical Employment and HR Advice",
     intro: [
       "We provide employment and human resource advisory to businesses, institutions, development partners and NGOs.",
@@ -256,7 +256,7 @@ export const SERVICES: Service[] = [
     icon: "users-alt",
     title: "NGOs, Development Partners & Public Sector Advisory",
     text: "Governance, legal compliance, policy development, institutional strengthening and project implementation.",
-    image: familyImg,
+    image: familyImg.src,
     headline: "Supporting Institutions That Drive Development",
     intro: [
       "We support NGOs, development organizations, government institutions, and public entities in governance, legal compliance, policy development, institutional strengthening, and project implementation.",

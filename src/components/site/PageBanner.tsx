@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 import defaultBanner from "@/assets/gavel-books-wooden-desk.jpg";
@@ -12,7 +12,7 @@ interface PageBannerProps {
   image?: string;
 }
 
-export function PageBanner({ title, crumbs, image = defaultBanner }: PageBannerProps) {
+export function PageBanner({ title, crumbs, image = defaultBanner.src }: PageBannerProps) {
   return (
     <section className="relative flex h-[420px] items-center justify-center overflow-hidden pt-[90px] md:h-[460px]">
       <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
@@ -23,14 +23,14 @@ export function PageBanner({ title, crumbs, image = defaultBanner }: PageBannerP
           aria-label="Breadcrumb"
           className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-white/80"
         >
-          <Link to="/" className="transition-colors hover:text-white">
+          <Link href="/" className="transition-colors hover:text-white">
             Home
           </Link>
           {crumbs.map((c) => (
             <span key={c.label} className="flex items-center gap-2">
               <ChevronRight className="size-4" strokeWidth={1.5} />
               {c.to ? (
-                <Link to={c.to} className="transition-colors hover:text-white">
+                <Link href={c.to} className="transition-colors hover:text-white">
                   {c.label}
                 </Link>
               ) : (

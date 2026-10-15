@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { ChevronRight, CircleCheck, Mail, MapPin, Phone } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
@@ -31,8 +31,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                 return (
                   <li key={s.slug}>
                     <Link
-                      to="/services/$slug"
-                      params={{ slug: s.slug }}
+                      href={`/services/${s.slug}`}
                       aria-current={active ? "page" : undefined}
                       className={`group flex items-center justify-between gap-3 px-5 py-4 text-[0.95rem] transition-colors duration-300 ${
                         active ? "bg-brand text-white" : "bg-[#f4f3f8] text-foreground hover:bg-brand hover:text-white"
@@ -53,7 +52,7 @@ export function ServiceDetail({ service }: { service: Service }) {
 
             {/* How can we help */}
             <div className="relative isolate overflow-hidden p-8 text-white">
-              <img src={helpBg} alt="" aria-hidden loading="lazy" className="absolute inset-0 -z-10 size-full object-cover" />
+              <img src={helpBg.src} alt="" aria-hidden loading="lazy" className="absolute inset-0 -z-10 size-full object-cover" />
               <div className="absolute inset-0 -z-10 bg-brand-deep/90" />
               <FlatIcon name="thin-balance-scale-right" className="size-14 text-gold" />
               <h2 className="mt-8 text-3xl leading-snug">How Can We Help?</h2>

@@ -7,12 +7,12 @@ import wipa from "@/assets/partners/wipa.jpg";
 
 // LawAge's partners and clients
 const PARTNERS = [
-  { name: "Caspian", logo: caspian },
-  { name: "Natural Resource Governance Institute", logo: nrgi },
-  { name: "Wetlands International", logo: wetlands },
-  { name: "Agathor", logo: agathor },
-  { name: "Husk Power Systems", logo: husk },
-  { name: "Wajibu – Institute of Public Accountability", logo: wipa },
+  { name: "Caspian", logo: caspian.src },
+  { name: "Natural Resource Governance Institute", logo: nrgi.src },
+  { name: "Wetlands International", logo: wetlands.src },
+  { name: "Agathor", logo: agathor.src },
+  { name: "Husk Power Systems", logo: husk.src },
+  { name: "Wajibu – Institute of Public Accountability", logo: wipa.src },
 ];
 
 export function Partners() {
