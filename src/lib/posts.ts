@@ -81,7 +81,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "regulations-banning-plastic-carrier-bags",
-    area: "social-justice-research-project-support",
+    area: "ngos-development-partners-public-sector",
     title: "Know the Regulations Banning Plastic Carrier Bags",
     excerpt:
       "How to avoid financial loss and imprisonment under the Environmental Management (Prohibition of Plastic Carrier Bags) Regulations, 2019.",

@@ -16,7 +16,7 @@ export const Route = createFileRoute("/services/")({
       {
         name: "description",
         content:
-          "Litigation, corporate and investment, mining, energy, insurance, debt recovery, real estate, intellectual property and social justice legal services from LawAge Advocates & Consult.",
+          "Corporate, litigation, mining, energy, intellectual property, data protection, tax, debt recovery, insurance, real estate, employment and public sector legal services from LawAge Advocates & Consult.",
       },
       { property: "og:title", content: "Our Services | LawAge Advocates & Consult" },
       { property: "og:image", content: logo },

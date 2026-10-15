@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { SERVICES } from "@/lib/services";
 
 import logo from "@/assets/lawage-logo.png";
 import ctaBg from "@/assets/client-consultation-cafe.jpg";
@@ -99,13 +98,13 @@ export function Footer() {
         {/* Main columns */}
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           {/* Brand + newsletter */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-5">
             <span className="inline-flex size-20 items-center justify-center rounded-full bg-white p-3.5">
               <img src={logo} alt="LawAge Advocates & Consult logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
             </span>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
-              We advise corporates, investors, governments, and development partners in navigating
-              complex legal, regulatory, and business environments.
+              A full-service Tanzanian law firm delivering practical, innovative, and results-oriented
+              legal solutions. A Class Above Legal Excellence.
             </p>
 
             <form onSubmit={(e) => e.preventDefault()} className="mt-7 max-w-sm">
@@ -132,7 +131,7 @@ export function Footer() {
           </div>
 
           {/* Quick links */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <FooterHeading>Quick Links</FooterHeading>
             <ul className="mt-6 space-y-3 text-sm">
               {QUICK_LINKS.map(([label, href]) => (
@@ -146,32 +145,23 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Practice areas */}
-          <div className="lg:col-span-3">
-            <FooterHeading>Practice Areas</FooterHeading>
-            <ul className="mt-6 space-y-3 text-sm">
-              {SERVICES.map(({ slug, title }) => (
-                <li key={slug}>
-                  <Link
-                    to="/services/$slug"
-                    params={{ slug }}
-                    className="group inline-flex items-center gap-2 text-white/65 transition-colors hover:text-white"
-                  >
-                    <span className="h-px w-0 bg-gold transition-all duration-300 group-hover:w-4" />
-                    {title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <FooterHeading>Get In Touch</FooterHeading>
             <ul className="mt-6 space-y-5 text-sm text-white/65">
               <li className="flex gap-3.5">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.5} />
-                Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania
+                <span>
+                  <span className="block text-white">Dodoma Office</span>
+                  Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania
+                </span>
+              </li>
+              <li className="flex gap-3.5">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.5} />
+                <span>
+                  <span className="block text-white">Dar es Salaam Office</span>
+                  3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Box 75841, Dar es Salaam
+                </span>
               </li>
               <li className="flex gap-3.5">
                 <Mail className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.5} />

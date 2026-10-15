@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "LawAge Advocates & Consult is a full-service Tanzanian law firm with over 9 years of experience, advising corporates, investors, governments and development partners.",
+          "LawAge Advocates & Consult is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, delivering practical, innovative and results-oriented legal solutions.",
       },
       { property: "og:title", content: "LawAge Advocates & Consult" },
       {
@@ -90,6 +90,40 @@ function AnimatedCounter({ value }: { value: string }) {
     </span>
   );
 }
+
+// "What Sets Us Apart" from the firm profile
+const SETS_APART: { icon: FlatIconName; title: string; text: string }[] = [
+  {
+    icon: "location-alt",
+    title: "Strategic Presence",
+    text: "With offices in Dodoma, Tanzania's administrative capital, and Dar es Salaam, the commercial hub, we serve clients nationwide while engaging closely with government institutions, regulators and the business community.",
+  },
+  {
+    icon: "thin-briefcase-blank",
+    title: "Business-Oriented Legal Advice",
+    text: "Legal decisions are also business decisions. Our advice is practical, commercially focused, and designed to support growth while protecting our clients' interests.",
+  },
+  {
+    icon: "user-headset",
+    title: "Client-Centred Service",
+    text: "Every client receives personalized attention, timely communication, and legal solutions tailored to their specific objectives, industry, and risk profile.",
+  },
+  {
+    icon: "thin-users-alt",
+    title: "Multidisciplinary Expertise",
+    text: "Our lawyers bring experience across diverse practice areas, providing integrated solutions for complex transactions, regulatory compliance, disputes, and investments.",
+  },
+  {
+    icon: "thin-award",
+    title: "Integrity & Professional Excellence",
+    text: "We uphold the highest ethical standards, maintain strict confidentiality, and consistently deliver with professionalism, accountability, and excellence.",
+  },
+  {
+    icon: "bullseye-arrow",
+    title: "Technology-Driven Practice",
+    text: "Modern legal technology, secure digital systems, and efficient document management enhance service delivery, improve collaboration, and keep client information secure.",
+  },
+];
 
 function SectionHeading({
   eyebrow,
@@ -170,9 +204,14 @@ function Index() {
               <span className="text-brand">Legal Excellence</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              With over 9 years of proven excellence, LawAge Advocates &amp; Consult is a leading
-              full-service law firm delivering high-impact legal and advisory solutions across
-              Tanzania, East Africa, and international markets.
+              LawAge Advocates is a full-service Tanzanian law firm dedicated to delivering practical,
+              innovative, and results-oriented legal solutions to businesses, government institutions,
+              development partners, financial institutions, NGOs, and private clients.
+            </p>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+              With offices in Dodoma and Dar es Salaam, we combine legal excellence with commercial
+              insight to help our clients navigate complex legal and regulatory environments with
+              confidence.
             </p>
 
             <div className="mt-10 grid max-w-xl grid-cols-2 border-t border-gold pt-8">
@@ -242,38 +281,28 @@ function Index() {
         <div className="relative mx-auto max-w-[1200px] px-6 text-center">
           <span className="inline-flex items-center gap-2.5 border border-gold px-4 py-2 text-sm uppercase tracking-[0.12em] text-white">
             <FlatIcon name="thin-balance-scale-right" className="size-4 text-gold" />
-            Why Choose Us
+            Why LawAge Advocates?
           </span>
-          <h2 className="mx-auto mt-6 max-w-4xl text-4xl uppercase leading-[1.15] text-white md:text-5xl">
-            With Over 9 Years Of <span className="text-gold">Proven Excellence</span>
+          <h2 className="mx-auto mt-6 max-w-4xl text-4xl leading-[1.15] text-white md:text-5xl">
+            Strategic Legal Solutions. Lasting Partnerships. <span className="text-gold">Measurable Results.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/85">
-            We advise corporates, investors, governments, and development partners in navigating
-            complex legal, regulatory, and business environments.
+          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white/85">
+            We do more than provide legal advice—we become trusted partners in our clients' success.
+            We combine legal expertise, commercial understanding, and strategic thinking to deliver
+            practical solutions that help our clients achieve their objectives while managing legal and
+            regulatory risks.
           </p>
 
-          <div className="mt-14 grid gap-10 text-left md:grid-cols-3 md:gap-8">
-            {(
-              [
-                {
-                  icon: "thin-award",
-                  title: "Proven Excellence",
-                  text: "Delivering trusted legal services with professionalism, integrity, and a strong track record of successful client outcomes.",
-                },
-                {
-                  icon: "thin-users-alt",
-                  title: "Experienced Legal Professionals",
-                  text: "For over nine years, we have provided reliable legal advice and representation to individuals, businesses, and organizations.",
-                },
-                {
-                  icon: "thin-briefcase-blank",
-                  title: "Committed To Client Success",
-                  text: "Our experience and dedication enable us to provide practical legal solutions that protect your interests and achieve results.",
-                },
-              ] satisfies { icon: FlatIconName; title: string; text: string }[]
-            ).map(({ icon, title, text }) => (
+          <p className="mt-14 text-[0.72rem] uppercase tracking-[0.22em] text-gold">What Sets Us Apart</p>
+          <div className="mt-8 grid gap-10 text-left sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+            {SETS_APART.map(({ icon, title, text }, i) => (
               <div key={title} className="border-t border-white/20 pt-6">
-                <FlatIcon name={icon} className="size-11 text-gold" />
+                <div className="flex items-center justify-between">
+                  <FlatIcon name={icon} className="size-11 text-gold" />
+                  <span className="font-[var(--font-display)] text-3xl text-white/20">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
                 <h3 className="mt-5 text-xl text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/75">{text}</p>
               </div>
@@ -307,7 +336,7 @@ function Index() {
       {/* TEAM — spotlight portrait beside a numbered roster */}
       <section id="team" className="section-pad bg-[#f4f3f8]">
         <div className="mx-auto max-w-[1200px] px-6">
-          <SectionHeading eyebrow="Our Team" title="Our" accent="Staff" center />
+          <SectionHeading eyebrow="Our Team" title="Experienced Professionals." accent="Trusted Advisors." center />
 
           <div
             onMouseEnter={() => (teamPausedRef.current = true)}

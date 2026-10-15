@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with LawAge Advocates & Consult in Dodoma, Tanzania. Call, WhatsApp, email or send us a message about your legal matter.",
+          "Get in touch with LawAge Advocates & Consult in Dodoma and Dar es Salaam, Tanzania. Call, WhatsApp, email or send us a message about your legal matter.",
       },
       { property: "og:title", content: "Contact Us | LawAge Advocates & Consult" },
       { property: "og:image", content: logo },
@@ -29,6 +29,7 @@ export const Route = createFileRoute("/contact")({
 
 // Details from lawage.co.tz/contact-us
 const ADDRESS = "Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania";
+const DAR_ADDRESS = "3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Box 75841, Dar es Salaam";
 const MAP_QUERY = "Medeli, Tambukareli, Dodoma, Tanzania";
 const EMAIL = "info@lawage.co.tz";
 const PHONES = [
@@ -40,7 +41,8 @@ const inputClass =
   "w-full border border-border bg-white px-4 py-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-brand";
 
 const INFO: { Icon: typeof MapPin; title: string; lines: { text: string; href?: string }[] }[] = [
-  { Icon: MapPin, title: "Head Office", lines: [{ text: ADDRESS }] },
+  { Icon: MapPin, title: "Dodoma Office", lines: [{ text: ADDRESS }] },
+  { Icon: MapPin, title: "Dar es Salaam Office", lines: [{ text: DAR_ADDRESS }] },
   { Icon: Phone, title: "Call Us", lines: PHONES.map(({ label, note, href }) => ({ text: `${label} · ${note}`, href })) },
   { Icon: Mail, title: "Email Us", lines: [{ text: EMAIL, href: `mailto:${EMAIL}` }] },
 ];
@@ -71,8 +73,13 @@ function Contact() {
               Get In Touch
             </span>
             <h2 className="mx-auto mt-6 max-w-2xl text-4xl leading-[1.15] text-foreground md:text-5xl">
-              Let's Talk About <span className="text-brand">Your Matter</span>
+              Let's Work <span className="text-brand">Together</span>
             </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              Whether you are establishing a business, expanding your investments, resolving a dispute,
+              protecting your assets, or navigating an evolving regulatory environment, LawAge Advocates is
+              ready to stand beside you as a trusted legal partner.
+            </p>
           </div>
 
           <div className="mt-14 grid overflow-hidden bg-white shadow-[0_24px_60px_rgba(33,28,79,0.1)] lg:grid-cols-[0.85fr_1.15fr]">
@@ -83,7 +90,7 @@ function Contact() {
 
               <h3 className="text-3xl">Contact Information</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/70">
-                Reach us by phone, WhatsApp or email, or visit our head office in Dodoma.
+                Reach us by phone, WhatsApp or email, or visit our offices in Dodoma and Dar es Salaam.
               </p>
 
               <ul className="mt-10 space-y-8">
