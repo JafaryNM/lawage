@@ -16,8 +16,8 @@ const NAV_ITEMS = [
     href: "/services"
   },
   {
-    label: "People",
-    href: "/people"
+    label: "Team",
+    href: "/team"
   },
   {
     label: "Blog",

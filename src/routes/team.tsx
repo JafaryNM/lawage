@@ -10,29 +10,29 @@ import { SUPPORT_TEAM, TEAM } from "@/lib/team";
 import logo from "@/assets/lawage-logo.png";
 import banner from "@/assets/hero-advocate-handshake.jpg";
 
-export const Route = createFileRoute("/people")({
+export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Our People | LawAge Advocates & Consult" },
+      { title: "Our Team | LawAge Advocates & Consult" },
       {
         name: "description",
         content:
           "Meet the advocates, consultants and support team of LawAge Advocates & Consult, a full-service Tanzanian law firm in Dodoma and Dar es Salaam.",
       },
-      { property: "og:title", content: "Our People | LawAge Advocates & Consult" },
+      { property: "og:title", content: "Our Team | LawAge Advocates & Consult" },
       { property: "og:image", content: logo },
       { name: "twitter:image", content: logo },
     ],
   }),
-  component: PeoplePage,
+  component: TeamPage,
 });
 
-function PeoplePage() {
+function TeamPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      <PageBanner title="Our People" crumbs={[{ label: "Our People" }]} image={banner} />
+      <PageBanner title="Our Team" crumbs={[{ label: "Our Team" }]} image={banner} />
 
       <section id="team" className="section-pad bg-[#e4e6ee]">
         <div className="mx-auto max-w-[1200px] px-6">

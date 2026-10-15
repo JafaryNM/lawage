@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
+import { Footer, WHATSAPP_URL } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 
 import { SERVICES } from "@/lib/services";
@@ -33,7 +33,8 @@ const DAR_ADDRESS = "3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Bo
 const MAP_QUERY = "Medeli, Tambukareli, Dodoma, Tanzania";
 const EMAIL = "info@lawage.co.tz";
 const PHONES = [
-  { label: "+255 713 282263", note: "Call / WhatsApp", href: "tel:+255713282263" },
+  { label: "+255 713 282263", note: "Call", href: "tel:+255713282263" },
+  { label: "+255 777 626294", note: "WhatsApp", href: WHATSAPP_URL },
   { label: "+255 736 626290", note: "Office", href: "tel:+255736626290" },
 ];
 
@@ -43,7 +44,7 @@ const inputClass =
 const INFO: { Icon: typeof MapPin; title: string; lines: { text: string; href?: string }[] }[] = [
   { Icon: MapPin, title: "Dodoma Office", lines: [{ text: ADDRESS }] },
   { Icon: MapPin, title: "Dar es Salaam Office", lines: [{ text: DAR_ADDRESS }] },
-  { Icon: Phone, title: "Call Us", lines: PHONES.map(({ label, note, href }) => ({ text: `${label} · ${note}`, href })) },
+  { Icon: Phone, title: "Call or WhatsApp", lines: PHONES.map(({ label, note, href }) => ({ text: `${label} · ${note}`, href })) },
   { Icon: Mail, title: "Email Us", lines: [{ text: EMAIL, href: `mailto:${EMAIL}` }] },
 ];
 

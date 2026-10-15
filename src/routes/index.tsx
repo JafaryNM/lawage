@@ -218,7 +218,7 @@ function Index() {
               </div>
             </div>
 
-            <Link to="/people" className="btn-brand mt-10">
+            <Link to="/team" className="btn-brand mt-10">
               Meet Our Staff <ArrowUpRight className="size-4" strokeWidth={1.5} />
             </Link>
           </div>

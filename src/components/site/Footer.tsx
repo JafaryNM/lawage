@@ -17,11 +17,13 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import logo from "@/assets/lawage-logo.png";
 import ctaBg from "@/assets/client-consultation-cafe.jpg";
 
+export const WHATSAPP_URL = "https://wa.me/255777626294";
+
 const QUICK_LINKS = [
   ["Home", "/"],
   ["Who We Are", "/about"],
   ["Practice Areas", "/services"],
-  ["Our People", "/people"],
+  ["Our Team", "/team"],
   ["Legal Insights", "/blog"],
   ["Contact Us", "/contact"],
 ] as const;
@@ -172,7 +174,18 @@ export function Footer() {
               <li className="flex gap-3.5">
                 <Phone className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.5} />
                 <a href="tel:+255713282263" className="transition-colors hover:text-white">
-                  +255 713 282263 (Call / WhatsApp)
+                  +255 713 282263 (Call)
+                </a>
+              </li>
+              <li className="flex gap-3.5">
+                <WhatsAppIcon className="mt-0.5 size-4 shrink-0 text-gold" />
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
+                >
+                  +255 777 626294 (WhatsApp)
                 </a>
               </li>
             </ul>
@@ -226,7 +239,7 @@ export function Footer() {
       </div>
       {/* Floating WhatsApp chat button, shown on every page */}
       <a
-        href="https://wa.me/255713282263"
+        href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with LawAge on WhatsApp"
