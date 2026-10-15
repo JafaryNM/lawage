@@ -1,10 +1,11 @@
-import { Linkedin, Mail } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Linkedin, Mail } from "lucide-react";
 
 import { FIRM_EMAIL, type TeamMember } from "@/lib/team";
 
 /**
- * Portrait grid with name and title beneath each photo. Hovering a photo reveals LinkedIn and
- * email icons stacked in its top-right corner; on touch screens the icons are always shown.
+ * Portrait grid with the name beneath each photo; each card opens the person's profile page.
+ * Hovering reveals LinkedIn and email icons in the top-right corner (always shown on touch screens).
  */
 export function TeamGrid({
   members,
@@ -32,7 +33,8 @@ function TeamCard({ member: m }: { member: TeamMember }) {
     "flex size-10 items-center justify-center rounded-full border border-white/50 bg-brand-deep/40 text-white backdrop-blur-sm transition-colors duration-300";
 
   return (
-    <article className="group">
+    // The name link stretches over the whole card; the contact icons sit above it (z-10)
+    <article className="group relative">
       <div className="relative aspect-[4/5] overflow-hidden bg-[#5b6168]">
         <img
           src={m.photo}
@@ -45,7 +47,7 @@ function TeamCard({ member: m }: { member: TeamMember }) {
 
         {/* Hover: a soft top shade with the contact icons sliding in as a column at the top right */}
         <div className="absolute inset-0 bg-gradient-to-bl from-brand-deep/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-focus-within:opacity-100 group-hover:opacity-100 pointer-coarse:opacity-100" />
-        <div className="absolute top-4 right-4 flex translate-x-3 flex-col gap-2.5 opacity-0 transition-all duration-500 group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100 pointer-coarse:translate-x-0 pointer-coarse:opacity-100 md:top-5 md:right-5">
+        <div className="absolute top-4 right-4 z-10 flex translate-x-3 flex-col gap-2.5 opacity-0 transition-all duration-500 group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100 pointer-coarse:translate-x-0 pointer-coarse:opacity-100 md:top-5 md:right-5">
           {links.map(({ Icon, label, href, external }) =>
             href ? (
               <a
@@ -69,10 +71,16 @@ function TeamCard({ member: m }: { member: TeamMember }) {
       </div>
 
       <h3 className="mt-6 text-lg leading-snug text-foreground transition-colors duration-300 group-hover:text-brand md:text-xl">
-        {m.name}
+        <Link href={`/team/${m.slug}`} className="after:absolute after:inset-0">
+          {m.name}
+        </Link>
       </h3>
-      {m.credentials && <p className="text-sm text-muted-foreground">{m.credentials}</p>}
-      <p className="mt-1 text-base text-muted-foreground">{m.role}</p>
+      {m.title && <p className="mt-1 text-sm leading-snug text-brand">{m.title}</p>}
+      {m.credentials && <p className="mt-1 text-sm text-muted-foreground">{m.credentials}</p>}
+      <p className="mt-2 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] text-brand/70 transition-colors group-hover:text-gold">
+        View profile{" "}
+        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+      </p>
     </article>
   );
 }

@@ -13,7 +13,7 @@ import { Partners } from "@/components/site/Partners";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { TeamGrid } from "@/components/site/TeamGrid";
-import { TEAM } from "@/lib/team";
+import { FEATURED_TEAM } from "@/lib/team";
 import { POSTS, formatPostDate } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
 
@@ -309,7 +309,7 @@ export function HomePage({ slides }: { slides: PublicSlide[] }) {
       <section id="team" className="section-pad bg-[#e4e6ee]">
         <div className="mx-auto max-w-[1200px] px-6">
           <SectionTitle>Our Team of Experts</SectionTitle>
-          <TeamGrid members={TEAM} className="mt-14" />
+          <TeamGrid members={FEATURED_TEAM} className="mt-14" />
         </div>
       </section>
 

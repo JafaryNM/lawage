@@ -2,33 +2,34 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { SiteSearch } from "@/components/site/SiteSearch";
 import logo from "@/assets/lawage-logo.png";
 
 const NAV_ITEMS = [
   {
     label: "Home",
-    href: "/"
+    href: "/",
   },
   {
     label: "About Us",
-    href: "/about"
+    href: "/about",
   },
   {
     label: "Service",
-    href: "/services"
+    href: "/services",
   },
   {
     label: "Team",
-    href: "/team"
+    href: "/team",
   },
   {
     label: "Blog",
-    href: "/blog"
+    href: "/blog",
   },
   {
     label: "Contact Us",
-    href: "/contact"
-  }
+    href: "/contact",
+  },
 ];
 
 interface HeaderProps {
@@ -69,36 +70,37 @@ export function Header({ theme = "dark" }: HeaderProps) {
           />
         </a>
 
-        {/* Center: Navigation Links */}
-        <nav
-          className={`hidden items-center gap-7 xl:flex transition-colors duration-300 ${
-            isHeaderLight ? "text-foreground" : "text-white"
-          }`}
-        >
-          {NAV_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className="relative py-3"
-            >
-              <a
-                href={item.href}
-                className="flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.18em] transition-colors duration-200 hover:text-brand"
-              >
-                {item.label}
-              </a>
-            </div>
-          ))}
-        </nav>
+        {/* Right: navigation, then search (after Contact Us), then the mobile menu button */}
+        <div className="flex items-center gap-2 xl:gap-5">
+          <nav
+            className={`hidden items-center gap-7 xl:flex transition-colors duration-300 ${
+              isHeaderLight ? "text-foreground" : "text-white"
+            }`}
+          >
+            {NAV_ITEMS.map((item) => (
+              <div key={item.label} className="relative py-3">
+                <a
+                  href={item.href}
+                  className="flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.18em] transition-colors duration-200 hover:text-brand"
+                >
+                  {item.label}
+                </a>
+              </div>
+            ))}
+          </nav>
 
-        {/* Mobile menu trigger */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle navigation"
-          className={`xl:hidden transition-colors ${isHeaderLight ? "text-foreground" : "text-white"}`}
-        >
-          {open ? <X className="size-7" /> : <Menu className="size-7" />}
-        </button>
+          <SiteSearch />
+
+          {/* Mobile menu trigger */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle navigation"
+            className={`xl:hidden transition-colors ${isHeaderLight ? "text-foreground" : "text-white"}`}
+          >
+            {open ? <X className="size-7" /> : <Menu className="size-7" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -118,8 +120,6 @@ export function Header({ theme = "dark" }: HeaderProps) {
                 </div>
               </div>
             ))}
-            
-
           </nav>
         </div>
       )}

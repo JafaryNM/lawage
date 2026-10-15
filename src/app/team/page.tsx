@@ -3,7 +3,7 @@ import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { TeamGrid } from "@/components/site/TeamGrid";
-import { SUPPORT_TEAM, TEAM } from "@/lib/team";
+import { TEAM_BY_DEPARTMENT } from "@/lib/team";
 import { pageMetadata } from "@/lib/seo";
 
 import banner from "@/assets/hero-advocate-handshake.jpg";
@@ -29,22 +29,19 @@ export default function TeamPage() {
           <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
             Our greatest strength lies in our people. Our team combines diverse legal expertise,
             commercial insight, and a shared commitment to delivering practical, client-focused
-            solutions.
+            solutions. Select anyone to read their profile.
           </p>
-          <TeamGrid members={TEAM} className="mt-14" />
-        </div>
-      </section>
 
-      <section id="support" className="section-pad">
-        <div className="mx-auto max-w-[1200px] px-6">
-          <SectionTitle>
-            Our Professional <span className="text-brand">Support Team</span>
-          </SectionTitle>
-          <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
-            Our legal practice is supported by a multidisciplinary team that ensures efficient
-            service delivery and seamless client support.
-          </p>
-          <TeamGrid members={SUPPORT_TEAM} className="mt-14" />
+          {/* One block per department heading (see DEPARTMENTS in src/lib/team.ts) */}
+          {TEAM_BY_DEPARTMENT.map(({ department, members }) => (
+            <div key={department} className="mt-16 first-of-type:mt-14">
+              <h2 className="flex items-center gap-4 text-2xl text-foreground md:text-3xl">
+                <span className="h-0.5 w-10 shrink-0 bg-gold" />
+                {department}
+              </h2>
+              <TeamGrid members={members} className="mt-8" />
+            </div>
+          ))}
         </div>
       </section>
 
