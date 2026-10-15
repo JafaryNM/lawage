@@ -34,5 +34,5 @@ export const TEAM: TeamMember[] = [
 export const SUPPORT_TEAM: TeamMember[] = [
   { name: "Davis Betram Komba", role: "Legal Officer", photo: davis },
   { name: "Secilia Dominick John", role: "Legal Officer & Administration Officer", photo: secilia },
-  { name: "Hamasa Group", role: "Information Technology Consultants", photo: hamasa, logo: true },
+  { name: "Sidaga Waziri", role: "Information Technology Consultant, Hamasa Group", photo: hamasa },
 ];
