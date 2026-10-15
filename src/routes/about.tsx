@@ -6,9 +6,6 @@ import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { WorkProcess } from "@/components/site/WorkProcess";
 import { Partners } from "@/components/site/Partners";
-import { SectionTitle } from "@/components/site/SectionTitle";
-import { TeamGrid } from "@/components/site/TeamGrid";
-import { SUPPORT_TEAM, TEAM } from "@/lib/team";
 
 import logo from "@/assets/lawage-logo.png";
 import storyImg from "@/assets/about-judge-writing.jpg";
@@ -184,19 +181,6 @@ function About() {
 
       {/* OUR SERVICE APPROACH — intro and photo beside a numbered timeline */}
       <WorkProcess />
-
-      {/* OUR TEAM — plain portrait grid */}
-      <section id="team" className="section-pad bg-[#e4e6ee]">
-        <div className="mx-auto max-w-[1200px] px-6">
-          <SectionTitle>Our Team of Experts</SectionTitle>
-          <TeamGrid members={TEAM} className="mt-14" />
-
-          <div className="mt-24">
-            <SectionTitle>Our Professional Support Team</SectionTitle>
-          </div>
-          <TeamGrid members={SUPPORT_TEAM} className="mt-14" />
-        </div>
-      </section>
 
       <Partners />
 
