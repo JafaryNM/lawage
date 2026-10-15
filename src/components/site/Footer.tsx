@@ -221,8 +221,8 @@ export function Footer() {
             .
           </p>
           <div className="flex items-center gap-6">
-            <a href="#privacy" className="transition-colors hover:text-white">Privacy Policy</a>
-            <a href="#terms" className="transition-colors hover:text-white">Terms &amp; Conditions</a>
+            <Link to="/privacy-policy" hash="privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+            <Link to="/privacy-policy" hash="terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
