@@ -1,5 +1,6 @@
 import { HomePage } from "@/components/pages/HomePage";
 import { pageMetadata } from "@/lib/seo";
+import { getPublicSlides } from "@/lib/slides";
 
 export const metadata = pageMetadata({
   title: "LawAge Advocates & Consult | Trusted Legal Excellence for Every Client",
@@ -10,6 +11,7 @@ export const metadata = pageMetadata({
     "High-impact legal and advisory solutions across Tanzania, East Africa and international markets.",
 });
 
+// Rebuilt whenever a slide is changed in the admin (see revalidatePath in admin/slides/actions)
 export default function Page() {
-  return <HomePage />;
+  return <HomePage slides={getPublicSlides()} />;
 }

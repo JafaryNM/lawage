@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Navigation, Phone, Send } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer, WHATSAPP_URL } from "@/components/site/Footer";
@@ -16,7 +16,9 @@ const ADDRESS =
   "Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania";
 const DAR_ADDRESS =
   "3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Box 75841, Dar es Salaam";
-const MAP_QUERY = "Medeli, Tambukareli, Dodoma, Tanzania";
+// The office's Google Maps listing (Makulu, Dodoma), as sent by the client
+const MAP_QUERY = "Tanzania Office of Sundy Law Firm, Makulu 41107, Dodoma, Tanzania";
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAP_QUERY)}`;
 const EMAIL = "info@lawage.co.tz";
 const PHONES = [
   { label: "+255 713 282263", note: "Call", href: "tel:+255713282263" },
@@ -198,14 +200,22 @@ export function ContactPage() {
       </section>
 
       {/* MAP */}
-      <section aria-label="Office location map">
+      <section aria-label="Office location map" className="relative">
         <iframe
           title="LawAge Advocates & Consult office location"
-          src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`}
-          className="block h-[420px] w-full border-0 grayscale"
+          src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=16&output=embed`}
+          className="block h-[420px] w-full border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
+        <a
+          href={DIRECTIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute bottom-5 left-5 inline-flex items-center gap-2 bg-brand px-5 py-3 text-xs uppercase tracking-[0.15em] text-white shadow-lg transition-colors hover:bg-brand-deep"
+        >
+          <Navigation className="size-4" /> Get Directions
+        </a>
       </section>
 
       <Footer />

@@ -8,6 +8,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { FlatIcon, type FlatIconName } from "@/components/site/FlatIcon";
 import { HeroSlideshow } from "@/components/site/HeroSlideshow";
+import type { PublicSlide } from "@/lib/slides";
 import { Partners } from "@/components/site/Partners";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { SectionTitle } from "@/components/site/SectionTitle";
@@ -139,14 +140,14 @@ function SectionHeading({
   );
 }
 
-export function HomePage() {
+export function HomePage({ slides }: { slides: PublicSlide[] }) {
   const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
   return (
     <div className="min-h-screen bg-background">
       <Header theme={heroTheme} />
 
       {/* HERO */}
-      <HeroSlideshow onThemeChange={setHeroTheme} />
+      <HeroSlideshow slides={slides} onThemeChange={setHeroTheme} />
 
       {/* ABOUT — image with offset gold frame, copy and stats alongside */}
       <section id="about" className="bg-white py-[70px] md:py-24">

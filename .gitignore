@@ -37,3 +37,6 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 .vercel
+
+# Local SQLite database (admin accounts and sessions)
+data/
