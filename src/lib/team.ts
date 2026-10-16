@@ -5,7 +5,6 @@ import oliver from "@/assets/team/oliver-costa.jpg";
 import innocent from "@/assets/team/innocent-mongi.jpg";
 import davis from "@/assets/team/davis-komba.jpg";
 import secilia from "@/assets/team/secilia-john.jpg";
-import hamasa from "@/assets/team/hamasa-group.jpg";
 
 export type TeamMember = {
   /** URL of the profile page: /team/<slug> */
@@ -44,7 +43,6 @@ export const DEPARTMENTS = [
   "Governance, Compliance & Investment",
   "Consultancy & Business Development",
   "Legal Support & Administration",
-  "Information Technology",
 ] as const;
 export type Department = (typeof DEPARTMENTS)[number];
 
@@ -157,13 +155,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Secilia Dominick John",
     department: "Legal Support & Administration",
     photo: secilia.src,
-  },
-  {
-    slug: "sidaga-waziri",
-    name: "Sidaga Waziri",
-    credentials: "Hamasa Group",
-    department: "Information Technology",
-    photo: hamasa.src,
   },
 ];
 
