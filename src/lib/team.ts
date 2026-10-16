@@ -5,6 +5,7 @@ import oliver from "@/assets/team/oliver-costa.jpg";
 import innocent from "@/assets/team/innocent-mongi.jpg";
 import davis from "@/assets/team/davis-komba.jpg";
 import secilia from "@/assets/team/secilia-john.jpg";
+import sidaga from "@/assets/team/sidaga-kihongo.jpg";
 
 export type TeamMember = {
   /** URL of the profile page: /team/<slug> */
@@ -43,6 +44,7 @@ export const DEPARTMENTS = [
   "Governance, Compliance & Investment",
   "Consultancy & Business Development",
   "Legal Support & Administration",
+  "Technology & Data",
 ] as const;
 export type Department = (typeof DEPARTMENTS)[number];
 
@@ -155,6 +157,28 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Secilia Dominick John",
     department: "Legal Support & Administration",
     photo: secilia.src,
+  },
+  {
+    slug: "sidaga-kihongo",
+    name: "Sidaga Waziri Kihongo",
+    department: "Technology & Data",
+    title: "Machine Learning Engineer | Data Scientist | AI & Backend Systems Specialist",
+    credentials: "Hamasa Media Group",
+    photo: sidaga.src,
+    bio: [
+      "Sidaga Waziri Kihongo is a Tanzanian technology professional specializing in data science, machine learning, artificial intelligence, and software development. He focuses on building data-driven solutions, intelligent systems, and backend applications that solve real-world problems.",
+      "He works as a Machine Learning Engineer and Data Analyst at Hamasa Media Group, where he develops data processing, analytics, and automation solutions for media monitoring and evaluation. His expertise includes machine learning, statistical analysis, Python programming, database management, and enterprise software development.",
+      "With a background in computer science and a degree in Data Science, Sidaga combines analytical thinking and technical expertise to transform data into actionable insights and develop innovative technology solutions that support digital transformation in Tanzania and across Africa.",
+    ],
+    expertise: [
+      "Machine Learning & Artificial Intelligence",
+      "Data Science & Analytics",
+      "Statistical Analysis",
+      "Python Programming",
+      "Backend & Enterprise Software Development",
+      "Database Management",
+      "Data Processing & Automation",
+    ],
   },
 ];
 
