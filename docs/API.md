@@ -88,7 +88,7 @@ type PublicSlide = {
 | `title` | required, ≤ 120 characters |
 | `description` | ≤ 300 characters |
 | `imageFile` | optional file: JPG, PNG or WebP, ≤ 5 MB. Takes priority over `builtinImage` |
-| `builtinImage` | optional: `builtin:advocate-desk`, `builtin:contract-review`, `builtin:advocate-handshake` |
+| `builtinImage` | optional: `builtin:law-library`, `builtin:handshake-file`, `builtin:legal-tech` |
 | `imageAlt` | ≤ 160 characters; defaults to the title |
 | `focus` | `center` \| `top` \| `bottom` |
 | `primaryLabel`, `primaryHref`, `secondaryLabel`, `secondaryHref` | label ≤ 30; link starts with `/`, `#`, `http(s)://`, `tel:` or `mailto:`; a button needs both or neither |

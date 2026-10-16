@@ -3,11 +3,14 @@
 export const SLIDE_FOCUS = ["center", "top", "bottom"] as const;
 export type SlideFocus = (typeof SLIDE_FOCUS)[number];
 
-/** Built-in photos shipped with the site; uploaded photos are stored as "upload:<file>" */
+/**
+ * Built-in photos shipped with the site; uploaded photos are stored as "upload:<file>".
+ * No recognisable faces, at the client's request (October 2026).
+ */
 export const BUILTIN_IMAGES = {
-  "builtin:advocate-desk": "Advocate at his desk",
-  "builtin:contract-review": "Contract review",
-  "builtin:advocate-handshake": "Handshake with a client",
+  "builtin:law-library": "Law library with the scales of justice",
+  "builtin:handshake-file": "Handshake over a case file",
+  "builtin:legal-tech": "Lawyer at a laptop with case files",
 } as const;
 
 export type SlideFields = {
@@ -28,8 +31,8 @@ export const DEFAULT_SLIDES: SlideFields[] = [
     title: "Trusted Legal Excellence for Every Client",
     description:
       "With over 9 years of experience, we deliver professional legal services tailored to protect your rights and achieve your goals.",
-    image: "builtin:advocate-desk",
-    imageAlt: "Advocate writing at his desk beside the scales of justice",
+    image: "builtin:law-library",
+    imageAlt: "Law library with a scales of justice statue on the desk",
     focus: "center",
     primaryLabel: "Practice Areas",
     primaryHref: "/#practice",
@@ -40,9 +43,9 @@ export const DEFAULT_SLIDES: SlideFields[] = [
     title: "Professional Legal Solutions You Can Rely On",
     description:
       "From corporate law and litigation to legal advisory and compliance, we deliver results with integrity and excellence.",
-    image: "builtin:contract-review",
-    imageAlt: "Advocate guiding a client through a contract",
-    focus: "top",
+    image: "builtin:handshake-file",
+    imageAlt: "Advocate shaking hands with a client holding a case file",
+    focus: "center",
     primaryLabel: "Practice Areas",
     primaryHref: "/#practice",
     secondaryLabel: "Contact Us",
@@ -51,9 +54,9 @@ export const DEFAULT_SLIDES: SlideFields[] = [
   {
     title: "Expert in Legal Specialties",
     description: "Suitable for complex legal, regulatory, and business environments.",
-    image: "builtin:advocate-handshake",
-    imageAlt: "Advocate in court robes shaking hands with a client",
-    focus: "top",
+    image: "builtin:legal-tech",
+    imageAlt: "Lawyer working on a laptop beside case files and notebooks",
+    focus: "center",
     primaryLabel: "Practice Areas",
     primaryHref: "/#practice",
     secondaryLabel: "Contact Us",

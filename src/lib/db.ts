@@ -68,6 +68,31 @@ const MIGRATIONS: ((db: DatabaseSync) => void)[] = [
       ),
     );
   },
+
+  // Built-in hero photos replaced with ones that show no faces (client request, October 2026)
+  (db) =>
+    db.exec(`
+      UPDATE hero_slides SET image = 'builtin:law-library', focus = 'center'
+        WHERE image = 'builtin:advocate-desk';
+      UPDATE hero_slides SET image = 'builtin:handshake-file', focus = 'center'
+        WHERE image = 'builtin:contract-review';
+      UPDATE hero_slides SET image = 'builtin:legal-tech', focus = 'center'
+        WHERE image = 'builtin:advocate-handshake';
+    `),
+
+  // Screen-reader descriptions for the new built-in photos, where the original text was untouched
+  (db) =>
+    db.exec(`
+      UPDATE hero_slides SET image_alt = 'Law library with a scales of justice statue on the desk'
+        WHERE image = 'builtin:law-library'
+          AND image_alt = 'Advocate writing at his desk beside the scales of justice';
+      UPDATE hero_slides SET image_alt = 'Advocate shaking hands with a client holding a case file'
+        WHERE image = 'builtin:handshake-file'
+          AND image_alt = 'Advocate guiding a client through a contract';
+      UPDATE hero_slides SET image_alt = 'Lawyer working on a laptop beside case files and notebooks'
+        WHERE image = 'builtin:legal-tech'
+          AND image_alt = 'Advocate in court robes shaking hands with a client';
+    `),
 ];
 
 function migrate(db: DatabaseSync) {
@@ -95,8 +120,10 @@ export function getDb(): DatabaseSync {
     mkdirSync(path.dirname(DB_PATH), { recursive: true });
     const db = new DatabaseSync(DB_PATH);
     db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;");
-    migrate(db);
     globalForDb.lawageDb = db;
   }
+  // Checked on every call (one PRAGMA read) so a long-running dev server also picks up
+  // migrations added after it started, not just a fresh connection
+  migrate(globalForDb.lawageDb);
   return globalForDb.lawageDb;
 }

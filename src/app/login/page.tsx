@@ -7,7 +7,7 @@ import { QueryProvider } from "@/components/providers/QueryProvider";
 import { getCurrentAdmin } from "@/lib/auth/session";
 import { LoginForm } from "./LoginForm";
 
-import sideImage from "@/assets/hero-advocate-desk.jpg";
+import sideImage from "@/assets/law-library-justice.jpg";
 
 export const metadata: Metadata = {
   title: "Admin Sign In | LawAge Advocates & Consult",

@@ -5,9 +5,11 @@ import path from "node:path";
 import { DATA_DIR, getDb } from "@/lib/db";
 import { DEFAULT_SLIDES, type SlideFields, type SlideFocus } from "@/lib/slides-data";
 
-import advocateDesk from "@/assets/hero-advocate-desk.jpg";
-import contractReview from "@/assets/hero-contract-review.jpg";
-import advocateHandshake from "@/assets/hero-advocate-handshake.jpg";
+import lawLibrary from "@/assets/law-library-justice.jpg";
+import handshakeFile from "@/assets/hero-handshake-file.jpg";
+// Lawyer at a laptop with case files, Pexels (pexels.com/photo/5668888), free under the Pexels
+// licence; the law-firm name on the laptop screen is blurred out
+import legalTech from "@/assets/hero-legal-tech.jpg";
 
 export type Slide = SlideFields & { id: number; sortOrder: number; isActive: boolean };
 
@@ -27,16 +29,23 @@ export type PublicSlide = {
 };
 
 const BUILTIN_URLS: Record<string, string> = {
-  "builtin:advocate-desk": advocateDesk.src,
-  "builtin:contract-review": contractReview.src,
-  "builtin:advocate-handshake": advocateHandshake.src,
+  "builtin:law-library": lawLibrary.src,
+  "builtin:handshake-file": handshakeFile.src,
+  "builtin:legal-tech": legalTech.src,
 };
 
 export const SLIDE_UPLOAD_DIR = path.join(DATA_DIR, "uploads", "slides");
 
+// Keys of the replaced built-in photos (October 2026), in case a database has not migrated yet
+const RETIRED_BUILTINS: Record<string, string> = {
+  "builtin:advocate-desk": "builtin:law-library",
+  "builtin:contract-review": "builtin:handshake-file",
+  "builtin:advocate-handshake": "builtin:legal-tech",
+};
+
 export function slideImageUrl(image: string): string {
   if (image.startsWith("upload:")) return `/uploads/slides/${image.slice("upload:".length)}`;
-  return BUILTIN_URLS[image] ?? advocateDesk.src;
+  return BUILTIN_URLS[RETIRED_BUILTINS[image] ?? image] ?? lawLibrary.src;
 }
 
 type SlideRow = {

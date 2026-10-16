@@ -38,6 +38,7 @@ export const FIRM_EMAIL = "info@lawage.co.tz";
 // DRAFT department headings, grouped by each person's current work; the client confirms or renames
 // them (meeting October 2026). Order here is the order on the Team page.
 export const DEPARTMENTS = [
+  "Commercial & Strategic Sectors",
   "Advocates",
   "Technology, Digital Rights, Policy & Litigation",
   "Governance, Compliance & Investment",
@@ -52,8 +53,31 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     slug: "stephen-msechu",
     name: "Stephen Wilbard Msechu",
-    department: "Advocates",
+    department: "Commercial & Strategic Sectors",
+    title: "Managing Partner – Commercial & Strategic Sectors Department",
+    credentials: "Co-Founder, LawAge Advocates",
     photo: stephen.src,
+    bio: [
+      "Stephen Wilbard Msechu is the Co-Founder and Managing Partner at LawAge Advocates, bringing over a decade of elite experience to Tanzania’s corporate, regulatory, and constitutional legal landscapes. Grounded in the firm’s core philosophy that the client’s best interest always comes first, Stephen guides businesses, international investors, individuals and non-profits through complex frameworks with seamless, results-driven clarity.",
+      "His specialized practice spans Corporate Law, Foreign Investment, Real Estate & Conveyancing, and Mining & Extractives Law. A versatile practitioner, he is an accomplished Arbitrator adept at resolving complex commercial disputes outside the courtroom. Extending his expertise directly into the property sector, he also serves as a Director at Steady Estate Company Limited, driving strategic real estate investments and asset management.",
+      "As a respected voice in natural resources governance, he co-founded HakiRasilimali and has frequently advised Parliamentary Committees on major economic legislation. A former Program Manager for the Tanganyika Law Society (TLS), he supervised the publication of the TLS Law Reports and was recognized as one of the 50 Most Influential Young Tanzanians. He is an active member of both the TLS and the East Africa Law Society (EALS).",
+    ],
+    qualifications: [
+      "LL.M., University of Dar es Salaam",
+      "LL.B., University of Dar es Salaam",
+      "Member, Tanganyika Law Society (TLS)",
+      "Member, East Africa Law Society (EALS)",
+    ],
+    expertise: [
+      "Corporate Law",
+      "Foreign Investment",
+      "Real Estate & Conveyancing",
+      "Mining & Extractives Law",
+      "Arbitration & Commercial Disputes",
+      "Regulatory & Constitutional Law",
+      "Natural Resources Governance",
+      "Legislative & Policy Advisory",
+    ],
   },
   {
     slug: "robert-majige",
@@ -96,7 +120,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     slug: "innocent-mongi",
-    name: "Innocent James Mongi",
+    name: "Innocent Daniel Mongi",
     department: "Consultancy & Business Development",
     photo: innocent.src,
   },
@@ -151,6 +175,7 @@ export const TEAM_BY_DEPARTMENT = DEPARTMENTS.map((department) => ({
 
 /** The firm's lead team, featured on the home page */
 const FEATURED_DEPARTMENTS: Department[] = [
+  "Commercial & Strategic Sectors",
   "Advocates",
   "Technology, Digital Rights, Policy & Litigation",
   "Governance, Compliance & Investment",

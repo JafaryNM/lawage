@@ -7,7 +7,8 @@ import { WorkProcess } from "@/components/site/WorkProcess";
 import { Partners } from "@/components/site/Partners";
 import { pageMetadata } from "@/lib/seo";
 
-import storyImg from "@/assets/about-judge-writing.jpg";
+// Scales of justice and gavel, Pexels (pexels.com/photo/5669619), free under the Pexels licence
+import storyImg from "@/assets/about-scales-gavel.jpg";
 import vmBg from "@/assets/law-library-justice.jpg";
 
 export const metadata = pageMetadata({
@@ -78,7 +79,7 @@ export default function About() {
             <div className="absolute inset-0 translate-x-6 translate-y-6 border-2 border-gold md:translate-x-8 md:translate-y-8" />
             <img
               src={storyImg.src}
-              alt="Judge writing at her desk in a law library"
+              alt="Scales of justice and a gavel on a lawyer’s desk beside case binders"
               className="relative aspect-[19/20] w-full object-cover"
               loading="lazy"
             />

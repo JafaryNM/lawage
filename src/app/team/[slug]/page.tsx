@@ -17,7 +17,7 @@ import {
 import { TEAM_MEMBERS, findTeamMember } from "@/lib/team";
 import { pageMetadata } from "@/lib/seo";
 
-import banner from "@/assets/hero-advocate-handshake.jpg";
+import banner from "@/assets/hero-handshake-file.jpg";
 
 type Props = { params: Promise<{ slug: string }> };
 
