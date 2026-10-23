@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props) {
   const service = findService((await params).slug);
   if (!service) return {};
   return pageMetadata({
-    title: `${service.title} | LawAge Advocates & Consult`,
+    title: `${service.title} | LawAge Advocates`,
     description: service.text,
   });
 }

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { Mail, MapPin, Navigation, Phone, Send } from "lucide-react";
+import { CircleCheck, Loader2, Mail, MapPin, Navigation, Phone, Send } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer, WHATSAPP_URL } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 
+import { ApiError, apiFetch } from "@/lib/api/client";
 import { SERVICES } from "@/lib/services";
 
 import banner from "@/assets/contact-banner.jpg";
@@ -23,7 +24,6 @@ const EMAIL = "info@lawage.co.tz";
 const PHONES = [
   { label: "+255 713 282263", note: "Call", href: "tel:+255713282263" },
   { label: "+255 777 626294", note: "WhatsApp", href: WHATSAPP_URL },
-  { label: "+255 736 626290", note: "Office", href: "tel:+255736626290" },
 ];
 
 const inputClass =
@@ -40,24 +40,41 @@ const INFO: { Icon: typeof MapPin; title: string; lines: { text: string; href?: 
   { Icon: Mail, title: "Email Us", lines: [{ text: EMAIL, href: `mailto:${EMAIL}` }] },
 ];
 
+const EMPTY_FORM = { name: "", email: "", phone: "", area: "", message: "", website: "" };
+
 export function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", area: "", message: "" });
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [error, setError] = useState("");
   const update = (key: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  // No form backend yet: open the visitor's email app with the message pre-filled
-  const onSubmit = (e: FormEvent) => {
+  // Emailed to the firm by /api/contact
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const subject = `Enquiry from ${form.name}${form.area ? ` – ${form.area}` : ""}`;
-    const body = `${form.message}\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nPractice area: ${form.area || "Not specified"}`;
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("sending");
+    setError("");
+    try {
+      await apiFetch("/api/contact", { method: "POST", body: form });
+      setForm(EMPTY_FORM);
+      setStatus("sent");
+    } catch (err) {
+      const fieldError = err instanceof ApiError ? Object.values(err.fieldErrors)[0] : undefined;
+      setError(fieldError ?? (err instanceof Error ? err.message : "Something went wrong."));
+      setStatus("idle");
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      <PageBanner title="Contact Us" crumbs={[{ label: "Contact Us" }]} image={banner.src} />
+      <PageBanner
+        title="Contact Us"
+        crumbs={[{ label: "Contact Us" }]}
+        image={banner.src}
+        focus="center 15%"
+      />
 
       <section className="section-pad bg-[#f4f3f8]">
         <div className="mx-auto max-w-[1200px] px-6">
@@ -185,13 +202,42 @@ export function ContactPage() {
                     className={`${inputClass} resize-y`}
                   />
                 </Field>
+                {/* Honeypot: hidden from people, filled in by spam bots */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                  value={form.website}
+                  onChange={update("website")}
+                  className="hidden"
+                />
                 <div className="sm:col-span-2">
                   <button
                     type="submit"
-                    className="inline-flex cursor-pointer items-center gap-2 bg-brand px-9 py-4 text-[0.78rem] uppercase tracking-[0.2em] text-white transition-colors hover:bg-brand-deep"
+                    disabled={status === "sending"}
+                    className="inline-flex cursor-pointer items-center gap-2 bg-brand px-9 py-4 text-[0.78rem] uppercase tracking-[0.2em] text-white transition-colors hover:bg-brand-deep disabled:cursor-wait disabled:opacity-70"
                   >
-                    Send Message <Send className="size-4" strokeWidth={1.5} />
+                    {status === "sending" ? (
+                      <>
+                        Sending <Loader2 className="size-4 animate-spin" strokeWidth={1.5} />
+                      </>
+                    ) : (
+                      <>
+                        Send Message <Send className="size-4" strokeWidth={1.5} />
+                      </>
+                    )}
                   </button>
+                  <div aria-live="polite">
+                    {status === "sent" && (
+                      <p className="mt-4 flex items-center gap-2 text-sm text-emerald-700">
+                        <CircleCheck className="size-4 shrink-0" /> Thank you. Your message has been
+                        sent and an advocate will get back to you shortly.
+                      </p>
+                    )}
+                    {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+                  </div>
                 </div>
               </form>
             </div>
@@ -202,7 +248,7 @@ export function ContactPage() {
       {/* MAP */}
       <section aria-label="Office location map" className="relative">
         <iframe
-          title="LawAge Advocates & Consult office location"
+          title="LawAge Advocates office location"
           src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=16&output=embed`}
           className="block h-[420px] w-full border-0"
           loading="lazy"

@@ -10,12 +10,19 @@ interface PageBannerProps {
   /** Trail after "Home"; the last crumb is the current page */
   crumbs: Crumb[];
   image?: string;
+  /** CSS object-position for the photo, e.g. "center 20%" to keep faces in view */
+  focus?: string;
 }
 
-export function PageBanner({ title, crumbs, image = defaultBanner.src }: PageBannerProps) {
+export function PageBanner({ title, crumbs, image = defaultBanner.src, focus }: PageBannerProps) {
   return (
     <section className="relative flex h-[420px] items-center justify-center overflow-hidden pt-[90px] md:h-[460px]">
-      <img src={image} alt="" className="absolute inset-0 size-full object-cover" />
+      <img
+        src={image}
+        alt=""
+        className="absolute inset-0 size-full object-cover"
+        style={focus ? { objectPosition: focus } : undefined}
+      />
       <div className="absolute inset-0 bg-brand-deep/70" />
       <div className="relative px-6 text-center">
         <h1 className="text-4xl text-white md:text-6xl">{title}</h1>

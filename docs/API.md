@@ -102,3 +102,15 @@ the current photo. A replaced or deleted uploaded photo is removed from disk onc
 | Method | Path | Response |
 | ------ | ---- | -------- |
 | `GET` | `/uploads/slides/:file` | The uploaded photo, cached as immutable |
+
+## Public forms
+
+Both routes email the firm (`MAIL_TO`, default `info@lawage.co.tz`) through SMTP. Set
+`SMTP_HOST`, `SMTP_PORT` (465 or 587), `SMTP_USER`, `SMTP_PASS` and optionally `SMTP_FROM` in the
+hosting environment; until then they answer `503` with a message pointing to the email address.
+A non-empty `website` field (hidden honeypot) is treated as spam and silently accepted.
+
+| Method | Path | Body | Success |
+| ------ | ---- | ---- | ------- |
+| POST | `/api/contact` | `{ name, email, phone, area, message }` | `204` |
+| POST | `/api/subscribe` | `{ email }` | `204` |

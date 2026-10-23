@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import logo from "@/assets/lawage-logo.png";
 
-export const SITE_NAME = "LawAge Advocates & Consult";
+export const SITE_NAME = "LawAge Advocates";
 
 /** Title, description and social-share tags for a page; the share image defaults to the logo */
 export function pageMetadata({

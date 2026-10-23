@@ -3,10 +3,10 @@ import { pageMetadata } from "@/lib/seo";
 import { getPublicSlides } from "@/lib/slides";
 
 export const metadata = pageMetadata({
-  title: "LawAge Advocates & Consult | Trusted Legal Excellence for Every Client",
+  title: "LawAge Advocates | Trusted Legal Excellence for Every Client",
   description:
-    "LawAge Advocates & Consult is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, delivering practical, innovative and results-oriented legal solutions.",
-  ogTitle: "LawAge Advocates & Consult",
+    "LawAge Advocates is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, delivering practical, innovative and results-oriented legal solutions.",
+  ogTitle: "LawAge Advocates",
   ogDescription:
     "High-impact legal and advisory solutions across Tanzania, East Africa and international markets.",
 });

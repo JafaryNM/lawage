@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props) {
   const post = findPost((await params).slug);
   if (!post) return {};
   return pageMetadata({
-    title: `${post.title} | LawAge Advocates & Consult`,
+    title: `${post.title} | LawAge Advocates`,
     description: post.excerpt,
     ogTitle: post.title,
   });

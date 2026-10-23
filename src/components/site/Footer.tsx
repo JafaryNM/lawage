@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useState, type FormEvent } from "react";
 import {
   ArrowUp,
   ArrowUpRight,
   Facebook,
   Instagram,
   Linkedin,
+  Loader2,
   Mail,
   MapPin,
   Phone,
@@ -15,6 +17,8 @@ import {
 } from "lucide-react";
 
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+
+import { apiFetch } from "@/lib/api/client";
 
 import logo from "@/assets/lawage-logo.png";
 import ctaBg from "@/assets/client-consultation-cafe.jpg";
@@ -26,7 +30,7 @@ const QUICK_LINKS = [
   ["Who We Are", "/about"],
   ["Practice Areas", "/services"],
   ["Our Team", "/team"],
-  ["Legal Insights", "/blog"],
+  ["Updates", "/blog"],
   ["Contact Us", "/contact"],
 ] as const;
 
@@ -44,6 +48,74 @@ function FooterHeading({ children }: { children: string }) {
       <h4 className="text-[0.75rem] uppercase tracking-[0.22em] text-white">{children}</h4>
       <span className="mt-3 block h-0.5 w-8 bg-gold" />
     </div>
+  );
+}
+
+/** Industry alerts sign-up; /api/subscribe emails the address to the firm */
+function NewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [error, setError] = useState("");
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    setError("");
+    try {
+      await apiFetch("/api/subscribe", { method: "POST", body: { email, website } });
+      setEmail("");
+      setStatus("sent");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setStatus("idle");
+    }
+  };
+
+  return (
+    <form onSubmit={onSubmit} className="mt-7 max-w-sm">
+      <label htmlFor="footer-newsletter" className="text-[0.68rem] uppercase tracking-[0.2em] text-white/60">
+        Industry alerts &amp; insights
+      </label>
+      <div className="mt-3 flex items-center rounded-full border border-white/15 bg-white/5 p-1.5 transition-colors focus-within:border-gold">
+        <input
+          id="footer-newsletter"
+          required
+          type="email"
+          placeholder="Your email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full bg-transparent px-4 text-sm text-white outline-none placeholder:text-white/40"
+        />
+        {/* Honeypot: hidden from people, filled in by spam bots */}
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          className="hidden"
+        />
+        <button
+          type="submit"
+          aria-label="Subscribe"
+          disabled={status === "sending"}
+          className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-gold text-white transition-colors hover:bg-white hover:text-brand disabled:cursor-wait"
+        >
+          {status === "sending" ? (
+            <Loader2 className="size-4 animate-spin" strokeWidth={1.75} />
+          ) : (
+            <Send className="size-4" strokeWidth={1.75} />
+          )}
+        </button>
+      </div>
+      <div aria-live="polite" className="text-xs">
+        {status === "sent" && <p className="mt-3 text-white/80">Thank you for subscribing.</p>}
+        {error && <p className="mt-3 text-red-300">{error}</p>}
+      </div>
+    </form>
   );
 }
 
@@ -104,34 +176,14 @@ export function Footer() {
           {/* Brand + newsletter */}
           <div className="lg:col-span-5">
             <span className="inline-flex size-20 items-center justify-center rounded-full bg-white p-3.5">
-              <img src={logo.src} alt="LawAge Advocates & Consult logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
+              <img src={logo.src} alt="LawAge Advocates logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
             </span>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
               A full-service Tanzanian law firm delivering practical, innovative, and results-oriented
               legal solutions. A Class Above Legal Excellence.
             </p>
 
-            <form onSubmit={(e) => e.preventDefault()} className="mt-7 max-w-sm">
-              <label htmlFor="footer-newsletter" className="text-[0.68rem] uppercase tracking-[0.2em] text-white/60">
-                Industry alerts &amp; insights
-              </label>
-              <div className="mt-3 flex items-center rounded-full border border-white/15 bg-white/5 p-1.5 transition-colors focus-within:border-gold">
-                <input
-                  id="footer-newsletter"
-                  required
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full bg-transparent px-4 text-sm text-white outline-none placeholder:text-white/40"
-                />
-                <button
-                  type="submit"
-                  aria-label="Subscribe"
-                  className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-gold text-white transition-colors hover:bg-white hover:text-brand"
-                >
-                  <Send className="size-4" strokeWidth={1.75} />
-                </button>
-              </div>
-            </form>
+            <NewsletterForm />
           </div>
 
           {/* Quick links */}
@@ -199,7 +251,7 @@ export function Footer() {
                   href={href ?? "#"}
                   target={href ? "_blank" : undefined}
                   rel={href ? "noopener noreferrer" : undefined}
-                  aria-label={`LawAge Advocates & Consult on ${label}`}
+                  aria-label={`LawAge Advocates on ${label}`}
                   className="flex size-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-gold hover:bg-gold hover:text-white"
                 >
                   <Icon className="size-4" strokeWidth={1.5} />
@@ -210,33 +262,45 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* Bottom bar: links sit on the left and the right edge is padded, so nothing ends up
+          under the floating WhatsApp button */}
       <div className="border-t border-white/10 bg-black/20">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-6 text-xs text-white/55 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} LawAge Advocates & Consult. All rights reserved. Icons by{" "}
-            <a
-              href="https://www.flaticon.com/uicons"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-white"
-            >
-              Flaticon
-            </a>
-            .
-          </p>
-          <div className="flex items-center gap-6">
-            <Link href="/privacy-policy#privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link href="/privacy-policy#terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
-            <button
-              type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              aria-label="Back to top"
-              className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-gold text-white transition-transform hover:-translate-y-1"
-            >
-              <ArrowUp className="size-4" strokeWidth={1.75} />
-            </button>
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-6 pr-24 text-xs text-white/55 md:flex-row md:items-center md:justify-between md:pr-32">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+            <p>
+              © {new Date().getFullYear()} LawAge Advocates. All rights reserved. Icons by{" "}
+              <a
+                href="https://www.flaticon.com/uicons"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                Flaticon
+              </a>
+              , photos by{" "}
+              <a
+                href="https://www.freepik.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                Freepik
+              </a>
+              .
+            </p>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy-policy#privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+              <Link href="/privacy-policy#terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
+            </div>
           </div>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Back to top"
+            className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-gold text-white transition-transform hover:-translate-y-1"
+          >
+            <ArrowUp className="size-4" strokeWidth={1.75} />
+          </button>
         </div>
       </div>
       {/* Floating WhatsApp chat button, shown on every page */}

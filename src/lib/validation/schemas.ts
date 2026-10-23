@@ -39,3 +39,22 @@ export const LoginSchema = z.object({
   username: z.string().trim().min(1, "Enter your username."),
   password: z.string().min(1, "Enter your password."),
 });
+
+// `website` is a hidden honeypot field: people leave it empty, spam bots fill it in
+const honeypot = z.string().max(500).optional();
+
+/** Public contact form (POST /api/contact) */
+export const ContactSchema = z.object({
+  name: z.string().trim().min(1, "Enter your name.").max(120),
+  email: z.string().trim().email("Enter a valid email address.").max(200),
+  phone: z.string().trim().max(40),
+  area: z.string().trim().max(120),
+  message: z.string().trim().min(1, "Tell us briefly how we can help.").max(5000, "Keep the message under 5,000 characters."),
+  website: honeypot,
+});
+
+/** Footer newsletter sign-up (POST /api/subscribe) */
+export const SubscribeSchema = z.object({
+  email: z.string().trim().email("Enter a valid email address.").max(200),
+  website: honeypot,
+});

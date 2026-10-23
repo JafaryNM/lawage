@@ -9,9 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 import banner from "@/assets/hero-handshake-file.jpg";
 
 export const metadata = pageMetadata({
-  title: "Our Team | LawAge Advocates & Consult",
+  title: "Our Team | LawAge Advocates",
   description:
-    "Meet the advocates, consultants and support team of LawAge Advocates & Consult, a full-service Tanzanian law firm in Dodoma and Dar es Salaam.",
+    "Meet the advocates, consultants and support team of LawAge Advocates, a full-service Tanzanian law firm in Dodoma and Dar es Salaam.",
 });
 
 export default function TeamPage() {

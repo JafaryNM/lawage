@@ -8,9 +8,9 @@ import banner from "@/assets/law-library-justice.jpg";
 import servicesBg from "@/assets/services-dots-bg.jpg";
 
 export const metadata = pageMetadata({
-  title: "Our Services | LawAge Advocates & Consult",
+  title: "Our Services | LawAge Advocates",
   description:
-    "Corporate, litigation, mining, energy, intellectual property, data protection, tax, debt recovery, insurance, real estate, employment and public sector legal services from LawAge Advocates & Consult.",
+    "Corporate, litigation, mining, energy, intellectual property, data protection, tax, debt recovery, insurance, real estate, employment and public sector legal services from LawAge Advocates.",
 });
 
 export default function ServicesPage() {

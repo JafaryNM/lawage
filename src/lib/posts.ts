@@ -27,12 +27,12 @@ export const POSTS: Post[] = [
     excerpt:
       "A three-day course for reporting persons on complying with anti-money laundering, counter terrorist financing and counter financing of proliferation laws in light of recent amendments.",
     body: [
-      "LawAge Advocates & Consult offers a three-day training on compliance with Anti-Money Laundering, Counter Terrorist Financing and Counter Financing of Proliferation obligations for reporting persons, in light of the recent amendments.",
+      "LawAge Advocates offers a three-day training on compliance with Anti-Money Laundering, Counter Terrorist Financing and Counter Financing of Proliferation obligations for reporting persons, in light of the recent amendments.",
       "The course covers both international and domestic enforcement mechanisms. Understanding the international framework helps reporting persons see why compliance with domestic AML, CTF and CFP laws and regulations matters.",
       "Institutions that want to strengthen their compliance systems can contact the firm for the full course outline.",
     ],
     image: companiesImg.src,
-    author: "LawAge Advocates & Consult",
+    author: "LawAge Advocates",
     date: "2022-11-16",
   },
   {
@@ -47,7 +47,7 @@ export const POSTS: Post[] = [
       "The change is expected to raise revenue for Zanzibar and increase demand for Zanzibar-based accountants and lawyers. Companies operating in both parts of the Union may face higher compliance costs and should decide early how to structure their operations.",
     ],
     image: contractsImg.src,
-    author: "Adv. Stephen Msechu",
+    author: "LawAge Advocates",
     date: "2021-10-06",
   },
   {
@@ -61,7 +61,7 @@ export const POSTS: Post[] = [
       "Our analysis examines the proposed changes and their legal implications for private legal practitioners in Tanzania.",
     ],
     image: arbitrationImg.src,
-    author: "LawAge Advocates & Consult",
+    author: "LawAge Advocates",
     date: "2021-05-20",
   },
   {
@@ -76,7 +76,7 @@ export const POSTS: Post[] = [
       "Paul Revocatus Kaunda challenged the Speaker's decision through a constitutional petition. The Attorney General raised preliminary objections, and this briefing discusses the court's ruling on them.",
     ],
     image: estatesImg.src,
-    author: "LawAge Advocates & Consult",
+    author: "LawAge Advocates",
     date: "2020-06-20",
   },
   {
@@ -91,7 +91,7 @@ export const POSTS: Post[] = [
       "Authorities may no longer register, license or permit anyone to import, export, sell or manufacture prohibited bags. Businesses should review their packaging to avoid penalties.",
     ],
     image: landImg.src,
-    author: "LawAge Advocates & Consult",
+    author: "LawAge Advocates",
     date: "2019-05-08",
   },
 ];
