@@ -246,7 +246,27 @@ export const TEAM_MEMBERS: TeamMember[] = [
     slug: "secilia-john",
     name: "Secilia Dominick John",
     department: "Legal Support & Administration",
+    title: "Administrative Officer",
+    credentials: "M.Sc., LL.B., B.A.",
     photo: secilia.src,
+    bio: [
+      "Secilia is an administrative professional at LawAge Advocates, bringing a multidisciplinary background in law, climate change and sustainable development, and mass communication. She holds a Master of Science in Climate Change and Sustainable Development from the University of Dar es Salaam (UDSM), a Bachelor of Laws (LL.B) from Mzumbe University, and a Bachelor's degree in Mass Communication from UDSM.",
+      "Her professional experience encompasses legal documentation, land-related matters, office coordination, and administrative affairs. She has practical experience in preparing and reviewing legal documents, facilitating land title applications, coordinating office operations, and supporting the effective delivery of legal and administrative services.",
+      "At LawAge Advocates, Secilia supports daily administrative operations, documentation management, office coordination, and general administrative functions. Her legal background contributes to the organised handling of legal records and documentation, while her training in communication and sustainable development broadens her capacity to support institutional coordination and professional engagement.",
+      "Secilia is committed to professionalism, accuracy, effective communication, and efficient office management, contributing to a well-organised working environment and the smooth delivery of the firm's services.",
+    ],
+    qualifications: [
+      "M.Sc. in Climate Change and Sustainable Development, University of Dar es Salaam (UDSM)",
+      "Bachelor of Laws (LL.B), Mzumbe University",
+      "Bachelor's Degree in Mass Communication, University of Dar es Salaam (UDSM)",
+    ],
+    expertise: [
+      "Office Administration & Operations Coordination",
+      "Legal Documentation & Records Management",
+      "Land-Related Matters & Title Applications",
+      "Institutional Coordination & Communication",
+      "Sustainable Development & Climate Policy Insights",
+    ],
   },
   {
     slug: "sidaga-kihongo",
