@@ -40,8 +40,8 @@ export const FIRM_EMAIL = "info@lawage.co.tz";
 // them (meeting October 2026). Order here is the order on the Team page.
 export const DEPARTMENTS = [
   "Commercial & Strategic Sectors",
-  "Advocates",
   "Technology, Digital Rights, Policy & Litigation",
+  "Advocates",
   "Governance, Compliance & Investment",
   "Consultancy & Business Development",
   "Legal Support & Administration",
@@ -301,8 +301,8 @@ export const TEAM_BY_DEPARTMENT = DEPARTMENTS.map((department) => ({
 /** The firm's lead team, featured on the home page */
 const FEATURED_DEPARTMENTS: Department[] = [
   "Commercial & Strategic Sectors",
-  "Advocates",
   "Technology, Digital Rights, Policy & Litigation",
+  "Advocates",
   "Governance, Compliance & Investment",
   "Consultancy & Business Development",
 ];
