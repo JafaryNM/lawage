@@ -1,5 +1,5 @@
 import companiesImg from "@/assets/post-companies.jpg";
-import landImg from "@/assets/post-land.jpg";
+import landImg from "@/assets/post-land-regularisation.jpg";
 import contractsImg from "@/assets/post-contracts.jpg";
 import arbitrationImg from "@/assets/post-arbitration.jpg";
 import estatesImg from "@/assets/post-estates.jpg";
