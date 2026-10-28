@@ -9,7 +9,6 @@ import sidaga from "@/assets/team/sidaga-kihongo.jpg";
 import nassoro from "@/assets/team/nassoro-nassoro.jpg";
 
 export type TeamMember = {
-  /** URL of the profile page: /team/<slug> */
   slug: string;
   name: string;
   /** Department heading the person is listed under on the Team page */
@@ -311,4 +310,6 @@ export const FEATURED_TEAM = TEAM_MEMBERS.filter((m) =>
 );
 
 export const findTeamMember = (slug: string) =>
-  TEAM_MEMBERS.find((m) => m.slug === slug || (slug === "oliver-costa" && m.slug === "olivia-costa"));
+  TEAM_MEMBERS.find(
+    (m) => m.slug === slug || (slug === "oliver-costa" && m.slug === "olivia-costa"),
+  );
