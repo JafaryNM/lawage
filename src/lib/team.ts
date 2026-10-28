@@ -6,6 +6,7 @@ import innocent from "@/assets/team/innocent-mongi.jpg";
 import davis from "@/assets/team/davis-komba.jpg";
 import secilia from "@/assets/team/secilia-john.jpg";
 import sidaga from "@/assets/team/sidaga-kihongo.jpg";
+import nassoro from "@/assets/team/nassoro-nassoro.jpg";
 
 export type TeamMember = {
   /** URL of the profile page: /team/<slug> */
@@ -110,19 +111,108 @@ export const TEAM_MEMBERS: TeamMember[] = [
       "Legal Research & Drafting",
     ],
   },
-  { slug: "derick-olotu", name: "Derick Daudi Olotu", department: "Advocates", photo: derick.src },
   {
-    slug: "oliver-costa",
-    name: "Oliver Balilo Costa",
-    credentials: "CMgr MCMI",
+    slug: "derick-olotu",
+    name: "Adv. Derick Daudi Olotu",
+    department: "Advocates",
+    title: "Head of Insurance & Risk Advisory Department",
+    credentials: "Advocate of the High Court of Tanzania",
+    photo: derick.src,
+    bio: [
+      "Adv. Derick is an Advocate of the High Court of Tanzania with experience in legal advisory, litigation, regulatory compliance, and dispute resolution. At LawAge Advocates, his practice focuses on insurance law and insurance claims, assisting clients in addressing insurance-related disputes, understanding policy obligations, and pursuing appropriate legal remedies.",
+      "Derick has practical experience in legal research, drafting legal opinions and pleadings, interpreting statutory and contractual obligations, and representing clients before courts and regulatory authorities. His broader background in commercial law, taxation, corporate governance, and regulatory compliance enables him to approach insurance matters with an understanding of their legal, contractual, and commercial implications.",
+      "His professional experience includes working with LawAge Advocates, Lexmicus Attorneys, and the Tanzania Revenue Authority, where he gained valuable exposure to litigation, statutory interpretation, dispute management, and legal risk assessment. He holds a Bachelor of Laws (LL.B) from Saint Augustine University of Tanzania and a Postgraduate Diploma in Law from the Law School of Tanzania.",
+      "As Head of the Insurance & Risk Advisory Department at LawAge Advocates, Derick contributes to the firm's insurance advisory and dispute resolution services, with a focus on insurance claims, policy interpretation, claims disputes, liability assessment, and insurance-related litigation. He is committed to helping individuals and businesses understand their legal rights and obligations, manage insurance-related risks, and pursue fair and legally sound outcomes when disputes arise.",
+      "His approach combines careful legal analysis, attention to contractual and regulatory requirements, and practical client-focused advice to support effective claims resolution and the protection of clients' interests.",
+    ],
+    qualifications: [
+      "LL.B., Saint Augustine University of Tanzania (SAUT)",
+      "Postgraduate Diploma in Legal Practice, Law School of Tanzania",
+      "Advocate of the High Court of Tanzania",
+    ],
+    expertise: [
+      "Insurance Law & Insurance Claims",
+      "Policy Interpretation & Liability Assessment",
+      "Insurance Disputes & Litigation",
+      "Commercial Law & Taxation",
+      "Corporate Governance & Regulatory Compliance",
+      "Legal Opinions & Dispute Resolution",
+    ],
+  },
+  {
+    slug: "nassoro-nassoro",
+    name: "Nassoro Nassoro",
+    department: "Advocates",
+    title: "Legal Officer",
+    credentials: "LL.B. (RUCU)",
+    photo: nassoro.src,
+    bio: [
+      "Nassoro Nassoro is a Legal Officer at LawAge Advocates in Dodoma, with a professional focus on legal research, contract management, civil claims, litigation support, and client advisory services. He holds a Bachelor of Laws (LL.B) from Ruaha Catholic University of Iringa (RUCU), where he developed a strong foundation in legal analysis, advocacy, and the practical application of the law.",
+      "Nassoro gained practical exposure to judicial processes through his legal field practice at the Resident Magistrate’s Court of Dodoma. His academic training in moot court and participation in moot court sessions further strengthened his skills in legal research, case analysis, oral advocacy, and the presentation of legal arguments. These experiences contribute to his approach to legal practice, which emphasises thorough preparation, attention to detail, and clear, practical advice.",
+      "During his time at RUCU, Nassoro served as a member of the Electoral Commission of the RUCU Law Society (RULASO) and spent three years as a peer educator. These roles helped develop his leadership, communication, teamwork, and interpersonal skills, while reinforcing his appreciation for accountability, collaboration, and service to others.",
+      "His professional interests include litigation and dispute resolution, commercial and contract law, legal research, advocacy, and the development of effective legal solutions to everyday business and personal challenges. He is particularly interested in continuous professional development, strengthening access to justice, and exploring how legal practice can respond to the evolving needs of individuals, businesses, and institutions.",
+      "At LawAge Advocates, Nassoro supports clients in contractual matters, civil claims, legal documentation, and related advisory services. He contributes to the preparation and review of legal documents, legal research, and the development of practical approaches to resolving clients’ legal challenges.",
+    ],
+    qualifications: [
+      "LL.B., Ruaha Catholic University of Iringa (RUCU)",
+      "Former Member, Electoral Commission of RUCU Law Society (RULASO)",
+    ],
+    expertise: [
+      "Litigation Support & Civil Claims",
+      "Contract Management & Review",
+      "Legal Research & Drafting",
+      "Commercial Law Advisory",
+      "Dispute Resolution & Advocacy",
+    ],
+  },
+  {
+    slug: "olivia-costa",
+    name: "Olivia Costa",
+    credentials: "CMgr MCMI | Executive Director, TATIC",
     department: "Consultancy & Business Development",
+    title: "Head of International Trade & Investment Advisory",
     photo: oliver.src,
+    bio: [
+      "Ms Olivia Costa is a professional in international trade, investment advocacy, strategic partnerships, and institutional engagement, with extensive experience in coalition leadership and stakeholder coordination. Since 2018, she has served as Executive Director of the Tanzania Trade & Investment Coalition (TATIC), leading initiatives that bring together civil society organisations and other stakeholders to engage on trade and investment policies and promote inclusive participation in national and international economic decision-making.",
+      "Olivia has undertaken leadership and management training in the United Kingdom, including programmes with the Chartered Management Institute and the Institute of Administrative Management. Her professional development also includes a PRINCE2 Project Management Practitioner course at Coventry University and executive training at Columbia University in New York, complemented by training in communications, advocacy, lobbying, project coordination, trade, and investment.",
+      "Her international engagement includes participation in Bilateral Investment Treaty discussions, United Nations Conference on Trade and Development (UNCTAD) forums, and World Trade Organization (WTO) public dialogues. Through these platforms, she has gained experience in international economic policy discussions, stakeholder representation, strategic networking, and facilitating dialogue between civil society and other actors involved in shaping trade and investment frameworks.",
+      "At LawAge Advocates, Olivia contributes to the International Trade & Investment Advisory function, drawing on her experience in institutional relations, stakeholder engagement, partnership development, and investment policy advocacy. Her work supports initiatives aimed at strengthening connections between investors, businesses, public institutions, civil society organisations, and other strategic partners, while identifying opportunities for collaboration and sustainable business development.",
+      "Olivia brings a collaborative and strategic approach to international trade and investment engagement, with a particular interest in fostering productive partnerships, improving stakeholder coordination, and supporting an enabling environment for investment and cross-border economic cooperation.",
+    ],
+    qualifications: [
+      "Chartered Management Institute (CMI), UK",
+      "Institute of Administrative Management, UK",
+      "PRINCE2 Project Management Practitioner, Coventry University",
+      "Executive Training, Columbia University in New York",
+    ],
+    expertise: [
+      "International Trade & Investment Advisory",
+      "Investment Policy Advocacy & Bilateral Investment Treaties",
+      "Strategic Partnerships & Coalition Leadership",
+      "Institutional Relations & Stakeholder Engagement",
+      "PRINCE2 Project Management",
+      "Cross-Border Economic Cooperation",
+    ],
   },
   {
     slug: "innocent-mongi",
     name: "Innocent Daniel Mongi",
     department: "Consultancy & Business Development",
+    title: "Business Development Manager",
+    credentials: "Business Development Manager",
     photo: innocent.src,
+    bio: [
+      "Innocent Daniel Mongi is a Business Development Manager at LawAge Advocates, responsible for identifying business opportunities, developing strategic partnerships, and strengthening relationships with clients, institutions, and other stakeholders. His role focuses on supporting the firm's growth, expanding its professional networks, and creating opportunities for collaboration across its legal and consultancy services.",
+      "Innocent brings a relationship-driven approach to business development, emphasising effective communication, strategic planning, stakeholder engagement, and the identification of opportunities that align with the firm's objectives. He contributes to strengthening the firm's market presence, building lasting client relationships, and supporting initiatives that promote sustainable business growth.",
+      "At LawAge Advocates, Innocent works to connect the firm's capabilities with emerging market opportunities, foster productive partnerships, and enhance its engagement with clients and strategic stakeholders. His professional approach is guided by integrity, accountability, innovation, professionalism, and collaboration, which he considers essential to building trusted relationships and achieving long-term business objectives.",
+    ],
+    expertise: [
+      "Business Development & Growth Strategy",
+      "Strategic Partnerships & Alliances",
+      "Client Relationship Management",
+      "Stakeholder Engagement",
+      "Market Opportunity Identification",
+    ],
   },
   {
     slug: "davis-komba",
@@ -200,4 +290,5 @@ export const FEATURED_TEAM = TEAM_MEMBERS.filter((m) =>
   FEATURED_DEPARTMENTS.includes(m.department),
 );
 
-export const findTeamMember = (slug: string) => TEAM_MEMBERS.find((m) => m.slug === slug);
+export const findTeamMember = (slug: string) =>
+  TEAM_MEMBERS.find((m) => m.slug === slug || (slug === "oliver-costa" && m.slug === "olivia-costa"));

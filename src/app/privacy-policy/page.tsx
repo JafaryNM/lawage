@@ -6,9 +6,9 @@ import { PageBanner } from "@/components/site/PageBanner";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Privacy Policy & Terms | LawAge Advocates & Consult",
+  title: "Privacy Policy & Terms | LawAge Advocates",
   description:
-    "Terms & Conditions and Personal Data Protection & Privacy Statement of LawAge Advocates & Consult, in line with the Tanzania Personal Data Protection Act, 2022.",
+    "Terms & Conditions and Personal Data Protection & Privacy Statement of LawAge Advocates, in line with the Tanzania Personal Data Protection Act, 2022.",
 });
 
 const EFFECTIVE_DATE = "1st October 2026";
@@ -248,7 +248,7 @@ const PARTS: Part[] = [
             </P>
             <dl className="mt-5 grid gap-3 border-l-4 border-gold bg-brand/5 p-6 text-sm sm:grid-cols-[auto_1fr] sm:gap-x-6">
               <dt className="font-semibold text-foreground">Firm Name</dt>
-              <dd className="text-muted-foreground">LawAge Advocates &amp; Consult</dd>
+              <dd className="text-muted-foreground">LawAge Advocates</dd>
               <dt className="font-semibold text-foreground">Physical Address</dt>
               <dd className="text-muted-foreground">
                 Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma –
@@ -294,7 +294,7 @@ export default function PrivacyPolicy() {
         <section className="mt-12">
           <h3 className="text-xl md:text-2xl">1. Introduction</h3>
           <P>
-            Welcome to the website of LawAge Advocates &amp; Consult ("LawAge Advocates," "we,"
+            Welcome to the website of LawAge Advocates ("LawAge Advocates," "we,"
             "us," or "our"). By accessing or using our website (www.lawage.co.tz), you agree to
             comply with these Terms &amp; Conditions and our Privacy Statement. If you do not agree,
             please do not use our website.

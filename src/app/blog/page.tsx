@@ -11,9 +11,9 @@ import { pageMetadata } from "@/lib/seo";
 import banner from "@/assets/law-library-justice.jpg";
 
 export const metadata = pageMetadata({
-  title: "Legal Updates | LawAge Advocates & Consult",
+  title: "Legal Updates | LawAge Advocates",
   description:
-    "Legal updates, analyses and briefings from LawAge Advocates & Consult on Tanzanian law, regulation and policy.",
+    "Legal updates, analyses and briefings from LawAge Advocates on Tanzanian law, regulation and policy.",
 });
 
 // Article pages link here filtered by practice area (?area=<service slug>)

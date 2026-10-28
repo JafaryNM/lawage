@@ -12,7 +12,7 @@ import { LogoutButton } from "./LogoutButton";
 import logo from "@/assets/lawage-logo.png";
 
 export const metadata: Metadata = {
-  title: "Admin | LawAge Advocates & Consult",
+  title: "Admin | LawAge Advocates",
   robots: { index: false, follow: false },
 };
 

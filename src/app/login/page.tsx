@@ -10,7 +10,7 @@ import { LoginForm } from "./LoginForm";
 import sideImage from "@/assets/law-library-justice.jpg";
 
 export const metadata: Metadata = {
-  title: "Admin Sign In | LawAge Advocates & Consult",
+  title: "Admin Sign In | LawAge Advocates",
   robots: { index: false, follow: false },
 };
 
@@ -35,7 +35,7 @@ export default async function LoginPage() {
           <span className="block h-0.5 w-12 bg-gold" />
           <h2 className="mt-6 text-4xl leading-tight">Admin Portal</h2>
           <p className="mt-4 text-base leading-relaxed text-white/75">
-            Manage the LawAge Advocates &amp; Consult website: legal updates, team profiles,
+            Manage the LawAge Advocates website: legal updates, team profiles,
             practice areas and client enquiries.
           </p>
         </div>

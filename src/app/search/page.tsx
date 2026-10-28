@@ -12,8 +12,8 @@ import banner from "@/assets/law-library-justice.jpg";
 
 export const metadata = {
   ...pageMetadata({
-    title: "Search | LawAge Advocates & Consult",
-    description: "Search articles, practice areas and team members of LawAge Advocates & Consult.",
+    title: "Search | LawAge Advocates",
+    description: "Search articles, practice areas and team members of LawAge Advocates.",
   }),
   robots: { index: false, follow: true },
 };

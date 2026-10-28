@@ -25,16 +25,16 @@ export function generateStaticParams() {
   return TEAM_MEMBERS.map(({ slug }) => ({ slug }));
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props) {
   const member = findTeamMember((await params).slug);
   if (!member) return {};
   return pageMetadata({
-    title: `${member.name} | LawAge Advocates & Consult`,
+    title: `${member.name} | LawAge Advocates`,
     description:
       member.bio?.[0] ??
-      `${member.name}, ${member.department}, LawAge Advocates & Consult, Tanzania.`,
+      `${member.name}, ${member.department}, LawAge Advocates, Tanzania.`,
     image: member.photo,
   });
 }

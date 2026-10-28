@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { NewsletterForm } from "@/components/site/NewsletterForm";
 
 import logo from "@/assets/lawage-logo.png";
 import ctaBg from "@/assets/client-consultation-cafe.jpg";
@@ -26,7 +27,7 @@ const QUICK_LINKS = [
   ["Who We Are", "/about"],
   ["Practice Areas", "/services"],
   ["Our Team", "/team"],
-  ["Legal Insights", "/blog"],
+  ["Updates", "/blog"],
   ["Contact Us", "/contact"],
 ] as const;
 
@@ -104,34 +105,14 @@ export function Footer() {
           {/* Brand + newsletter */}
           <div className="lg:col-span-5">
             <span className="inline-flex size-20 items-center justify-center rounded-full bg-white p-3.5">
-              <img src={logo.src} alt="LawAge Advocates & Consult logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
+              <img src={logo.src} alt="LawAge Advocates logo" className="h-full w-auto" loading="lazy" width={679} height={770} />
             </span>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
               A full-service Tanzanian law firm delivering practical, innovative, and results-oriented
               legal solutions. A Class Above Legal Excellence.
             </p>
 
-            <form onSubmit={(e) => e.preventDefault()} className="mt-7 max-w-sm">
-              <label htmlFor="footer-newsletter" className="text-[0.68rem] uppercase tracking-[0.2em] text-white/60">
-                Industry alerts &amp; insights
-              </label>
-              <div className="mt-3 flex items-center rounded-full border border-white/15 bg-white/5 p-1.5 transition-colors focus-within:border-gold">
-                <input
-                  id="footer-newsletter"
-                  required
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full bg-transparent px-4 text-sm text-white outline-none placeholder:text-white/40"
-                />
-                <button
-                  type="submit"
-                  aria-label="Subscribe"
-                  className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-gold text-white transition-colors hover:bg-white hover:text-brand"
-                >
-                  <Send className="size-4" strokeWidth={1.75} />
-                </button>
-              </div>
-            </form>
+            <NewsletterForm />
           </div>
 
           {/* Quick links */}
@@ -199,7 +180,7 @@ export function Footer() {
                   href={href ?? "#"}
                   target={href ? "_blank" : undefined}
                   rel={href ? "noopener noreferrer" : undefined}
-                  aria-label={`LawAge Advocates & Consult on ${label}`}
+                  aria-label={`LawAge Advocates on ${label}`}
                   className="flex size-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-gold hover:bg-gold hover:text-white"
                 >
                   <Icon className="size-4" strokeWidth={1.5} />
@@ -214,7 +195,7 @@ export function Footer() {
       <div className="border-t border-white/10 bg-black/20">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-6 text-xs text-white/55 md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} LawAge Advocates & Consult. All rights reserved. Icons by{" "}
+            © {new Date().getFullYear()} LawAge Advocates. All rights reserved. Icons by{" "}
             <a
               href="https://www.flaticon.com/uicons"
               target="_blank"
@@ -225,7 +206,7 @@ export function Footer() {
             </a>
             .
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 md:mr-24">
             <Link href="/privacy-policy#privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
             <Link href="/privacy-policy#terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
             <button

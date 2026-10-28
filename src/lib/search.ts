@@ -23,8 +23,8 @@ const PAGES: Entry[] = [
   {
     title: "Home",
     href: "/",
-    excerpt: "LawAge Advocates & Consult, a full-service Tanzanian law firm.",
-    keywords: "home lawage advocates consult law firm tanzania",
+    excerpt: "LawAge Advocates, a full-service Tanzanian law firm.",
+    keywords: "home lawage advocates law firm tanzania",
     body: "",
   },
   {
@@ -44,7 +44,7 @@ const PAGES: Entry[] = [
   {
     title: "Our Team",
     href: "/team",
-    excerpt: "Advocates, consultants and staff by department.",
+    excerpt: "Advocates, specialists and staff by department.",
     keywords: "team people advocates lawyers staff departments",
     body: "",
   },

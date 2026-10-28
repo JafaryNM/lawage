@@ -9,7 +9,7 @@ import { SlidesCard } from "./SlidesCard";
 
 // Sections still edited in code; counts come from the site's content files
 const SECTIONS: DashboardCardProps[] = [
-  { title: "Legal Updates", text: "Blog posts and briefings", count: POSTS.length, Icon: FileText },
+  { title: "Legal Updates", text: "Legal updates and briefings", count: POSTS.length, Icon: FileText },
   { title: "Team", text: "People across all departments", count: TEAM_MEMBERS.length, Icon: Users },
   { title: "Practice Areas", text: "Services offered", count: SERVICES.length, Icon: Scale },
   { title: "Enquiries", text: "Messages from the contact form", count: null, Icon: Inbox },

@@ -12,7 +12,7 @@ import storyImg from "@/assets/about-scales-gavel.jpg";
 import vmBg from "@/assets/law-library-justice.jpg";
 
 export const metadata = pageMetadata({
-  title: "About Us | LawAge Advocates & Consult",
+  title: "About Us | LawAge Advocates",
   description:
     "LawAge Advocates is a full-service Tanzanian law firm with offices in Dodoma and Dar es Salaam, combining legal excellence with commercial insight.",
 });
@@ -26,7 +26,7 @@ const VISION_MISSION: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: Flag,
     title: "Our Mission",
-    text: "To provide exceptional legal and advisory services through professionalism, innovation, and strategic partnerships while creating sustainable value for our clients, promoting the rule of law, and contributing to national and regional development.",
+    text: "To deliver innovative legal solutions shaping business success and advancing justice with integrity and excellence.",
   },
 ];
 

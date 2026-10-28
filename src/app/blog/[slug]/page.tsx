@@ -17,13 +17,13 @@ export function generateStaticParams() {
   return POSTS.map(({ slug }) => ({ slug }));
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props) {
   const post = findPost((await params).slug);
   if (!post) return {};
   return pageMetadata({
-    title: `${post.title} | LawAge Advocates & Consult`,
+    title: `${post.title} | LawAge Advocates`,
     description: post.excerpt,
     ogTitle: post.title,
   });
@@ -83,14 +83,77 @@ export default async function BlogPost({ params }: Props) {
             />
           </div>
 
-          <p className="mt-10 font-display text-xl leading-relaxed text-foreground">
-            {post.excerpt}
-          </p>
-          {post.body.map((para) => (
-            <p key={para} className="mt-6 text-base leading-relaxed text-muted-foreground">
-              {para}
-            </p>
-          ))}
+          <div className="prose prose-lg max-w-none">
+            {post.body.map((para, idx) => {
+              const trimmed = para.trim();
+              if (!trimmed) return null;
+
+              // Top level numbered sections (e.g., "1. What Has Changed Under the Law?")
+              if (/^\d+\.\s+[A-Z]/.test(trimmed)) {
+                return (
+                  <h2
+                    key={idx}
+                    className="mt-12 mb-4 pt-4 border-t border-border/50 text-2xl font-bold tracking-tight text-foreground md:text-3xl"
+                  >
+                    {trimmed}
+                  </h2>
+                );
+              }
+
+              // Subsection lettered headings (e.g., "A. Risk assessment and governance")
+              if (/^[A-E]\.\s+[A-Z]/.test(trimmed)) {
+                return (
+                  <h3 key={idx} className="mt-8 mb-3 text-xl font-bold text-foreground">
+                    {trimmed}
+                  </h3>
+                );
+              }
+
+              // Standalone headings like "Disclaimer", "About Us", "About LawAge Advocates"
+              if (/^(disclaimer|about us|about lawage advocates)[\s:]*$/i.test(trimmed)) {
+                return (
+                  <h3
+                    key={idx}
+                    className="mt-10 mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand"
+                  >
+                    {trimmed}
+                  </h3>
+                );
+              }
+
+              // Standalone short section headings without terminal punctuation
+              if (
+                trimmed.length < 90 &&
+                !/[.;]$/.test(trimmed) &&
+                (trimmed.endsWith("?") || /^(have you|protect your|the way forward|conclusion)/i.test(trimmed))
+              ) {
+                return (
+                  <h3 key={idx} className="mt-8 mb-3 text-xl font-bold text-foreground">
+                    {trimmed}
+                  </h3>
+                );
+              }
+
+              // Legal disclaimers callout
+              if (/^this article is (intended|provided)|this executive briefing is provided/i.test(trimmed)) {
+                return (
+                  <div
+                    key={idx}
+                    className="mt-6 rounded-lg border-l-4 border-gold bg-muted/40 p-5 text-sm italic leading-relaxed text-muted-foreground"
+                  >
+                    {trimmed}
+                  </div>
+                );
+              }
+
+              // Regular body paragraph
+              return (
+                <p key={idx} className="mt-6 text-base leading-relaxed text-muted-foreground">
+                  {trimmed}
+                </p>
+              );
+            })}
+          </div>
 
           {service && (
             <div className="mt-12 flex flex-col items-start gap-4 rounded-[8px] border-l-4 border-brand bg-[#f0f0f0] px-8 py-7 sm:flex-row sm:items-center sm:justify-between">

@@ -23,7 +23,7 @@ const NAV_ITEMS = [
     href: "/team",
   },
   {
-    label: "Blog",
+    label: "Updates",
     href: "/blog",
   },
   {
@@ -61,7 +61,7 @@ export function Header({ theme = "dark" }: HeaderProps) {
         <a href="/" className="shrink-0">
           <img
             src={logo.src}
-            alt="LawAge Advocates & Consult logo"
+            alt="LawAge Advocates logo"
             className={`h-11 w-auto md:h-14 transition-all duration-300 ${
               isHeaderLight ? "" : "brightness-0 invert"
             }`}

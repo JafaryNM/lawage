@@ -23,7 +23,6 @@ const EMAIL = "info@lawage.co.tz";
 const PHONES = [
   { label: "+255 713 282263", note: "Call", href: "tel:+255713282263" },
   { label: "+255 777 626294", note: "WhatsApp", href: WHATSAPP_URL },
-  { label: "+255 736 626290", note: "Office", href: "tel:+255736626290" },
 ];
 
 const inputClass =
@@ -202,7 +201,7 @@ export function ContactPage() {
       {/* MAP */}
       <section aria-label="Office location map" className="relative">
         <iframe
-          title="LawAge Advocates & Consult office location"
+          title="LawAge Advocates office location"
           src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=16&output=embed`}
           className="block h-[420px] w-full border-0"
           loading="lazy"
