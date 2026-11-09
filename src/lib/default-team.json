@@ -5,7 +5,7 @@
     "department": "Commercial & Strategic Sectors",
     "title": "Managing Partner – Commercial & Strategic Sectors Department",
     "credentials": "Co-Founder, LawAge Advocates",
-    "photo": "asset:stephen",
+    "photo": "/assets/team/stephen-msechu.jpg",
     "bio": [
       "Stephen Wilbard Msechu is the Co-Founder and Managing Partner at LawAge Advocates, bringing over a decade of elite experience to Tanzania’s corporate, regulatory, and constitutional legal landscapes. Grounded in the firm’s core philosophy that the client’s best interest always comes first, Stephen guides businesses, international investors, individuals and non-profits through complex frameworks with seamless, results-driven clarity.",
       "His specialized practice spans Corporate Law, Foreign Investment, Real Estate & Conveyancing, and Mining & Extractives Law. A versatile practitioner, he is an accomplished Arbitrator adept at resolving complex commercial disputes outside the courtroom. Extending his expertise directly into the property sector, he also serves as a Director at Steady Estate Company Limited, driving strategic real estate investments and asset management.",
@@ -34,7 +34,7 @@
     "department": "Legal Support & Administration",
     "title": "Administrative Officer",
     "credentials": "M.Sc., LL.B., B.A.",
-    "photo": "asset:secilia",
+    "photo": "/assets/team/secilia-john.jpg",
     "bio": [
       "Secilia is an administrative professional at LawAge Advocates, bringing a multidisciplinary background in law, climate change and sustainable development, and mass communication. She holds a Master of Science in Climate Change and Sustainable Development from the University of Dar es Salaam (UDSM), a Bachelor of Laws (LL.B) from Mzumbe University, and a Bachelor's degree in Mass Communication from UDSM.",
       "Her professional experience encompasses legal documentation, land-related matters, office coordination, and administrative affairs. She has practical experience in preparing and reviewing legal documents, facilitating land title applications, coordinating office operations, and supporting the effective delivery of legal and administrative services.",
@@ -60,7 +60,7 @@
     "department": "Technology, Digital Rights, Policy & Litigation",
     "title": "Head of Technology, Digital Rights, Policy & Litigation Department",
     "credentials": "Advocate of the High Court of Tanzania",
-    "photo": "asset:robert",
+    "photo": "/assets/team/robert-majige.jpg",
     "linkedin": "https://www.linkedin.com/in/robert-sylivester-majige-7a265a204/",
     "bio": [
       "Adv. Robert Sylivester Majige is an Advocate of the High Court of Tanzania with expertise spanning legal practice, technology, public policy and digital governance.",
@@ -91,7 +91,7 @@
     "department": "Advocates",
     "title": "Head of Insurance & Risk Advisory Department",
     "credentials": "Advocate of the High Court of Tanzania",
-    "photo": "asset:derick",
+    "photo": "/assets/team/derick-olotu.jpg",
     "bio": [
       "Adv. Derick is an Advocate of the High Court of Tanzania with experience in legal advisory, litigation, regulatory compliance, and dispute resolution. At LawAge Advocates, his practice focuses on insurance law and insurance claims, assisting clients in addressing insurance-related disputes, understanding policy obligations, and pursuing appropriate legal remedies.",
       "Derick has practical experience in legal research, drafting legal opinions and pleadings, interpreting statutory and contractual obligations, and representing clients before courts and regulatory authorities. His broader background in commercial law, taxation, corporate governance, and regulatory compliance enables him to approach insurance matters with an understanding of their legal, contractual, and commercial implications.",
@@ -118,7 +118,7 @@
     "name": "Davis Betram Komba",
     "department": "Governance, Compliance & Investment",
     "title": "Head of Governance, Compliance and Investment Department",
-    "photo": "asset:davis",
+    "photo": "/assets/team/davis-komba.jpg",
     "linkedin": "https://tz.linkedin.com/in/davis-betram-komba-jr-a70875113",
     "bio": [
       "Davis Betram Komba is a Tanzanian lawyer, governance and human-rights practitioner, researcher, and youth leadership advocate with experience spanning legal practice, civil society, policy advocacy, organisational leadership, and community development.",
@@ -147,7 +147,7 @@
     "credentials": "CMgr MCMI | Executive Director, TATIC",
     "department": "Consultancy & Business Development",
     "title": "Head of International Trade & Investment Advisory",
-    "photo": "asset:oliver",
+    "photo": "/assets/team/oliver-costa.jpg",
     "bio": [
       "Ms Olivia Costa is a professional in international trade, investment advocacy, strategic partnerships, and institutional engagement, with extensive experience in coalition leadership and stakeholder coordination. Since 2018, she has served as Executive Director of the Tanzania Trade & Investment Coalition (TATIC), leading initiatives that bring together civil society organisations and other stakeholders to engage on trade and investment policies and promote inclusive participation in national and international economic decision-making.",
       "Olivia has undertaken leadership and management training in the United Kingdom, including programmes with the Chartered Management Institute and the Institute of Administrative Management. Her professional development also includes a PRINCE2 Project Management Practitioner course at Coventry University and executive training at Columbia University in New York, complemented by training in communications, advocacy, lobbying, project coordination, trade, and investment.",
@@ -176,7 +176,7 @@
     "department": "Consultancy & Business Development",
     "title": "Business Development Manager",
     "credentials": "Business Development Manager",
-    "photo": "asset:innocent",
+    "photo": "/assets/team/innocent-mongi.jpg",
     "bio": [
       "Innocent Daniel Mongi is a Business Development Manager at LawAge Advocates, responsible for identifying business opportunities, developing strategic partnerships, and strengthening relationships with clients, institutions, and other stakeholders. His role focuses on supporting the firm's growth, expanding its professional networks, and creating opportunities for collaboration across its legal and consultancy services.",
       "Innocent brings a relationship-driven approach to business development, emphasising effective communication, strategic planning, stakeholder engagement, and the identification of opportunities that align with the firm's objectives. He contributes to strengthening the firm's market presence, building lasting client relationships, and supporting initiatives that promote sustainable business growth.",
@@ -196,7 +196,7 @@
     "department": "Advocates",
     "title": "Legal Officer",
     "credentials": "LL.B. (RUCU)",
-    "photo": "asset:nassoro",
+    "photo": "/assets/team/nassoro-nassoro.jpg",
     "bio": [
       "Nassoro Nassoro is a Legal Officer at LawAge Advocates in Dodoma, with a professional focus on legal research, contract management, civil claims, litigation support, and client advisory services. He holds a Bachelor of Laws (LL.B) from Ruaha Catholic University of Iringa (RUCU), where he developed a strong foundation in legal analysis, advocacy, and the practical application of the law.",
       "Nassoro gained practical exposure to judicial processes through his legal field practice at the Resident Magistrate’s Court of Dodoma. His academic training in moot court and participation in moot court sessions further strengthened his skills in legal research, case analysis, oral advocacy, and the presentation of legal arguments. These experiences contribute to his approach to legal practice, which emphasises thorough preparation, attention to detail, and clear, practical advice.",
@@ -222,7 +222,7 @@
     "department": "Technology & Data",
     "title": "Machine Learning Engineer | Data Scientist | AI & Backend Systems Specialist",
     "credentials": "Hamasa Media Group",
-    "photo": "asset:sidaga",
+    "photo": "/assets/team/sidaga-kihongo.jpg",
     "bio": [
       "Sidaga Waziri Kihongo is a Tanzanian technology professional specializing in data science, machine learning, artificial intelligence, and software development. He focuses on building data-driven solutions, intelligent systems, and backend applications that solve real-world problems.",
       "He works as a Machine Learning Engineer and Data Analyst at Hamasa Media Group, where he develops data processing, analytics, and automation solutions for media monitoring and evaluation. His expertise includes machine learning, statistical analysis, Python programming, database management, and enterprise software development.",
