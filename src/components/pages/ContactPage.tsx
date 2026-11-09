@@ -191,46 +191,61 @@ export function ContactPage({
                   </button>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
+                <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2" suppressHydrationWarning>
                   {errorMessage && (
                     <div className="sm:col-span-2 rounded bg-destructive/10 p-3 text-xs text-destructive">
                       {errorMessage}
                     </div>
                   )}
 
-                  <Field label="Full Name">
+                  <Field label="Full Name" id="contact-name">
                     <input
+                      id="contact-name"
+                      name="name"
+                      autoComplete="name"
                       required
                       placeholder="Your name"
                       value={form.name}
                       onChange={update("name")}
                       className={inputClass}
+                      suppressHydrationWarning
                     />
                   </Field>
-                  <Field label="Email">
+                  <Field label="Email" id="contact-email">
                     <input
+                      id="contact-email"
+                      name="email"
+                      autoComplete="email"
                       required
                       type="email"
                       placeholder="you@example.com"
                       value={form.email}
                       onChange={update("email")}
                       className={inputClass}
+                      suppressHydrationWarning
                     />
                   </Field>
-                  <Field label="Phone">
+                  <Field label="Phone" id="contact-phone">
                     <input
+                      id="contact-phone"
+                      name="phone"
+                      autoComplete="tel"
                       type="tel"
                       placeholder="+255 …"
                       value={form.phone}
                       onChange={update("phone")}
                       className={inputClass}
+                      suppressHydrationWarning
                     />
                   </Field>
-                  <Field label="Practice Area">
+                  <Field label="Practice Area" id="contact-area">
                     <select
+                      id="contact-area"
+                      name="area"
                       value={form.area}
                       onChange={update("area")}
                       className={`${inputClass} cursor-pointer`}
+                      suppressHydrationWarning
                     >
                       <option value="">Select a practice area</option>
                       {servicesList.map((s) => (
@@ -240,14 +255,17 @@ export function ContactPage({
                       ))}
                     </select>
                   </Field>
-                  <Field label="Message" wide>
+                  <Field label="Message" id="contact-message" wide>
                     <textarea
+                      id="contact-message"
+                      name="message"
                       required
                       rows={5}
                       placeholder="How can we help?"
                       value={form.message}
                       onChange={update("message")}
                       className={`${inputClass} resize-y`}
+                      suppressHydrationWarning
                     />
                   </Field>
                   <div className="sm:col-span-2">
@@ -300,19 +318,24 @@ export function ContactPage({
 
 function Field({
   label,
+  id,
   wide = false,
   children,
 }: {
   label: string;
+  id?: string;
   wide?: boolean;
   children: ReactNode;
 }) {
   return (
-    <label className={`block ${wide ? "sm:col-span-2" : ""}`}>
-      <span className="mb-2 block text-[0.7rem] uppercase tracking-[0.2em] text-foreground">
+    <div className={`block ${wide ? "sm:col-span-2" : ""}`} suppressHydrationWarning>
+      <label
+        htmlFor={id}
+        className="mb-2 block text-[0.7rem] uppercase tracking-[0.2em] text-foreground"
+      >
         {label}
-      </span>
+      </label>
       {children}
-    </label>
+    </div>
   );
 }
