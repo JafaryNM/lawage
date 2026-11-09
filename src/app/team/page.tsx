@@ -3,8 +3,8 @@ import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { TeamList } from "@/components/site/TeamList";
-import { getDbTeamByDepartment } from "@/lib/cms-server";
-import { TEAM_BY_DEPARTMENT } from "@/lib/team";
+import { getDbTeam } from "@/lib/cms-server";
+import { TEAM_MEMBERS } from "@/lib/team";
 import { pageMetadata } from "@/lib/seo";
 
 import banner from "@/assets/hero-handshake-file.jpg";
@@ -16,8 +16,8 @@ export const metadata = pageMetadata({
 });
 
 export default function TeamPage() {
-  const dbGroups = getDbTeamByDepartment();
-  const groups = dbGroups.length ? dbGroups : TEAM_BY_DEPARTMENT;
+  const allTeam = getDbTeam({ onlyActive: true });
+  const members = allTeam.length ? allTeam : TEAM_MEMBERS;
 
   return (
     <div className="min-h-screen bg-background">
@@ -37,7 +37,7 @@ export default function TeamPage() {
           </p>
 
           <TeamList
-            members={groups.flatMap((group) => group.members)}
+            members={members}
             className="mt-14"
           />
         </div>

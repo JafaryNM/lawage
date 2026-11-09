@@ -371,15 +371,20 @@ export function getDbTeamByDepartment(): { department: Department; members: CmsT
 }
 
 export function getDbFeaturedTeam(): CmsTeamMember[] {
-  const FEATURED_DEPTS = [
-    "Commercial & Strategic Sectors",
-    "Technology, Digital Rights, Policy & Litigation",
-    "Advocates",
-    "Governance, Compliance & Investment",
-    "Consultancy & Business Development",
+  const FEATURED_SLUGS = [
+    "stephen-msechu",
+    "secilia-john",
+    "robert-majige",
+    "derick-olotu",
+    "davis-komba",
+    "olivia-costa",
+    "innocent-mongi",
+    "nassoro-nassoro",
   ];
   const members = getDbTeam({ onlyActive: true });
-  return members.filter((m) => FEATURED_DEPTS.includes(m.department));
+  return FEATURED_SLUGS.map((slug) =>
+    members.find((m) => m.slug === slug),
+  ).filter(Boolean) as CmsTeamMember[];
 }
 
 /* =========================================================================

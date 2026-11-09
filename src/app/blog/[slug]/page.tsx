@@ -36,6 +36,39 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
+function renderInlineLinks(text: string) {
+  const parts: React.ReactNode[] = [];
+  const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    const anchor = match[1];
+    const url = match[2];
+    parts.push(
+      <a
+        key={match.index}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-gold hover:decoration-gold"
+      >
+        {anchor}
+      </a>,
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex === 0) return text;
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  return <>{parts}</>;
+}
+
 export default async function BlogPost({ params }: Props) {
   const post = findPost((await params).slug);
   if (!post) notFound();
@@ -109,7 +142,7 @@ export default async function BlogPost({ params }: Props) {
                     key={idx}
                     className="mt-12 mb-4 pt-4 border-t border-border/50 text-2xl font-bold tracking-tight text-foreground md:text-3xl"
                   >
-                    {trimmed}
+                    {renderInlineLinks(trimmed)}
                   </h2>
                 );
               }
@@ -118,7 +151,7 @@ export default async function BlogPost({ params }: Props) {
               if (/^[A-E]\.\s+[A-Z]/.test(trimmed)) {
                 return (
                   <h3 key={idx} className="mt-8 mb-3 text-xl font-bold text-foreground">
-                    {trimmed}
+                    {renderInlineLinks(trimmed)}
                   </h3>
                 );
               }
@@ -130,7 +163,7 @@ export default async function BlogPost({ params }: Props) {
                     key={idx}
                     className="mt-10 mb-2 text-sm font-bold uppercase tracking-[0.2em] text-brand"
                   >
-                    {trimmed}
+                    {renderInlineLinks(trimmed)}
                   </h3>
                 );
               }
@@ -143,7 +176,7 @@ export default async function BlogPost({ params }: Props) {
               ) {
                 return (
                   <h3 key={idx} className="mt-8 mb-3 text-xl font-bold text-foreground">
-                    {trimmed}
+                    {renderInlineLinks(trimmed)}
                   </h3>
                 );
               }
@@ -155,7 +188,7 @@ export default async function BlogPost({ params }: Props) {
                     key={idx}
                     className="mt-6 rounded-lg border-l-4 border-gold bg-muted/40 p-5 text-sm italic leading-relaxed text-muted-foreground"
                   >
-                    {trimmed}
+                    {renderInlineLinks(trimmed)}
                   </div>
                 );
               }
@@ -163,7 +196,7 @@ export default async function BlogPost({ params }: Props) {
               // Regular body paragraph
               return (
                 <p key={idx} className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  {trimmed}
+                  {renderInlineLinks(trimmed)}
                 </p>
               );
             })}

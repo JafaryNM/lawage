@@ -29,6 +29,32 @@
     ]
   },
   {
+    "slug": "secilia-john",
+    "name": "Secilia Dominick John",
+    "department": "Legal Support & Administration",
+    "title": "Administrative Officer",
+    "credentials": "M.Sc., LL.B., B.A.",
+    "photo": "asset:secilia",
+    "bio": [
+      "Secilia is an administrative professional at LawAge Advocates, bringing a multidisciplinary background in law, climate change and sustainable development, and mass communication. She holds a Master of Science in Climate Change and Sustainable Development from the University of Dar es Salaam (UDSM), a Bachelor of Laws (LL.B) from Mzumbe University, and a Bachelor's degree in Mass Communication from UDSM.",
+      "Her professional experience encompasses legal documentation, land-related matters, office coordination, and administrative affairs. She has practical experience in preparing and reviewing legal documents, facilitating land title applications, coordinating office operations, and supporting the effective delivery of legal and administrative services.",
+      "At LawAge Advocates, Secilia supports daily administrative operations, documentation management, office coordination, and general administrative functions. Her legal background contributes to the organised handling of legal records and documentation, while her training in communication and sustainable development broadens her capacity to support institutional coordination and professional engagement.",
+      "Secilia is committed to professionalism, accuracy, effective communication, and efficient office management, contributing to a well-organised working environment and the smooth delivery of the firm's services."
+    ],
+    "qualifications": [
+      "M.Sc. in Climate Change and Sustainable Development, University of Dar es Salaam (UDSM)",
+      "Bachelor of Laws (LL.B), Mzumbe University",
+      "Bachelor's Degree in Mass Communication, University of Dar es Salaam (UDSM)"
+    ],
+    "expertise": [
+      "Office Administration & Operations Coordination",
+      "Legal Documentation & Records Management",
+      "Land-Related Matters & Title Applications",
+      "Institutional Coordination & Communication",
+      "Sustainable Development & Climate Policy Insights"
+    ]
+  },
+  {
     "slug": "robert-majige",
     "name": "Robert Sylivester Majige",
     "department": "Technology, Digital Rights, Policy & Litigation",
@@ -88,29 +114,31 @@
     ]
   },
   {
-    "slug": "nassoro-nassoro",
-    "name": "Nassoro Nassoro",
-    "department": "Advocates",
-    "title": "Legal Officer",
-    "credentials": "LL.B. (RUCU)",
-    "photo": "asset:nassoro",
+    "slug": "davis-komba",
+    "name": "Davis Betram Komba",
+    "department": "Governance, Compliance & Investment",
+    "title": "Head of Governance, Compliance and Investment Department",
+    "photo": "asset:davis",
+    "linkedin": "https://tz.linkedin.com/in/davis-betram-komba-jr-a70875113",
     "bio": [
-      "Nassoro Nassoro is a Legal Officer at LawAge Advocates in Dodoma, with a professional focus on legal research, contract management, civil claims, litigation support, and client advisory services. He holds a Bachelor of Laws (LL.B) from Ruaha Catholic University of Iringa (RUCU), where he developed a strong foundation in legal analysis, advocacy, and the practical application of the law.",
-      "Nassoro gained practical exposure to judicial processes through his legal field practice at the Resident Magistrate’s Court of Dodoma. His academic training in moot court and participation in moot court sessions further strengthened his skills in legal research, case analysis, oral advocacy, and the presentation of legal arguments. These experiences contribute to his approach to legal practice, which emphasises thorough preparation, attention to detail, and clear, practical advice.",
-      "During his time at RUCU, Nassoro served as a member of the Electoral Commission of the RUCU Law Society (RULASO) and spent three years as a peer educator. These roles helped develop his leadership, communication, teamwork, and interpersonal skills, while reinforcing his appreciation for accountability, collaboration, and service to others.",
-      "His professional interests include litigation and dispute resolution, commercial and contract law, legal research, advocacy, and the development of effective legal solutions to everyday business and personal challenges. He is particularly interested in continuous professional development, strengthening access to justice, and exploring how legal practice can respond to the evolving needs of individuals, businesses, and institutions.",
-      "At LawAge Advocates, Nassoro supports clients in contractual matters, civil claims, legal documentation, and related advisory services. He contributes to the preparation and review of legal documents, legal research, and the development of practical approaches to resolving clients’ legal challenges."
+      "Davis Betram Komba is a Tanzanian lawyer, governance and human-rights practitioner, researcher, and youth leadership advocate with experience spanning legal practice, civil society, policy advocacy, organisational leadership, and community development.",
+      "His professional interests and practice areas include land and real estate law, corporate and commercial law, human rights, data protection, digital governance, regulatory compliance, policy development, and access to justice.",
+      "Beyond legal practice, Davis has extensive experience working with civil society organisations and youth-led initiatives, with a particular focus on youth civic participation, climate justice, governance, human rights, research, and institutional strengthening. He has held leadership and governance roles within several organisations and has participated in national and international initiatives addressing youth empowerment, democratic participation, climate action, and public policy.",
+      "Davis combines legal knowledge with research, advocacy, leadership, and strategic communication to support institutions, communities, young people, and businesses in navigating complex legal, governance, and policy challenges."
     ],
     "qualifications": [
-      "LL.B., Ruaha Catholic University of Iringa (RUCU)",
-      "Former Member, Electoral Commission of RUCU Law Society (RULASO)"
+      "LL.B., Mzumbe University",
+      "Postgraduate Diploma in Legal Practice, Law School of Tanzania"
     ],
     "expertise": [
-      "Litigation Support & Civil Claims",
-      "Contract Management & Review",
-      "Legal Research & Drafting",
-      "Commercial Law Advisory",
-      "Dispute Resolution & Advocacy"
+      "Land & Real Estate Law",
+      "Corporate & Commercial Law",
+      "Regulatory Compliance",
+      "Governance & Institutional Strengthening",
+      "Data Protection & Digital Governance",
+      "Human Rights & Access to Justice",
+      "Policy Development & Advocacy",
+      "Legal Research"
     ]
   },
   {
@@ -163,57 +191,29 @@
     ]
   },
   {
-    "slug": "davis-komba",
-    "name": "Davis Betram Komba",
-    "department": "Governance, Compliance & Investment",
-    "title": "Head of Governance, Compliance and Investment Department",
-    "photo": "asset:davis",
-    "linkedin": "https://tz.linkedin.com/in/davis-betram-komba-jr-a70875113",
+    "slug": "nassoro-nassoro",
+    "name": "Nassoro Nassoro",
+    "department": "Advocates",
+    "title": "Legal Officer",
+    "credentials": "LL.B. (RUCU)",
+    "photo": "asset:nassoro",
     "bio": [
-      "Davis Betram Komba is a Tanzanian lawyer, governance and human-rights practitioner, researcher, and youth leadership advocate with experience spanning legal practice, civil society, policy advocacy, organisational leadership, and community development.",
-      "His professional interests and practice areas include land and real estate law, corporate and commercial law, human rights, data protection, digital governance, regulatory compliance, policy development, and access to justice.",
-      "Beyond legal practice, Davis has extensive experience working with civil society organisations and youth-led initiatives, with a particular focus on youth civic participation, climate justice, governance, human rights, research, and institutional strengthening. He has held leadership and governance roles within several organisations and has participated in national and international initiatives addressing youth empowerment, democratic participation, climate action, and public policy.",
-      "Davis combines legal knowledge with research, advocacy, leadership, and strategic communication to support institutions, communities, young people, and businesses in navigating complex legal, governance, and policy challenges."
+      "Nassoro Nassoro is a Legal Officer at LawAge Advocates in Dodoma, with a professional focus on legal research, contract management, civil claims, litigation support, and client advisory services. He holds a Bachelor of Laws (LL.B) from Ruaha Catholic University of Iringa (RUCU), where he developed a strong foundation in legal analysis, advocacy, and the practical application of the law.",
+      "Nassoro gained practical exposure to judicial processes through his legal field practice at the Resident Magistrate’s Court of Dodoma. His academic training in moot court and participation in moot court sessions further strengthened his skills in legal research, case analysis, oral advocacy, and the presentation of legal arguments. These experiences contribute to his approach to legal practice, which emphasises thorough preparation, attention to detail, and clear, practical advice.",
+      "During his time at RUCU, Nassoro served as a member of the Electoral Commission of the RUCU Law Society (RULASO) and spent three years as a peer educator. These roles helped develop his leadership, communication, teamwork, and interpersonal skills, while reinforcing his appreciation for accountability, collaboration, and service to others.",
+      "His professional interests include litigation and dispute resolution, commercial and contract law, legal research, advocacy, and the development of effective legal solutions to everyday business and personal challenges. He is particularly interested in continuous professional development, strengthening access to justice, and exploring how legal practice can respond to the evolving needs of individuals, businesses, and institutions.",
+      "At LawAge Advocates, Nassoro supports clients in contractual matters, civil claims, legal documentation, and related advisory services. He contributes to the preparation and review of legal documents, legal research, and the development of practical approaches to resolving clients’ legal challenges."
     ],
     "qualifications": [
-      "LL.B., Mzumbe University",
-      "Postgraduate Diploma in Legal Practice, Law School of Tanzania"
+      "LL.B., Ruaha Catholic University of Iringa (RUCU)",
+      "Former Member, Electoral Commission of RUCU Law Society (RULASO)"
     ],
     "expertise": [
-      "Land & Real Estate Law",
-      "Corporate & Commercial Law",
-      "Regulatory Compliance",
-      "Governance & Institutional Strengthening",
-      "Data Protection & Digital Governance",
-      "Human Rights & Access to Justice",
-      "Policy Development & Advocacy",
-      "Legal Research"
-    ]
-  },
-  {
-    "slug": "secilia-john",
-    "name": "Secilia Dominick John",
-    "department": "Legal Support & Administration",
-    "title": "Administrative Officer",
-    "credentials": "M.Sc., LL.B., B.A.",
-    "photo": "asset:secilia",
-    "bio": [
-      "Secilia is an administrative professional at LawAge Advocates, bringing a multidisciplinary background in law, climate change and sustainable development, and mass communication. She holds a Master of Science in Climate Change and Sustainable Development from the University of Dar es Salaam (UDSM), a Bachelor of Laws (LL.B) from Mzumbe University, and a Bachelor's degree in Mass Communication from UDSM.",
-      "Her professional experience encompasses legal documentation, land-related matters, office coordination, and administrative affairs. She has practical experience in preparing and reviewing legal documents, facilitating land title applications, coordinating office operations, and supporting the effective delivery of legal and administrative services.",
-      "At LawAge Advocates, Secilia supports daily administrative operations, documentation management, office coordination, and general administrative functions. Her legal background contributes to the organised handling of legal records and documentation, while her training in communication and sustainable development broadens her capacity to support institutional coordination and professional engagement.",
-      "Secilia is committed to professionalism, accuracy, effective communication, and efficient office management, contributing to a well-organised working environment and the smooth delivery of the firm's services."
-    ],
-    "qualifications": [
-      "M.Sc. in Climate Change and Sustainable Development, University of Dar es Salaam (UDSM)",
-      "Bachelor of Laws (LL.B), Mzumbe University",
-      "Bachelor's Degree in Mass Communication, University of Dar es Salaam (UDSM)"
-    ],
-    "expertise": [
-      "Office Administration & Operations Coordination",
-      "Legal Documentation & Records Management",
-      "Land-Related Matters & Title Applications",
-      "Institutional Coordination & Communication",
-      "Sustainable Development & Climate Policy Insights"
+      "Litigation Support & Civil Claims",
+      "Contract Management & Review",
+      "Legal Research & Drafting",
+      "Commercial Law Advisory",
+      "Dispute Resolution & Advocacy"
     ]
   },
   {
