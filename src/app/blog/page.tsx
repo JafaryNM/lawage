@@ -4,8 +4,9 @@ import { ArrowUpRight, Calendar, User } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
-import { SERVICES } from "@/lib/services";
+import { getDbPosts, getDbServices } from "@/lib/cms-server";
 import { POSTS, formatPostDate, type Post } from "@/lib/posts";
+import { SERVICES } from "@/lib/services";
 import { pageMetadata } from "@/lib/seo";
 
 import banner from "@/assets/law-library-justice.jpg";
@@ -19,15 +20,22 @@ export const metadata = pageMetadata({
 // Article pages link here filtered by practice area (?area=<service slug>)
 type Props = { searchParams: Promise<{ area?: string | string[] }> };
 
-const areaTitle = (slug: string) => SERVICES.find((s) => s.slug === slug)?.title ?? "";
-
 export default async function Blog({ searchParams }: Props) {
+  const allServices = getDbServices({ onlyActive: true });
+  const servicesList = allServices.length ? allServices : SERVICES;
+
+  const areaTitle = (slug: string) => servicesList.find((s) => s.slug === slug)?.title ?? "";
+
   const requested = (await searchParams).area;
   const area =
-    typeof requested === "string" && SERVICES.some((s) => s.slug === requested)
+    typeof requested === "string" && servicesList.some((s) => s.slug === requested)
       ? requested
       : undefined;
-  const posts = [...POSTS]
+
+  const allPosts = getDbPosts({ onlyActive: true });
+  const postsList = allPosts.length ? allPosts : POSTS;
+
+  const posts = [...postsList]
     .filter((p) => !area || p.area === area)
     .sort((a, b) => b.date.localeCompare(a.date));
 

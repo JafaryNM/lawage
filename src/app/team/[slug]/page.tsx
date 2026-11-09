@@ -14,21 +14,30 @@ import {
   firstNameOf,
   profileEmail,
 } from "@/components/site/TeamProfile";
-import { TEAM_MEMBERS, findTeamMember } from "@/lib/team";
+import { getDbTeam, getDbTeamMemberBySlug } from "@/lib/cms-server";
+import { TEAM_MEMBERS, findTeamMember as findStaticMember } from "@/lib/team";
 import { pageMetadata } from "@/lib/seo";
 
 import banner from "@/assets/hero-handshake-file.jpg";
 
 type Props = { params: Promise<{ slug: string }> };
 
+function findMember(slug: string) {
+  const dbMember = getDbTeamMemberBySlug(slug);
+  if (dbMember) return dbMember;
+  return findStaticMember(slug);
+}
+
 export function generateStaticParams() {
+  const dbTeam = getDbTeam();
+  if (dbTeam.length) return dbTeam.map(({ slug }) => ({ slug }));
   return TEAM_MEMBERS.map(({ slug }) => ({ slug }));
 }
 
 export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props) {
-  const member = findTeamMember((await params).slug);
+  const member = findMember((await params).slug);
   if (!member) return {};
   return pageMetadata({
     title: `${member.name} | LawAge Advocates`,
@@ -40,11 +49,14 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function TeamMemberPage({ params }: Props) {
-  const member = findTeamMember((await params).slug);
+  const member = findMember((await params).slug);
   if (!member) notFound();
 
   const firstName = firstNameOf(member);
-  const colleagues = TEAM_MEMBERS.filter(
+  const allTeam = getDbTeam({ onlyActive: true });
+  const teamList = allTeam.length ? allTeam : TEAM_MEMBERS;
+
+  const colleagues = teamList.filter(
     (m) => m.department === member.department && m.slug !== member.slug,
   );
   const email = profileEmail(member);
@@ -53,7 +65,7 @@ export default async function TeamMemberPage({ params }: Props) {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* PROFILE HEADER — photo in an offset gold frame beside name, title and contact buttons */}
+      {/* PROFILE HEADER */}
       <section className="relative isolate overflow-hidden bg-brand-deep pt-[130px] pb-16 text-white md:pt-[150px] md:pb-20">
         <img
           src={banner.src}

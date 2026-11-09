@@ -3,6 +3,7 @@ import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { TeamList } from "@/components/site/TeamList";
+import { getDbTeamByDepartment } from "@/lib/cms-server";
 import { TEAM_BY_DEPARTMENT } from "@/lib/team";
 import { pageMetadata } from "@/lib/seo";
 
@@ -15,6 +16,9 @@ export const metadata = pageMetadata({
 });
 
 export default function TeamPage() {
+  const dbGroups = getDbTeamByDepartment();
+  const groups = dbGroups.length ? dbGroups : TEAM_BY_DEPARTMENT;
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -32,9 +36,8 @@ export default function TeamPage() {
             solutions. Select anyone to read their profile.
           </p>
 
-          {/* Everyone in one list, ordered by department (see DEPARTMENTS in src/lib/team.ts) */}
           <TeamList
-            members={TEAM_BY_DEPARTMENT.flatMap((group) => group.members)}
+            members={groups.flatMap((group) => group.members)}
             className="mt-14"
           />
         </div>

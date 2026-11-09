@@ -33,10 +33,15 @@ export default async function AdminLayout({ children }: { children: ReactNode })
                   Admin
                 </span>
               </Link>
-              <nav className="flex items-center gap-5 text-sm">
+              <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                 {[
                   ["Dashboard", "/admin"],
                   ["Slideshow", "/admin/slides"],
+                  ["Legal Updates", "/admin/posts"],
+                  ["Team", "/admin/team"],
+                  ["Practice Areas", "/admin/services"],
+                  ["Site Settings", "/admin/settings"],
+                  ["Enquiries", "/admin/enquiries"],
                 ].map(([label, href]) => (
                   <Link
                     key={href}

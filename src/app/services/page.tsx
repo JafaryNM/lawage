@@ -2,6 +2,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
+import { getDbServices } from "@/lib/cms-server";
+import { SERVICES } from "@/lib/services";
 import { pageMetadata } from "@/lib/seo";
 
 import banner from "@/assets/law-library-justice.jpg";
@@ -14,6 +16,9 @@ export const metadata = pageMetadata({
 });
 
 export default function ServicesPage() {
+  const allServices = getDbServices({ onlyActive: true });
+  const services = allServices.length ? allServices : SERVICES;
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -26,7 +31,7 @@ export default function ServicesPage() {
         style={{ backgroundImage: `url(${servicesBg.src})` }}
       >
         <div className="mx-auto max-w-[1200px] px-6">
-          <ServicesGrid />
+          <ServicesGrid services={services} />
         </div>
       </section>
 

@@ -1,55 +1,99 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { Mail, MapPin, Navigation, Phone, Send } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, MapPin, Navigation, Phone, Send } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer, WHATSAPP_URL } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
-
 import { SERVICES } from "@/lib/services";
 
 import banner from "@/assets/contact-banner.jpg";
 
-// Details from lawage.co.tz/contact-us
-const ADDRESS =
+// Default details from lawage.co.tz/contact-us
+const DEFAULT_ADDRESS =
   "Plot 33, Block AC, Medeli, Tambukareli, First Floor, P.O. Box 1909, Dodoma, Tanzania";
-const DAR_ADDRESS =
+const DEFAULT_DAR_ADDRESS =
   "3rd Floor, Sukari House, Sokoine Drive/Ohio Street, P.O. Box 75841, Dar es Salaam";
-// The office's Google Maps listing (Makulu, Dodoma), as sent by the client
 const MAP_QUERY = "Tanzania Office of Sundy Law Firm, Makulu 41107, Dodoma, Tanzania";
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAP_QUERY)}`;
-const EMAIL = "info@lawage.co.tz";
-const PHONES = [
-  { label: "+255 713 282263", note: "Call", href: "tel:+255713282263" },
-  { label: "+255 777 626294", note: "WhatsApp", href: WHATSAPP_URL },
-];
+const DEFAULT_EMAIL = "info@lawage.co.tz";
 
 const inputClass =
   "w-full border border-border bg-white px-4 py-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-brand";
 
-const INFO: { Icon: typeof MapPin; title: string; lines: { text: string; href?: string }[] }[] = [
-  { Icon: MapPin, title: "Dodoma Office", lines: [{ text: ADDRESS }] },
-  { Icon: MapPin, title: "Dar es Salaam Office", lines: [{ text: DAR_ADDRESS }] },
-  {
-    Icon: Phone,
-    title: "Call or WhatsApp",
-    lines: PHONES.map(({ label, note, href }) => ({ text: `${label} · ${note}`, href })),
-  },
-  { Icon: Mail, title: "Email Us", lines: [{ text: EMAIL, href: `mailto:${EMAIL}` }] },
-];
+export type ContactSettings = {
+  address_dodoma?: string;
+  address_dar?: string;
+  email_primary?: string;
+  phone_call?: string;
+  phone_whatsapp?: string;
+};
 
-export function ContactPage() {
+export function ContactPage({
+  settings,
+  services,
+}: {
+  settings?: ContactSettings;
+  services?: { slug: string; title: string }[];
+}) {
+  const address = settings?.address_dodoma || DEFAULT_ADDRESS;
+  const darAddress = settings?.address_dar || DEFAULT_DAR_ADDRESS;
+  const email = settings?.email_primary || DEFAULT_EMAIL;
+  const phoneCall = settings?.phone_call || "+255 713 282263";
+  const phoneWhatsapp = settings?.phone_whatsapp || "+255 777 626294";
+  const servicesList = services && services.length ? services : SERVICES;
+
+  const infoItems: { Icon: typeof MapPin; title: string; lines: { text: string; href?: string }[] }[] = [
+    { Icon: MapPin, title: "Dodoma Office", lines: [{ text: address }] },
+    { Icon: MapPin, title: "Dar es Salaam Office", lines: [{ text: darAddress }] },
+    {
+      Icon: Phone,
+      title: "Call or WhatsApp",
+      lines: [
+        { text: `${phoneCall} · Call`, href: `tel:${phoneCall.replace(/[^0-9+]/g, "")}` },
+        { text: `${phoneWhatsapp} · WhatsApp`, href: WHATSAPP_URL },
+      ],
+    },
+    { Icon: Mail, title: "Email Us", lines: [{ text: email, href: `mailto:${email}` }] },
+  ];
+
   const [form, setForm] = useState({ name: "", email: "", phone: "", area: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const update = (key: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  // No form backend yet: open the visitor's email app with the message pre-filled
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const subject = `Enquiry from ${form.name}${form.area ? ` – ${form.area}` : ""}`;
-    const body = `${form.message}\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nPractice area: ${form.area || "Not specified"}`;
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData?.error?.message || "Failed to send message. Please try again.");
+      }
+
+      setIsSubmitted(true);
+      setForm({ name: "", email: "", phone: "", area: "", message: "" });
+    } catch (err: any) {
+      setErrorMessage(err.message || "Something went wrong.");
+      // Fallback: allow sending via mailto if network error
+      const subject = `Enquiry from ${form.name}${form.area ? ` – ${form.area}` : ""}`;
+      const body = `${form.message}\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nPractice area: ${form.area || "Not specified"}`;
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -92,7 +136,7 @@ export function ContactPage() {
               </p>
 
               <ul className="mt-10 space-y-8">
-                {INFO.map(({ Icon, title, lines }) => (
+                {infoItems.map(({ Icon, title, lines }) => (
                   <li key={title} className="flex gap-5">
                     <span className="flex size-12 shrink-0 items-center justify-center bg-gold">
                       <Icon className="size-5" strokeWidth={1.6} />
@@ -131,68 +175,100 @@ export function ContactPage() {
                 Tell us briefly about your matter and the right advocate will get back to you.
               </p>
 
-              <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
-                <Field label="Full Name">
-                  <input
-                    required
-                    placeholder="Your name"
-                    value={form.name}
-                    onChange={update("name")}
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label="Email">
-                  <input
-                    required
-                    type="email"
-                    placeholder="you@example.com"
-                    value={form.email}
-                    onChange={update("email")}
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label="Phone">
-                  <input
-                    type="tel"
-                    placeholder="+255 …"
-                    value={form.phone}
-                    onChange={update("phone")}
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label="Practice Area">
-                  <select
-                    value={form.area}
-                    onChange={update("area")}
-                    className={`${inputClass} cursor-pointer`}
-                  >
-                    <option value="">Select a practice area</option>
-                    {SERVICES.map((s) => (
-                      <option key={s.slug} value={s.title}>
-                        {s.title}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="Message" wide>
-                  <textarea
-                    required
-                    rows={5}
-                    placeholder="How can we help?"
-                    value={form.message}
-                    onChange={update("message")}
-                    className={`${inputClass} resize-y`}
-                  />
-                </Field>
-                <div className="sm:col-span-2">
+              {isSubmitted ? (
+                <div className="mt-8 rounded-[6px] border border-gold/40 bg-brand/5 p-8 text-center">
+                  <CheckCircle2 className="mx-auto size-12 text-gold" />
+                  <h4 className="mt-4 text-2xl font-normal text-foreground">Message Received</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Thank you for reaching out. One of our advocates will review your enquiry and get back to you promptly.
+                  </p>
                   <button
-                    type="submit"
-                    className="inline-flex cursor-pointer items-center gap-2 bg-brand px-9 py-4 text-[0.78rem] uppercase tracking-[0.2em] text-white transition-colors hover:bg-brand-deep"
+                    type="button"
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-6 inline-block bg-brand px-6 py-2.5 text-xs uppercase tracking-wider text-white hover:bg-brand-deep"
                   >
-                    Send Message <Send className="size-4" strokeWidth={1.5} />
+                    Send Another Message
                   </button>
                 </div>
-              </form>
+              ) : (
+                <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
+                  {errorMessage && (
+                    <div className="sm:col-span-2 rounded bg-destructive/10 p-3 text-xs text-destructive">
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  <Field label="Full Name">
+                    <input
+                      required
+                      placeholder="Your name"
+                      value={form.name}
+                      onChange={update("name")}
+                      className={inputClass}
+                    />
+                  </Field>
+                  <Field label="Email">
+                    <input
+                      required
+                      type="email"
+                      placeholder="you@example.com"
+                      value={form.email}
+                      onChange={update("email")}
+                      className={inputClass}
+                    />
+                  </Field>
+                  <Field label="Phone">
+                    <input
+                      type="tel"
+                      placeholder="+255 …"
+                      value={form.phone}
+                      onChange={update("phone")}
+                      className={inputClass}
+                    />
+                  </Field>
+                  <Field label="Practice Area">
+                    <select
+                      value={form.area}
+                      onChange={update("area")}
+                      className={`${inputClass} cursor-pointer`}
+                    >
+                      <option value="">Select a practice area</option>
+                      {servicesList.map((s) => (
+                        <option key={s.slug} value={s.title}>
+                          {s.title}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                  <Field label="Message" wide>
+                    <textarea
+                      required
+                      rows={5}
+                      placeholder="How can we help?"
+                      value={form.message}
+                      onChange={update("message")}
+                      className={`${inputClass} resize-y`}
+                    />
+                  </Field>
+                  <div className="sm:col-span-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex cursor-pointer items-center gap-2 bg-brand px-9 py-4 text-[0.78rem] uppercase tracking-[0.2em] text-white transition-colors hover:bg-brand-deep disabled:opacity-70"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          Sending... <Loader2 className="size-4 animate-spin" />
+                        </>
+                      ) : (
+                        <>
+                          Send Message <Send className="size-4" strokeWidth={1.5} />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

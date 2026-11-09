@@ -6,11 +6,29 @@ import { Footer } from "@/components/site/Footer";
 import { FlatIcon } from "@/components/site/FlatIcon";
 import { PageBanner } from "@/components/site/PageBanner";
 import { SERVICES, type Service } from "@/lib/services";
-
 import helpBg from "@/assets/law-library-justice.jpg";
 
+export type ServiceContactSettings = {
+  address_dodoma?: string;
+  email_primary?: string;
+  phone_call?: string;
+};
+
 /** Practice-area page: services list and help box on the left, service overview on the right */
-export function ServiceDetail({ service }: { service: Service }) {
+export function ServiceDetail({
+  service,
+  services,
+  settings,
+}: {
+  service: Service;
+  services?: Service[];
+  settings?: ServiceContactSettings;
+}) {
+  const servicesList = services ?? SERVICES;
+  const address = settings?.address_dodoma ?? "Plot 33, Block AC, Medeli, Tambukareli, Dodoma, Tanzania";
+  const email = settings?.email_primary ?? "info@lawage.co.tz";
+  const phone = settings?.phone_call ?? "+255 713 282263";
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -26,7 +44,7 @@ export function ServiceDetail({ service }: { service: Service }) {
           {/* SIDEBAR */}
           <aside className="order-2 space-y-10 lg:order-1 lg:sticky lg:top-32 lg:self-start">
             <ul className="space-y-4">
-              {SERVICES.map((s) => {
+              {servicesList.map((s) => {
                 const active = s.slug === service.slug;
                 return (
                   <li key={s.slug}>
@@ -59,21 +77,21 @@ export function ServiceDetail({ service }: { service: Service }) {
               <ul className="mt-6 space-y-4 text-sm text-white/85">
                 <li className="flex gap-3">
                   <MapPin className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.75} />
-                  Plot 33, Block AC, Medeli, Tambukareli, Dodoma, Tanzania
+                  {address}
                 </li>
                 <li className="flex gap-3">
                   <Mail className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.75} />
-                  <a href="mailto:info@lawage.co.tz" className="transition-colors hover:text-white">
-                    info@lawage.co.tz
+                  <a href={`mailto:${email}`} className="transition-colors hover:text-white">
+                    {email}
                   </a>
                 </li>
               </ul>
               <a
-                href="tel:+255713282263"
+                href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
                 className="mt-6 flex items-center gap-3 text-xl text-white transition-colors hover:text-gold"
               >
                 <Phone className="size-5 text-gold" strokeWidth={1.75} />
-                +255 713 282263
+                {phone}
               </a>
             </div>
           </aside>

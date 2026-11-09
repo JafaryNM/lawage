@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
 import { WorkProcess } from "@/components/site/WorkProcess";
 import { Partners } from "@/components/site/Partners";
+import { getDbSettings } from "@/lib/cms-server";
 import { pageMetadata } from "@/lib/seo";
 
 // Scales of justice and gavel, Pexels (pexels.com/photo/5669619), free under the Pexels licence
@@ -66,6 +67,15 @@ const CORE_VALUES = [
 ];
 
 export default function About() {
+  const settings = getDbSettings();
+  const visionText = settings?.vision || "To be a leading law firm in Tanzania and beyond, recognized for delivering innovative legal solutions, shaping business success, and advancing justice with integrity and excellence.";
+  const missionText = settings?.mission || "To deliver innovative legal solutions shaping business success and advancing justice with integrity and excellence.";
+
+  const visionMission = [
+    { icon: Eye, title: "Our Vision", text: visionText },
+    { icon: Flag, title: "Our Mission", text: missionText },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -143,7 +153,7 @@ export default function About() {
           </div>
 
           <div className="relative mt-14 grid gap-6 md:grid-cols-2 md:gap-10">
-            {VISION_MISSION.map(({ icon: Icon, title, text }) => (
+            {visionMission.map(({ icon: Icon, title, text }) => (
               <article
                 key={title}
                 className="group relative border border-white/15 bg-white/[0.07] p-8 backdrop-blur-md transition-colors duration-500 hover:border-gold/60 hover:bg-white/[0.11] md:p-12"

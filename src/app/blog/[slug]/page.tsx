@@ -5,15 +5,22 @@ import { ArrowLeft, Calendar, User } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageBanner } from "@/components/site/PageBanner";
+import { getDbPostBySlug, getDbPosts, getDbServices } from "@/lib/cms-server";
 import { SERVICES } from "@/lib/services";
 import { POSTS, formatPostDate } from "@/lib/posts";
 import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
-const findPost = (slug: string) => POSTS.find((p) => p.slug === slug);
+function findPost(slug: string) {
+  const dbPost = getDbPostBySlug(slug);
+  if (dbPost) return dbPost;
+  return POSTS.find((p) => p.slug === slug);
+}
 
 export function generateStaticParams() {
+  const dbPosts = getDbPosts();
+  if (dbPosts.length) return dbPosts.map(({ slug }) => ({ slug }));
   return POSTS.map(({ slug }) => ({ slug }));
 }
 
@@ -32,8 +39,15 @@ export async function generateMetadata({ params }: Props) {
 export default async function BlogPost({ params }: Props) {
   const post = findPost((await params).slug);
   if (!post) notFound();
-  const service = SERVICES.find((s) => s.slug === post.area);
-  const related = POSTS.filter((p) => p.slug !== post.slug)
+
+  const services = getDbServices();
+  const service = services.find((s) => s.slug === post.area) ?? SERVICES.find((s) => s.slug === post.area);
+
+  const allPosts = getDbPosts({ onlyActive: true });
+  const postsList = allPosts.length ? allPosts : POSTS;
+
+  const related = postsList
+    .filter((p) => p.slug !== post.slug)
     .sort((a, b) => Number(b.area === post.area) - Number(a.area === post.area))
     .slice(0, 3);
 

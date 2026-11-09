@@ -2,6 +2,8 @@ import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
+import { applyCmsMigrations } from "./db-cms-schema.ts";
+import { seedCmsData } from "./db-cms-seed.ts";
 import { DEFAULT_SLIDES } from "./slides-data.ts";
 
 /** Folder for the SQLite file and uploaded images; kept out of git */
@@ -93,6 +95,12 @@ const MIGRATIONS: ((db: DatabaseSync) => void)[] = [
         WHERE image = 'builtin:legal-tech'
           AND image_alt = 'Advocate in court robes shaking hands with a client';
     `),
+
+  // Migration 5: Add full CMS tables (posts, team_members, services, site_settings, enquiries) and seed initial data
+  (db) => {
+    applyCmsMigrations(db);
+    seedCmsData(db);
+  },
 ];
 
 function migrate(db: DatabaseSync) {

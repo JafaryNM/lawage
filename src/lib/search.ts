@@ -1,3 +1,4 @@
+import { getDbPosts, getDbServices, getDbTeam } from "@/lib/cms-server";
 import { POSTS, formatPostDate } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
 import { TEAM_MEMBERS } from "@/lib/team";
@@ -71,43 +72,53 @@ const PAGES: Entry[] = [
   },
 ].map((p) => ({ ...p, type: "page" as const }));
 
-// Built once per server instance from the site's content files; new articles are picked up automatically
-const INDEX: Entry[] = [
-  ...POSTS.map((p) => ({
-    type: "article" as const,
-    title: p.title,
-    excerpt: p.excerpt,
-    href: `/blog/${p.slug}`,
-    image: p.image,
-    meta: formatPostDate(p.date),
-    keywords: `${p.author} ${SERVICES.find((s) => s.slug === p.area)?.title ?? ""}`,
-    body: p.body.join(" "),
-  })),
-  ...SERVICES.map((s) => ({
-    type: "service" as const,
-    title: s.title,
-    excerpt: s.text,
-    href: `/services/${s.slug}`,
-    image: s.image,
-    keywords: s.headline,
-    body: [...s.intro, ...s.scope, s.approach].join(" "),
-  })),
-  ...TEAM_MEMBERS.map((m) => ({
-    type: "person" as const,
-    title: m.name,
-    excerpt: m.title ?? m.department,
-    href: `/team/${m.slug}`,
-    image: m.photo,
-    keywords: [
-      m.department,
-      m.credentials,
-      ...(m.expertise ?? []),
-      ...(m.qualifications ?? []),
-    ].join(" "),
-    body: (m.bio ?? []).join(" "),
-  })),
-  ...PAGES,
-];
+function buildSearchIndex(): Entry[] {
+  const dbPosts = getDbPosts({ onlyActive: true });
+  const postsList = dbPosts.length ? dbPosts : POSTS;
+
+  const dbServices = getDbServices({ onlyActive: true });
+  const servicesList = dbServices.length ? dbServices : SERVICES;
+
+  const dbTeam = getDbTeam({ onlyActive: true });
+  const teamList = dbTeam.length ? dbTeam : TEAM_MEMBERS;
+
+  return [
+    ...postsList.map((p) => ({
+      type: "article" as const,
+      title: p.title,
+      excerpt: p.excerpt,
+      href: `/blog/${p.slug}`,
+      image: p.image,
+      meta: formatPostDate(p.date),
+      keywords: `${p.author} ${servicesList.find((s) => s.slug === p.area)?.title ?? ""}`,
+      body: p.body.join(" "),
+    })),
+    ...servicesList.map((s) => ({
+      type: "service" as const,
+      title: s.title,
+      excerpt: s.text,
+      href: `/services/${s.slug}`,
+      image: s.image,
+      keywords: s.headline,
+      body: [...s.intro, ...s.scope, s.approach || ""].join(" "),
+    })),
+    ...teamList.map((m) => ({
+      type: "person" as const,
+      title: m.name,
+      excerpt: m.title ?? m.department,
+      href: `/team/${m.slug}`,
+      image: m.photo,
+      keywords: [
+        m.department,
+        m.credentials,
+        ...(m.expertise ?? []),
+        ...(m.qualifications ?? []),
+      ].join(" "),
+      body: (m.bio ?? []).join(" "),
+    })),
+    ...PAGES,
+  ];
+}
 
 // Lower-case and strip accents so "Dar es Salaam" matches "dar es salaam"
 const normalize = (text: string) => text.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "");
@@ -123,28 +134,32 @@ export function search(query: string, limit = 20): SearchResult[] {
   const words = q.split(/\s+/).filter((w) => w.length > 1 || /\d/.test(w));
   if (!words.length) return [];
 
-  const scored = INDEX.map((entry) => {
-    const fields = {
-      title: normalize(entry.title),
-      keywords: normalize(entry.keywords),
-      excerpt: normalize(entry.excerpt),
-      body: normalize(entry.body),
-    };
-    let score = 0;
-    for (const word of words) {
-      // Match at the start of a word: "land" finds "landlord" but not "island"
-      const pattern = new RegExp(`(^|[^a-z0-9])${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`);
-      let wordScore = 0;
-      for (const [field, text] of Object.entries(fields) as [keyof typeof WEIGHTS, string][]) {
-        if (pattern.test(text)) wordScore += WEIGHTS[field];
+  const index = buildSearchIndex();
+
+  const scored = index
+    .map((entry) => {
+      const fields = {
+        title: normalize(entry.title),
+        keywords: normalize(entry.keywords),
+        excerpt: normalize(entry.excerpt),
+        body: normalize(entry.body),
+      };
+      let score = 0;
+      for (const word of words) {
+        // Match at the start of a word: "land" finds "landlord" but not "island"
+        const pattern = new RegExp(`(^|[^a-z0-9])${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`);
+        let wordScore = 0;
+        for (const [field, text] of Object.entries(fields) as [keyof typeof WEIGHTS, string][]) {
+          if (pattern.test(text)) wordScore += WEIGHTS[field];
+        }
+        if (!wordScore) return null; // every word must match
+        score += wordScore;
       }
-      if (!wordScore) return null; // every word must match
-      score += wordScore;
-    }
-    if (fields.title.includes(q)) score += 20;
-    if (fields.title.startsWith(q)) score += 10;
-    return { entry, score };
-  }).filter((r) => r !== null);
+      if (fields.title.includes(q)) score += 20;
+      if (fields.title.startsWith(q)) score += 10;
+      return { entry, score };
+    })
+    .filter((r) => r !== null);
 
   return scored
     .sort((a, b) => b.score - a.score)

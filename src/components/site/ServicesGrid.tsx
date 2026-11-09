@@ -1,13 +1,14 @@
 import Link from "next/link";
 
 import { FlatIcon } from "@/components/site/FlatIcon";
-import { SERVICES } from "@/lib/services";
+import { SERVICES, type Service } from "@/lib/services";
 
 /** White service cards overlapping a photo on the right, each linking to its detail page */
-export function ServicesGrid({ limit }: { limit?: number }) {
+export function ServicesGrid({ limit, services }: { limit?: number; services?: Service[] }) {
+  const list = services ?? SERVICES;
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {SERVICES.slice(0, limit).map(({ slug, icon, title, text, image }) => (
+      {list.slice(0, limit).map(({ slug, icon, title, text, image }) => (
         <Link
           key={slug}
           href={`/services/${slug}`}

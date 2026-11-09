@@ -1,4 +1,6 @@
 import { ContactPage } from "@/components/pages/ContactPage";
+import { getDbServices, getDbSettings } from "@/lib/cms-server";
+import { SERVICES } from "@/lib/services";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +10,9 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <ContactPage />;
+  const settings = getDbSettings();
+  const allServices = getDbServices({ onlyActive: true });
+  const services = allServices.length ? allServices : SERVICES;
+
+  return <ContactPage settings={settings} services={services} />;
 }

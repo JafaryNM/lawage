@@ -1,4 +1,5 @@
 import { HomePage } from "@/components/pages/HomePage";
+import { getDbFeaturedTeam, getDbPosts, getDbServices } from "@/lib/cms-server";
 import { pageMetadata } from "@/lib/seo";
 import { getPublicSlides } from "@/lib/slides";
 
@@ -11,7 +12,18 @@ export const metadata = pageMetadata({
     "High-impact legal and advisory solutions across Tanzania, East Africa and international markets.",
 });
 
-// Rebuilt whenever a slide is changed in the admin (see revalidatePath in admin/slides/actions)
 export default function Page() {
-  return <HomePage slides={getPublicSlides()} />;
+  const slides = getPublicSlides();
+  const posts = getDbPosts({ onlyActive: true });
+  const team = getDbFeaturedTeam();
+  const services = getDbServices({ onlyActive: true });
+
+  return (
+    <HomePage
+      slides={slides}
+      posts={posts}
+      team={team}
+      services={services}
+    />
+  );
 }

@@ -14,23 +14,23 @@ export type TeamMember = {
   /** Department heading the person is listed under on the Team page */
   department: Department;
   /** Department-style title shown under the name, e.g. "Head of … Department" */
-  title?: string;
+  title?: string | undefined;
   photo: string;
-  credentials?: string;
+  credentials?: string | undefined;
   /** Short biography for the profile page, one string per paragraph */
-  bio?: string[];
+  bio?: string[] | undefined;
   /** Degrees and professional qualifications, listed on the profile page */
-  qualifications?: string[];
+  qualifications?: string[] | undefined;
   /** Areas of expertise, listed on the profile page */
-  expertise?: string[];
+  expertise?: string[] | undefined;
   /** Downloadable CV (e.g. a PDF in public/cv/), shown as a button on the profile page */
-  cvUrl?: string;
+  cvUrl?: string | undefined;
   /** Full LinkedIn profile URL; until set, the LinkedIn icon shows but is not clickable */
-  linkedin?: string;
+  linkedin?: string | undefined;
   /** Personal work email; falls back to the firm inbox */
-  email?: string;
+  email?: string | undefined;
   /** Photo is a company logo: shown whole on a tinted background rather than cropped */
-  logo?: boolean;
+  logo?: boolean | undefined;
 };
 
 export const FIRM_EMAIL = "info@lawage.co.tz";

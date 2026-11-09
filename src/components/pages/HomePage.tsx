@@ -13,9 +13,9 @@ import { Partners } from "@/components/site/Partners";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { TeamGrid } from "@/components/site/TeamGrid";
-import { FEATURED_TEAM } from "@/lib/team";
-import { POSTS, formatPostDate } from "@/lib/posts";
-import { SERVICES } from "@/lib/services";
+import { FEATURED_TEAM, type TeamMember } from "@/lib/team";
+import { POSTS, formatPostDate, type Post } from "@/lib/posts";
+import { SERVICES, type Service } from "@/lib/services";
 
 import about from "@/assets/gavel-books-wooden-desk.jpg";
 import servicesBg from "@/assets/services-dots-bg.jpg";
@@ -140,8 +140,21 @@ function SectionHeading({
   );
 }
 
-export function HomePage({ slides }: { slides: PublicSlide[] }) {
+export function HomePage({
+  slides,
+  posts,
+  team,
+  services,
+}: {
+  slides: PublicSlide[];
+  posts?: Post[];
+  team?: TeamMember[];
+  services?: Service[];
+}) {
   const [heroTheme, setHeroTheme] = useState<"light" | "dark">("light");
+  const postsList = posts ?? POSTS;
+  const teamList = team ?? FEATURED_TEAM;
+  const servicesList = services ?? SERVICES;
   return (
     <div className="min-h-screen bg-background">
       <Header theme={heroTheme} />
@@ -221,7 +234,7 @@ export function HomePage({ slides }: { slides: PublicSlide[] }) {
           </SectionTitle>
 
           <div className="mt-14">
-            <ServicesGrid limit={4} />
+            <ServicesGrid limit={4} services={servicesList} />
           </div>
 
           <div className="mt-14 flex justify-center">
@@ -309,7 +322,7 @@ export function HomePage({ slides }: { slides: PublicSlide[] }) {
       <section id="team" className="section-pad bg-[#e4e6ee]">
         <div className="mx-auto max-w-[1200px] px-6">
           <SectionTitle>Our Team of Experts</SectionTitle>
-          <TeamGrid members={FEATURED_TEAM} className="mt-14" />
+          <TeamGrid members={teamList} className="mt-14" />
         </div>
       </section>
 
@@ -333,11 +346,11 @@ export function HomePage({ slides }: { slides: PublicSlide[] }) {
           </div>
 
           {(() => {
-            const [featured, ...rest] = [...POSTS]
+            const [featured, ...rest] = [...postsList]
               .sort((a, b) => b.date.localeCompare(a.date))
               .slice(0, 3);
             if (!featured) return null;
-            const areaTitle = (slug: string) => SERVICES.find((sv) => sv.slug === slug)?.title;
+            const areaTitle = (slug: string) => servicesList.find((sv) => sv.slug === slug)?.title;
             const day = (iso: string) => iso.slice(8, 10);
             const month = (iso: string) =>
               new Date(`${iso}T00:00:00`).toLocaleDateString("en-GB", { month: "short" });
